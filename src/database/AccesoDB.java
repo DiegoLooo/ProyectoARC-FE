@@ -64,8 +64,10 @@ public class AccesoDB {
         }finally {
             System.out.println("Fin");
         }
-
+        System.out.println("Prueba v2");
         return cn;
     }
+    
 
+    
 }
