@@ -46,7 +46,7 @@ public class AccesoDB {
         Connection cn = null;
         AccesoDB a = new AccesoDB();
         String s1;
-        s1 = a.LeerTexto("C:\\prueba-arc\\acceso.txt");
+        s1 = a.LeerTexto("C:\\sonarq\\ProyectoARC-FE\\acceso.txt");
 
         try {
             // Parámetros de Connexión
