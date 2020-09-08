@@ -24,6 +24,7 @@ public class Principal {
     public static void main(String[] args) throws ClassNotFoundException, ParseException {
         // TODO code application logic here
         try {
+            System.out.println("mensaje de prueba");
             Connection cn = AccesoDB.obtener();
             System.out.println("Conexion conforme....");
         } catch (SQLException e) {
