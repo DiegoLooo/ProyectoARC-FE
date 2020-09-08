@@ -21,8 +21,11 @@ public class AccesoDB {
     public String LeerTexto(String direccion) { //direccion del archivo
 
         String texto = "";
+        BufferedReader bf = null;
+        FileReader fr =null;
         try {
-            BufferedReader bf = new BufferedReader(new FileReader(direccion));
+            fr = new FileReader(direccion);
+            bf = new BufferedReader(fr);
             String temp = "";
             String bfRead;
             while ((bfRead = bf.readLine()) != null) {
