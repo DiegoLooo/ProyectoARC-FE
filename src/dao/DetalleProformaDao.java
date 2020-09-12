@@ -214,7 +214,7 @@ public class DetalleProformaDao implements ICrudDao<DetalleProforma> {
         try {
             // q="select nombres, apellidos, telefono, correo, cargo, usuario, password from usuario where nombres=?";
             q = "select round((round((SUM(cantidad*precioUnitario)*1.18),2)*T.cambioVenta),3)Total, T.cambioVenta "
-                    + "	from detalleproforma D, tipodecambio T where D.idProforma_fk=? and T.fechaCambio='" + fecha + "'";
+                    + "from detalleproforma D, tipodecambio T where D.idProforma_fk=? and T.fechaCambio='" + fecha + "'";
             conexion = AccesoDB.obtener();
             ps = conexion.prepareStatement(q);
             //preparar valor del parametro
