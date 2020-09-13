@@ -39,10 +39,9 @@ public class OrdenTrabajoRegistro extends javax.swing.JInternalFrame {
     /**
      * Creates new form OrdenTrabajoRegistro
      */
-    
     int dia1p, dia2p;
     String valorDia;
-    
+
     int idOrdenTrabajo;
     int anioOT;
     int idPedido;
@@ -64,31 +63,31 @@ public class OrdenTrabajoRegistro extends javax.swing.JInternalFrame {
     String estado;
     String estadoCombo;
     String observacion;
-    
+
     int tabla;
     int idDetalleOrdenTrabajo;
-    
+
     //Para generar nuevo numero de orden
     String numo;
     int num;
     int ultimoIdOT;
- 
+
     static int numDePedparaDetalle;
     static int anioPedidoEnDetalle;
     static String numOTParaDetalle;
     static int idOrdenTrabajoParaDetalle;
-    
-    boolean mensaje=false;
+
+    boolean mensaje = false;
 
     public OrdenTrabajoRegistro() throws ParseException {
         initComponents();
         habilitarInicio();
         txtAnioPedido.setText(anioActual());
         txtAnioOrden.setText(anioActual());
-        
+
         txtFechaEmision.setText(fechaActual());
         labelD1.setText(diaSemana(txtFechaEmision.getText()));
-        System.out.println("el dia de la fecha de emision es :"+diaFecha(txtFechaEmision.getText()));
+        System.out.println("el dia de la fecha de emision es :" + diaFecha(txtFechaEmision.getText()));
 //        fechaInicio = sumarDias(txtFechaEmision.getText(), 1);
         txtFechaInicio.setText(fechaActual());
         labelD2.setText(diaSemana(txtFechaInicio.getText()));
@@ -96,7 +95,7 @@ public class OrdenTrabajoRegistro extends javax.swing.JInternalFrame {
         labelD3.setText("---------");
         txtFechaEntrega.setText("");
         labelD4.setText("---------");
-        
+
         comboBoxServicio.setSelectedIndex(0);
         comboBoxEstado.setSelectedIndex(1);
         comboBoxRecepcion.setSelectedIndex(2);
@@ -1645,7 +1644,7 @@ public class OrdenTrabajoRegistro extends javax.swing.JInternalFrame {
             Logger.getLogger(OrdenTrabajoRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
         listaDetalleOrdenTrabajo(idOrdenTrabajo);
-        System.out.println("id Orden de Trabajo "+ idOrdenTrabajo);
+        System.out.println("id Orden de Trabajo " + idOrdenTrabajo);
         habilitarBuscarOT();
     }//GEN-LAST:event_buttonBuscarOTActionPerformed
 
@@ -1665,7 +1664,7 @@ public class OrdenTrabajoRegistro extends javax.swing.JInternalFrame {
             Logger.getLogger(OrdenTrabajoRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-       
+
     }//GEN-LAST:event_buttonBuscarPedidoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1712,21 +1711,21 @@ public class OrdenTrabajoRegistro extends javax.swing.JInternalFrame {
 
     private void txtFechaFinalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaFinalKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            
-            fechaFinal=txtFechaFinal.getText();
-            fechaEntrega=txtFechaEntrega.getText();
+
+            fechaFinal = txtFechaFinal.getText();
+            fechaEntrega = txtFechaEntrega.getText();
             try {
                 labelD3.setText(diaSemana(fechaFinal));
             } catch (ParseException ex) {
                 Logger.getLogger(OrdenTrabajoRegistro.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             try {
                 agregarDias(identificarfechaLunes(txtFechaInicio.getText()));
             } catch (ParseException ex) {
                 Logger.getLogger(OrdenTrabajoRegistro.class.getName()).log(Level.SEVERE, null, ex);
             }
-              
+
         }
     }//GEN-LAST:event_txtFechaFinalKeyPressed
 
@@ -1804,25 +1803,38 @@ public class OrdenTrabajoRegistro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonEliminarActionPerformed
 
     private void buttonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNuevoActionPerformed
-        habilitarNuevo();
+
+        try {
+            habilitarNuevo();
+        } catch (NullPointerException ex) {
+            Logger.getLogger(Articulos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_buttonNuevoActionPerformed
 
     private void buttonAgregarDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarDetalleActionPerformed
-        DetalleDeOrdenTrabajo DetOT = null;
         try {
-            DetOT = new DetalleDeOrdenTrabajo();
-        } catch (Exception ex) {
-            Logger.getLogger(OrdenTrabajoRegistro.class.getName()).log(Level.SEVERE, null, ex);
+            DetalleDeOrdenTrabajo DetOT = null;
+            try {
+                DetOT = new DetalleDeOrdenTrabajo();
+                Principal.jDesktopPane1.add(DetOT);
+                DetOT.toFront();
+                DetOT.setVisible(true);
+            } catch (Exception ex) {
+                Logger.getLogger(OrdenTrabajoRegistro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } catch (NullPointerException ex) {
+            Logger.getLogger(Articulos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Principal.jDesktopPane1.add(DetOT);
-        DetOT.toFront();
-        DetOT.setVisible(true);
+
     }//GEN-LAST:event_buttonAgregarDetalleActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         tabla = jTable1.getSelectedRow();
         idDetalleOrdenTrabajo = Integer.parseInt(jTable1.getValueAt(tabla, 0).toString());
-        
+
         DetalleDeOrdenTrabajo detOT = null;
         try {
             detOT = new DetalleDeOrdenTrabajo();
@@ -1832,7 +1844,7 @@ public class OrdenTrabajoRegistro extends javax.swing.JInternalFrame {
         Principal.jDesktopPane1.add(detOT);
         detOT.toFront();
         detOT.setVisible(true);
-        
+
         try {
             DetalleDeOrdenTrabajo.consultarDetalleOrdenTrabajo(idDetalleOrdenTrabajo);
         } catch (Exception ex) {
@@ -1840,14 +1852,14 @@ public class OrdenTrabajoRegistro extends javax.swing.JInternalFrame {
         }
         listaDetalleOrdenTrabajo(idOrdenTrabajo);
         DetalleDeOrdenTrabajo.habilitarTabla();
-        
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void buttonAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAnteriorActionPerformed
         numOrdenTrabajo = String.format("%06d", (Integer.parseInt(txtNumOrdenTrabajo.getText()) - 1));
         System.out.println(numOrdenTrabajo);
         int aio = Integer.parseInt(txtAnioOrden.getText());
-        
+
         try {
             consultarOrdenTrabajo(numOrdenTrabajo, aio);
         } catch (Exception ex) {
@@ -1872,7 +1884,7 @@ public class OrdenTrabajoRegistro extends javax.swing.JInternalFrame {
         numOrdenTrabajo = String.format("%06d", (Integer.parseInt(txtNumOrdenTrabajo.getText()) + 1));
         System.out.println(numOrdenTrabajo);
         int aio = Integer.parseInt(txtAnioOrden.getText());
-        
+
         try {
             consultarOrdenTrabajo(numOrdenTrabajo, aio);
         } catch (Exception ex) {
@@ -1903,21 +1915,21 @@ public class OrdenTrabajoRegistro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonLimpiarActionPerformed
 
     private void buttonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonModificarActionPerformed
-       habilitarModificar();
+        habilitarModificar();
     }//GEN-LAST:event_buttonModificarActionPerformed
 
     private void comboBoxServicioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboBoxServicioKeyTyped
-         String Caracteres = comboBoxServicio.getEditor().getItem().toString();
-        if(Caracteres.length()>=40){ 
+        String Caracteres = comboBoxServicio.getEditor().getItem().toString();
+        if (Caracteres.length() >= 40) {
             JOptionPane.showMessageDialog(null, "Ya no puede ingresar más letras.");
-            evt.consume(); 
+            evt.consume();
         }
     }//GEN-LAST:event_comboBoxServicioKeyTyped
 
     private void buttonPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPdfActionPerformed
         GenerarReporte ordT = new GenerarReporte();
         try {
-            ordT.ReporteOrdenTrabajoGuardar(idOrdenTrabajo,numOrdenTrabajo, txtAnioOrden.getText(), numeroCotizacion, txtRazSocial.getText() );
+            ordT.ReporteOrdenTrabajoGuardar(idOrdenTrabajo, numOrdenTrabajo, txtAnioOrden.getText(), numeroCotizacion, txtRazSocial.getText());
 
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Rotulaciones.class.getName()).log(Level.SEVERE, null, ex);
@@ -2152,20 +2164,20 @@ public class OrdenTrabajoRegistro extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtRuc;
     // End of variables declaration//GEN-END:variables
 
-ClienteController clientecontroler=new ClienteController();
-Cliente cliente;
+    ClienteController clientecontroler = new ClienteController();
+    Cliente cliente;
 
-PedidoController pedidocontroler=new PedidoController();
-Pedido pedido;
+    PedidoController pedidocontroler = new PedidoController();
+    Pedido pedido;
 
-OrdenTrabajoController ordentrabajocontroler=new OrdenTrabajoController();
-OrdenTrabajo ordentrabajo;
+    OrdenTrabajoController ordentrabajocontroler = new OrdenTrabajoController();
+    OrdenTrabajo ordentrabajo;
 
-static DetalleOrdenTrabajoController detalleordentrabajocontroler= new DetalleOrdenTrabajoController();
-static DetalleOrdenTrabajo detalleordentrabajo;
+    static DetalleOrdenTrabajoController detalleordentrabajocontroler = new DetalleOrdenTrabajoController();
+    static DetalleOrdenTrabajo detalleordentrabajo;
 
-ProformaController proformacontroler=new ProformaController();
-Proforma proforma;
+    ProformaController proformacontroler = new ProformaController();
+    Proforma proforma;
 
 //-------------------------------- Procesar ---------------------------------------------------------
     private void procesar(int op) {
@@ -2208,7 +2220,8 @@ Proforma proforma;
 
         return ordenTrab;
     }
- //------------- Consultas para generar codigo -------------------    
+    //------------- Consultas para generar codigo -------------------    
+
     private void consultarNumeroOrden(int id) throws Exception {
 
         ordentrabajo = ordentrabajocontroler.OrdenTrabajoBuscar(id);
@@ -2246,51 +2259,48 @@ Proforma proforma;
         num = num + 1;
         txtNumOrdenTrabajo.setText(String.format("%06d", num));
     }
-   
+
 //-------------------------------- Consultar Orden Trabajo ---------------------------------------------
-   
     private void consultarPedidoOrdenT(int ip) throws Exception {
         pedido = pedidocontroler.PedidoBuscar(ip);
         if (pedido != null) {
 
             idPedido = pedido.getIdPedido();
-            numPedido=pedido.getNumPedido();
+            numPedido = pedido.getNumPedido();
             txtNumPedido.setText(String.format("%06d", pedido.getNumPedido()));
             txtAnioPedido.setText(anioActual(pedido.getFechaEmision()));
-            numDePedparaDetalle=pedido.getNumPedido();
-            idCotizacion=pedido.getIdProforma();
+            numDePedparaDetalle = pedido.getNumPedido();
+            idCotizacion = pedido.getIdProforma();
             consultarCodigoProforma(idCotizacion);
             idCliente = pedido.getIdCliente();
             consultarCliente(idCliente);
-            dia1p=pedido.getDia1();
-            dia2p=pedido.getDia2();
-            
-            txtDiasHabiles.setText("DE "+dia1p+" A "+dia2p+" DIAS HÁBILES");
-            
-            
+            dia1p = pedido.getDia1();
+            dia2p = pedido.getDia2();
+
+            txtDiasHabiles.setText("DE " + dia1p + " A " + dia2p + " DIAS HÁBILES");
+
         } else {
             JOptionPane.showMessageDialog(null, "Pedido no registrado");
             //System.out.println("Error");
         }
     }
 
-    
     private void consultarOrdenTrabajo(String numor, int anio) throws Exception {
         ordentrabajo = ordentrabajocontroler.OrdenTrabajoBuscar(numor, anio);
-        
+
         if (ordentrabajo != null) {
 
-            idOrdenTrabajo=ordentrabajo.getIdOrdenTrabajo();
-            idOrdenTrabajoParaDetalle=ordentrabajo.getIdOrdenTrabajo();
-            idPedido=ordentrabajo.getIdPedido();
+            idOrdenTrabajo = ordentrabajo.getIdOrdenTrabajo();
+            idOrdenTrabajoParaDetalle = ordentrabajo.getIdOrdenTrabajo();
+            idPedido = ordentrabajo.getIdPedido();
             consultarPedidoOrdenT(idPedido);
-            idCotizacion=ordentrabajo.getIdProforma();
-            numOrdenTrabajo=ordentrabajo.getNumOrdenTrabajo();
-            numOTParaDetalle=ordentrabajo.getNumOrdenTrabajo();
+            idCotizacion = ordentrabajo.getIdProforma();
+            numOrdenTrabajo = ordentrabajo.getNumOrdenTrabajo();
+            numOTParaDetalle = ordentrabajo.getNumOrdenTrabajo();
             txtNumOrdenTrabajo.setText(ordentrabajo.getNumOrdenTrabajo());
-            servicio=ordentrabajo.getTipoServicio();
+            servicio = ordentrabajo.getTipoServicio();
             comboBoxServicio.setSelectedItem(ordentrabajo.getTipoServicio());
-            
+
             recepcion = ordentrabajo.getRecepcion();
             String testValue = recepcion;
             for (int i = 0; i < comboBoxRecepcion.getModel().getSize(); i++) {
@@ -2300,8 +2310,8 @@ Proforma proforma;
                     break;
                 }
             }
-            
-            destino=ordentrabajo.getDestino();
+
+            destino = ordentrabajo.getDestino();
             String testValue1 = destino;
             for (int i = 0; i < comboBoxDestino.getModel().getSize(); i++) {
                 if (comboBoxDestino.getItemAt(i).equals(testValue1)) {
@@ -2310,21 +2320,21 @@ Proforma proforma;
                     break;
                 }
             }
-            
-            fechaEmision=ordentrabajo.getFechaEmision();
+
+            fechaEmision = ordentrabajo.getFechaEmision();
             txtFechaEmision.setText(ordentrabajo.getFechaEmision());
-            fechaInicio=ordentrabajo.getFechaInicio();
+            fechaInicio = ordentrabajo.getFechaInicio();
             txtFechaInicio.setText(ordentrabajo.getFechaInicio());
-            fechaFinal=ordentrabajo.getFechaFin();
+            fechaFinal = ordentrabajo.getFechaFin();
             txtFechaFinal.setText(ordentrabajo.getFechaFin());
-            fechaEntrega=ordentrabajo.getFechaEntrega();
+            fechaEntrega = ordentrabajo.getFechaEntrega();
             txtFechaEntrega.setText(ordentrabajo.getFechaEntrega());
             labelD1.setText(diaSemana(fechaEmision));
             labelD2.setText(diaSemana(fechaInicio));
             labelD3.setText(diaSemana(fechaFinal));
             labelD4.setText(diaSemana(fechaEntrega));
             agregarDias(identificarfechaLunes(txtFechaInicio.getText()));
-            estado=ordentrabajo.getEstado();
+            estado = ordentrabajo.getEstado();
             String testValue2 = estado;
             for (int j = 0; j < comboBoxEstado.getModel().getSize(); j++) {
                 if (comboBoxEstado.getItemAt(j).equals(testValue2)) {
@@ -2333,22 +2343,20 @@ Proforma proforma;
                     break;
                 }
             }
-            observacion=ordentrabajo.getObservacion();
+            observacion = ordentrabajo.getObservacion();
             txtObservacion.setText(ordentrabajo.getObservacion());
-            
+
             txtAreaMedidaIngreso.setText(ordentrabajo.getMedidaIngreso());
             txtAreaMedidaFinaliza.setText(ordentrabajo.getMedidaFinaliza());
-            
 
         } else {
             JOptionPane.showMessageDialog(null, "Pedido no registrado");
             //System.out.println("Error");
-            mensaje=true;
+            mensaje = true;
         }
     }
 
 //-------------------------------- Consultar Pedido-----------------------------------------------------   
-
     private void consultarPedido(int numPed, int anio) throws Exception {
         pedido = pedidocontroler.PedidoBuscar(numPed, anio);
         if (pedido != null) {
@@ -2363,14 +2371,14 @@ Proforma proforma;
             dia1p = pedido.getDia1();
             dia2p = pedido.getDia2();
             System.out.println("este es el dia 1 :" + dia1p + ", este es el dia 2: " + dia2p);
-            txtDiasHabiles.setText("DE "+dia1p+" A "+dia2p+" DIAS HÁBILES");
-            fechaFinal=sumarDias(txtFechaInicio.getText(), (dia1p - 1));
+            txtDiasHabiles.setText("DE " + dia1p + " A " + dia2p + " DIAS HÁBILES");
+            fechaFinal = sumarDias(txtFechaInicio.getText(), (dia1p - 1));
             txtFechaFinal.setText(fechaFinal);
             labelD3.setText(diaSemana(fechaFinal));
-            fechaEntrega=sumarDias(txtFechaInicio.getText(), (dia2p - 1));
+            fechaEntrega = sumarDias(txtFechaInicio.getText(), (dia2p - 1));
             txtFechaEntrega.setText(fechaEntrega);
             labelD4.setText(diaSemana(fechaEntrega));
-            fechaInicio=txtFechaInicio.getText();
+            fechaInicio = txtFechaInicio.getText();
             agregarDias(identificarfechaLunes(txtFechaInicio.getText()));
 
         } else {
@@ -2408,7 +2416,7 @@ Proforma proforma;
     }
 
 //------------------------- Listar detalle orden trabajo -----------------------------------------
-   static  void listaDetalleOrdenTrabajo(int id) {
+    static void listaDetalleOrdenTrabajo(int id) {
         List<DetalleOrdenTrabajo> lista;
         try {
             lista = detalleordentrabajocontroler.DetalleOrdenTrabajoFiltrar(id);
@@ -2421,23 +2429,24 @@ Proforma proforma;
     }
 
     static void verDetalleOrdenTrabajo(List<DetalleOrdenTrabajo> lista) {
-        
+
         DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
         tabla.setRowCount(0);
         for (DetalleOrdenTrabajo detOrdT : lista) {
-            
-            Object[] fila = {detOrdT.getIdDetalleOrdenTrabajo(), detOrdT.getItem(), detOrdT.getCant(), 
-                             detOrdT.getDescripcion(), detOrdT.getTolerancia()};
+
+            Object[] fila = {detOrdT.getIdDetalleOrdenTrabajo(), detOrdT.getItem(), detOrdT.getCant(),
+                detOrdT.getDescripcion(), detOrdT.getTolerancia()};
             tabla.addRow(fila);
         }
-    }    
+    }
 //------------------------ metodo para jalar numero de pedido desde Pedidos OrdenTrabajo ------------------------------
+
     static void numPedidoOrdenTrabajo() {
         PedidosOrdenTrabajo.numeroPedido = Integer.parseInt(PedidosOrdenTrabajo.txtNumPedido.getText());
         txtAnioPedido.setText(PedidosOrdenTrabajo.anioPedidoParaOrdenT);
         txtNumPedido.setText(String.format("%06d", PedidosOrdenTrabajo.numeroPedido));
     }
-    
+
 //------------------------------------ Limpiar ------------------------------------------------
     void limpiar() throws ParseException {
         idOrdenTrabajo = 0;
@@ -2473,9 +2482,9 @@ Proforma proforma;
         txtFechaEntrega.setText("");
         labelD4.setText("---------");
         txtNumPedido.setText("");
-        txtNumOrdenTrabajo.setText(""); 
+        txtNumOrdenTrabajo.setText("");
         labelNumCotizacion.setText("");
-        txtRazSocial.setText(""); 
+        txtRazSocial.setText("");
         txtRuc.setText("");
         comboBoxServicio.setSelectedIndex(0);
         comboBoxRecepcion.setSelectedIndex(2);
@@ -2483,10 +2492,11 @@ Proforma proforma;
         comboBoxEstado.setSelectedIndex(1);
         txtObservacion.setText("");
         txtDiasHabiles.setText("");
-        
-        listaDetalleOrdenTrabajo(0);   
+
+        listaDetalleOrdenTrabajo(0);
     }
 //------------------------------------- Habilitar ----------------------------------------------
+
     void habilitarInicio() {
 
         buttonPedido.setEnabled(false);
@@ -2522,7 +2532,7 @@ Proforma proforma;
         txtAreaMedidaFinaliza.setEnabled(false);
         txtAreaMedidaIngreso.setEnabled(false);
     }
-    
+
     void habilitarBuscarOT() {
 
         buttonPedido.setEnabled(false);
@@ -2558,7 +2568,7 @@ Proforma proforma;
         txtAreaMedidaFinaliza.setEnabled(false);
         txtAreaMedidaIngreso.setEnabled(false);
     }
-    
+
     void habilitarModificar() {
 
         buttonPedido.setEnabled(false);
@@ -2594,9 +2604,9 @@ Proforma proforma;
         txtAreaMedidaFinaliza.setEnabled(true);
         txtAreaMedidaIngreso.setEnabled(true);
     }
-    
+
     void habilitarGuardar() {
-        
+
         buttonPedido.setEnabled(false);
         buttonBuscarPedido.setEnabled(false);
         buttonBuscarOT.setEnabled(false);
@@ -2630,7 +2640,7 @@ Proforma proforma;
         txtAreaMedidaFinaliza.setEnabled(false);
         txtAreaMedidaIngreso.setEnabled(false);
     }
-    
+
     void habilitarEliminar() {
 
         buttonPedido.setEnabled(false);
@@ -2666,7 +2676,7 @@ Proforma proforma;
         txtAreaMedidaFinaliza.setEnabled(false);
         txtAreaMedidaIngreso.setEnabled(false);
     }
-    
+
     void habilitarNuevo() {
 
         buttonPedido.setEnabled(true);
@@ -2702,9 +2712,9 @@ Proforma proforma;
         txtAreaMedidaFinaliza.setEnabled(true);
         txtAreaMedidaIngreso.setEnabled(true);
     }
-    
+
     void habilitarRegistrar() {
-        
+
         buttonPedido.setEnabled(false);
         buttonBuscarPedido.setEnabled(false);
         buttonBuscarOT.setEnabled(false);
@@ -2740,14 +2750,14 @@ Proforma proforma;
     }
 //---------------------------------------- fecha -----------------------------------------------
 
-   // ------------------------ Fecha --> Indica la fecha del dia --------------------
+    // ------------------------ Fecha --> Indica la fecha del dia --------------------
     public String fechaActual() {
         Date fecha = new Date();
 
         SimpleDateFormat formatofecha = new SimpleDateFormat("yyyy-MM-dd");
         return formatofecha.format(fecha);
     }
-    
+
     public String anioActual(String f) throws ParseException {
         Calendar fecha = Calendar.getInstance();
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
@@ -2758,16 +2768,15 @@ Proforma proforma;
         SimpleDateFormat formatofecha = new SimpleDateFormat("yyyy");
         return formatofecha.format(fechaDate);
     }
-       
-    
+
     public String anioActual() {
         Date fecha = new Date();
 
         SimpleDateFormat formatofecha = new SimpleDateFormat("yyyy");
         return formatofecha.format(fecha);
     }
-    
-     public String diaFecha(String f) throws ParseException {
+
+    public String diaFecha(String f) throws ParseException {
         Calendar fecha = Calendar.getInstance();
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         Date fechaDate = null;
@@ -2777,13 +2786,13 @@ Proforma proforma;
         SimpleDateFormat formatofecha = new SimpleDateFormat("dd");
         return formatofecha.format(fechaDate);
     }
-    
+
     String diaSemana(String ah) throws ParseException {
         Calendar fecha = Calendar.getInstance();
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         Date fechaDate = null;
 
-        fechaDate=formato.parse(ah);
+        fechaDate = formato.parse(ah);
 
         fecha.setTime(fechaDate);
 
@@ -2815,7 +2824,7 @@ Proforma proforma;
         }
         return valorDia;
     }
-    
+
     String sumarRestarDiasFecha(String ah, int dias) throws ParseException {
 
         Calendar calendar = Calendar.getInstance();
@@ -2828,7 +2837,7 @@ Proforma proforma;
         return formato.format(calendar.getTime()); // Devuelve el objeto date String  con los nuevos días añadidos
 
     }
-    
+
     String sumarDias(String fR, int v) throws ParseException {
         for (int i = 1; i <= v; i++) {
 
@@ -2854,31 +2863,29 @@ Proforma proforma;
 
         return fR;
     }
-    
-     String identificarfechaLunes(String fl) throws ParseException {
-       
-            if ("Domingo".equals(diaSemana(fl))) {
-                fl = sumarRestarDiasFecha(fl, -6);
-            } else if ("Lunes".equals(diaSemana(fl))) {
-                fl = fl;
-            } else if ("Martes".equals(diaSemana(fl))) {
-                fl = sumarRestarDiasFecha(fl, -1);
-            } else if ("Miercoles".equals(diaSemana(fl))) {
-                fl =sumarRestarDiasFecha(fl, -2);
-            } else if ("Jueves".equals(diaSemana(fl))) {
-                fl = sumarRestarDiasFecha(fl, -3);
-            } else if ("Viernes".equals(diaSemana(fl))) {
-                fl = sumarRestarDiasFecha(fl, -4);
-            } else if ("Sabado".equals(diaSemana(fl))) {
-                fl = sumarRestarDiasFecha(fl, -5);
-            }
-       return fl;
+
+    String identificarfechaLunes(String fl) throws ParseException {
+
+        if ("Domingo".equals(diaSemana(fl))) {
+            fl = sumarRestarDiasFecha(fl, -6);
+        } else if ("Lunes".equals(diaSemana(fl))) {
+            fl = fl;
+        } else if ("Martes".equals(diaSemana(fl))) {
+            fl = sumarRestarDiasFecha(fl, -1);
+        } else if ("Miercoles".equals(diaSemana(fl))) {
+            fl = sumarRestarDiasFecha(fl, -2);
+        } else if ("Jueves".equals(diaSemana(fl))) {
+            fl = sumarRestarDiasFecha(fl, -3);
+        } else if ("Viernes".equals(diaSemana(fl))) {
+            fl = sumarRestarDiasFecha(fl, -4);
+        } else if ("Sabado".equals(diaSemana(fl))) {
+            fl = sumarRestarDiasFecha(fl, -5);
+        }
+        return fl;
     }
-     
-    
+
     void agregarDias(String fh) throws ParseException {
 
-        
         labelN1.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -2898,7 +2905,7 @@ Proforma proforma;
             label1.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN2.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -2918,7 +2925,7 @@ Proforma proforma;
             label2.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN3.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -2939,7 +2946,7 @@ Proforma proforma;
             label3.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN4.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -2959,7 +2966,7 @@ Proforma proforma;
             label4.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN5.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -2979,7 +2986,7 @@ Proforma proforma;
             label5.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN6.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -2999,7 +3006,7 @@ Proforma proforma;
             label6.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN7.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3019,8 +3026,8 @@ Proforma proforma;
             label7.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
-        labelN8.setText(String.format("%02d",Integer.parseInt(diaFecha(fh))));
+        fh = sumarRestarDiasFecha(fh, 1);
+        labelN8.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
                 label8.setText("I");
@@ -3039,14 +3046,14 @@ Proforma proforma;
             label8.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
-        labelN9.setText(String.format("%02d",Integer.parseInt(diaFecha(fh))));
+        fh = sumarRestarDiasFecha(fh, 1);
+        labelN9.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
                 label9.setText("I");
                 label9.setForeground(Color.decode("#009900"));
                 label9.setFont(label9.getFont().deriveFont(Font.BOLD));
-            } else if (fechaFinal.equals(fh) ) {
+            } else if (fechaFinal.equals(fh)) {
                 label9.setText("F");
                 label9.setForeground(Color.RED);
                 label9.setFont(label9.getFont().deriveFont(Font.BOLD));
@@ -3059,7 +3066,7 @@ Proforma proforma;
             label9.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN10.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3079,7 +3086,7 @@ Proforma proforma;
             label10.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN11.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3099,7 +3106,7 @@ Proforma proforma;
             label11.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN12.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3119,7 +3126,7 @@ Proforma proforma;
             label12.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN13.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3139,7 +3146,7 @@ Proforma proforma;
             label13.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN14.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) { //|| diaf1==dia || diaent1==dia ) {
@@ -3159,7 +3166,7 @@ Proforma proforma;
             label14.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN15.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) { //|| diaf1==dia || diaent1==dia ) {
@@ -3179,7 +3186,7 @@ Proforma proforma;
             label15.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN16.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3199,7 +3206,7 @@ Proforma proforma;
             label16.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN17.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3219,7 +3226,7 @@ Proforma proforma;
             label17.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN18.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3239,7 +3246,7 @@ Proforma proforma;
             label18.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN19.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3259,7 +3266,7 @@ Proforma proforma;
             label19.setText("");
         }
 
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN20.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3278,8 +3285,8 @@ Proforma proforma;
         } else {
             label20.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN21.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3298,8 +3305,8 @@ Proforma proforma;
         } else {
             label21.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN22.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3318,8 +3325,8 @@ Proforma proforma;
         } else {
             label22.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN23.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3338,8 +3345,8 @@ Proforma proforma;
         } else {
             label23.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN24.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3358,8 +3365,8 @@ Proforma proforma;
         } else {
             label24.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN25.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3378,8 +3385,8 @@ Proforma proforma;
         } else {
             label25.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN26.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3398,8 +3405,8 @@ Proforma proforma;
         } else {
             label26.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN27.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3418,8 +3425,8 @@ Proforma proforma;
         } else {
             label27.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN28.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3438,8 +3445,8 @@ Proforma proforma;
         } else {
             label28.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN29.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3458,8 +3465,8 @@ Proforma proforma;
         } else {
             label29.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN30.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3478,8 +3485,8 @@ Proforma proforma;
         } else {
             label30.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN31.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3498,8 +3505,8 @@ Proforma proforma;
         } else {
             label31.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN32.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3518,68 +3525,68 @@ Proforma proforma;
         } else {
             label32.setText("");
         }
-        
-         fh = sumarRestarDiasFecha(fh, 1);
-         labelN33.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
-         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
-             if (fechaInicio.equals(fh)) {
-                 label33.setText("I");
-                 label33.setForeground(Color.decode("#009900"));
-                 label33.setFont(label33.getFont().deriveFont(Font.BOLD));
-             } else if (fechaFinal.equals(fh)) {
-                 label33.setText("F");
-                 label33.setForeground(Color.RED);
-                 label33.setFont(label33.getFont().deriveFont(Font.BOLD));
-             } else if (fechaEntrega.equals(fh)) {
-                 label33.setText("E");
-                 label33.setForeground(Color.decode("#FE4B0C"));
-                 label33.setFont(label33.getFont().deriveFont(Font.BOLD));
-             }
-         } else {
-             label33.setText("");
-         }
-         
-         fh = sumarRestarDiasFecha(fh, 1);
-         labelN34.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
-         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
-             if (fechaInicio.equals(fh)) {
-                 label34.setText("I");
-                 label34.setForeground(Color.decode("#009900"));
-                 label34.setFont(label34.getFont().deriveFont(Font.BOLD));
-             } else if (fechaFinal.equals(fh)) {
-                 label34.setText("F");
-                 label34.setForeground(Color.RED);
-                 label34.setFont(label34.getFont().deriveFont(Font.BOLD));
-             } else if (fechaEntrega.equals(fh)) {
-                 label34.setText("E");
-                 label34.setForeground(Color.decode("#FE4B0C"));
-                 label34.setFont(label34.getFont().deriveFont(Font.BOLD));
-             }
-         } else {
-             label34.setText("");
-         }
-         
-         fh = sumarRestarDiasFecha(fh, 1);
-         labelN35.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
-         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
-             if (fechaInicio.equals(fh)) {
-                 label35.setText("I");
-                 label35.setForeground(Color.decode("#009900"));
-                 label35.setFont(label35.getFont().deriveFont(Font.BOLD));
-             } else if (fechaFinal.equals(fh)) {
-                 label35.setText("F");
-                 label35.setForeground(Color.RED);
-                 label35.setFont(label35.getFont().deriveFont(Font.BOLD));
-             } else if (fechaEntrega.equals(fh)) {
-                 label35.setText("E");
-                 label35.setForeground(Color.decode("#FE4B0C"));
-                 label35.setFont(label35.getFont().deriveFont(Font.BOLD));
-             }
-         } else {
-             label35.setText("");
-         }
-         
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
+        labelN33.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
+        if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
+            if (fechaInicio.equals(fh)) {
+                label33.setText("I");
+                label33.setForeground(Color.decode("#009900"));
+                label33.setFont(label33.getFont().deriveFont(Font.BOLD));
+            } else if (fechaFinal.equals(fh)) {
+                label33.setText("F");
+                label33.setForeground(Color.RED);
+                label33.setFont(label33.getFont().deriveFont(Font.BOLD));
+            } else if (fechaEntrega.equals(fh)) {
+                label33.setText("E");
+                label33.setForeground(Color.decode("#FE4B0C"));
+                label33.setFont(label33.getFont().deriveFont(Font.BOLD));
+            }
+        } else {
+            label33.setText("");
+        }
+
+        fh = sumarRestarDiasFecha(fh, 1);
+        labelN34.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
+        if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
+            if (fechaInicio.equals(fh)) {
+                label34.setText("I");
+                label34.setForeground(Color.decode("#009900"));
+                label34.setFont(label34.getFont().deriveFont(Font.BOLD));
+            } else if (fechaFinal.equals(fh)) {
+                label34.setText("F");
+                label34.setForeground(Color.RED);
+                label34.setFont(label34.getFont().deriveFont(Font.BOLD));
+            } else if (fechaEntrega.equals(fh)) {
+                label34.setText("E");
+                label34.setForeground(Color.decode("#FE4B0C"));
+                label34.setFont(label34.getFont().deriveFont(Font.BOLD));
+            }
+        } else {
+            label34.setText("");
+        }
+
+        fh = sumarRestarDiasFecha(fh, 1);
+        labelN35.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
+        if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
+            if (fechaInicio.equals(fh)) {
+                label35.setText("I");
+                label35.setForeground(Color.decode("#009900"));
+                label35.setFont(label35.getFont().deriveFont(Font.BOLD));
+            } else if (fechaFinal.equals(fh)) {
+                label35.setText("F");
+                label35.setForeground(Color.RED);
+                label35.setFont(label35.getFont().deriveFont(Font.BOLD));
+            } else if (fechaEntrega.equals(fh)) {
+                label35.setText("E");
+                label35.setForeground(Color.decode("#FE4B0C"));
+                label35.setFont(label35.getFont().deriveFont(Font.BOLD));
+            }
+        } else {
+            label35.setText("");
+        }
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN36.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3598,7 +3605,7 @@ Proforma proforma;
         } else {
             label36.setText("");
         }
-        fh = sumarRestarDiasFecha(fh,1);
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN37.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3617,8 +3624,8 @@ Proforma proforma;
         } else {
             label37.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN38.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3637,8 +3644,8 @@ Proforma proforma;
         } else {
             label38.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN39.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3657,8 +3664,8 @@ Proforma proforma;
         } else {
             label39.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN40.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3677,8 +3684,8 @@ Proforma proforma;
         } else {
             label40.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN41.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3697,8 +3704,8 @@ Proforma proforma;
         } else {
             label41.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN42.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3717,8 +3724,8 @@ Proforma proforma;
         } else {
             label42.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN43.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3737,8 +3744,8 @@ Proforma proforma;
         } else {
             label43.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN44.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3757,8 +3764,8 @@ Proforma proforma;
         } else {
             label44.setText("");
         }
-        
-        fh = sumarRestarDiasFecha(fh,1);
+
+        fh = sumarRestarDiasFecha(fh, 1);
         labelN45.setText(String.format("%02d", Integer.parseInt(diaFecha(fh))));
         if (fechaInicio.equals(fh) || fechaFinal.equals(fh) || fechaEntrega.equals(fh)) {
             if (fechaInicio.equals(fh)) {
@@ -3777,25 +3784,25 @@ Proforma proforma;
         } else {
             label45.setText("");
         }
-   
+
     }
-    
-    
- //----------------- metodo que jala desde Orden de Trabajo Vista  -------------
+
+    //----------------- metodo que jala desde Orden de Trabajo Vista  -------------
     static void pasarOrdenDeTrabajo() {
         txtAnioOrden.setText(OrdenTrabajoVista.anio);
         txtNumOrdenTrabajo.setText(OrdenTrabajoVista.numOrdTrabParaModificar);
     }
 //------------------------ metodo para jalar numero de pedido desde Pedidos Vista ------------------------------
-     static void numDePedidoAOrdenTrabajo(){
-         txtAnioPedido.setText(PedidosVista.anioPe);
-         txtNumPedido.setText(PedidosVista.numero);           
-     }
-     
+
+    static void numDePedidoAOrdenTrabajo() {
+        txtAnioPedido.setText(PedidosVista.anioPe);
+        txtNumPedido.setText(PedidosVista.numero);
+    }
+
 //------------------------ metodo para jalar numero de pedido desde Pedidos Vista ------------------------------
-     static void numDePedidoRegistroAOrdenTrabajo(){
-         txtAnioPedido.setText(Integer.toString(Pedidos.anioParaDetalleAPedido));
-         txtNumPedido.setText(Integer.toString(Pedidos.numPedParaDetalle));           
-     }
-      
+    static void numDePedidoRegistroAOrdenTrabajo() {
+        txtAnioPedido.setText(Integer.toString(Pedidos.anioParaDetalleAPedido));
+        txtNumPedido.setText(Integer.toString(Pedidos.numPedParaDetalle));
+    }
+
 }

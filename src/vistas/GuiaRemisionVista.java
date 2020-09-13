@@ -16,7 +16,6 @@ import entity.MotivoGuia;
 import exportarexcel.clsExportarExcel;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -40,12 +39,12 @@ public class GuiaRemisionVista extends javax.swing.JInternalFrame {
      */
     int tabla;
     static int anio;
-    
+
     int idGuia;
     static String serie;
     static String num;
     String fech;
-    
+
     String fechTras;
     String dirPar;
     String dirLle;
@@ -62,27 +61,26 @@ public class GuiaRemisionVista extends javax.swing.JInternalFrame {
     String lic;
     String estado;
     String numPedido;
-    
+
     String estadoCombo;
     String tipo;
     String motivo;
-    
-    String filtro="c.razonSocial";
-    
+
+    String filtro = "c.razonSocial";
+
     MotivoGuiaController motivoguiacontroler = new MotivoGuiaController();
     MotivoGuia motivoguia;
-    
-    
+
     public GuiaRemisionVista() throws Exception {
         initComponents();
-        listaGuiaDeRemision(filtro,txtLike.getText());
+        listaGuiaDeRemision(filtro, txtLike.getText());
         comboBoxEstado.setEnabled(false);
         txtObser.setEnabled(false);
         buttonModificar.setEnabled(true);
-        buttonGuardar.setEnabled(false); 
-        jTable1.setDefaultRenderer (Object.class, new RowsRenderer());
+        buttonGuardar.setEnabled(false);
+        jTable1.setDefaultRenderer(Object.class, new RowsRenderer());
         comboBoxTipo.setModel(motivoguiacontroler.ListarComboMotivoGuia());
-       
+
     }
 
     public class RowsRenderer extends DefaultTableCellRenderer {
@@ -104,23 +102,24 @@ public class GuiaRemisionVista extends javax.swing.JInternalFrame {
                 this.setOpaque(true);
                 this.setForeground(Color.RED);
 //               this.setFont(this.getFont().deriveFont( Font.BOLD));
-            } else if ((!"ANULADO".equals((jTable1.getValueAt(row, column)))) && 
-                       (!"PENDIENTE".equals((jTable1.getValueAt(row, column))) && 
-                       (!"EMITIDO".equals((jTable1.getValueAt(row, column)))))) {
+            } else if ((!"ANULADO".equals((jTable1.getValueAt(row, column))))
+                    && (!"PENDIENTE".equals((jTable1.getValueAt(row, column)))
+                    && (!"EMITIDO".equals((jTable1.getValueAt(row, column)))))) {
                 this.setOpaque(true);
                 this.setForeground(Color.BLACK);
             }
-            
+
             if (selected) {
                 setBackground(Color.decode("#39698a"));
                 setForeground(Color.decode("#FFFFFF"));
-            } else{
+            } else {
                 setBackground(Color.WHITE);
             }
-            
+
             return this;
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -540,7 +539,7 @@ public class GuiaRemisionVista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCerrarActionPerformed
-      dispose();
+        dispose();
     }//GEN-LAST:event_buttonCerrarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -553,11 +552,11 @@ public class GuiaRemisionVista extends javax.swing.JInternalFrame {
         serie = jTable1.getValueAt(tabla, 0).toString();
         num = jTable1.getValueAt(tabla, 1).toString();
         fech = jTable1.getValueAt(tabla, 5).toString();
-        
-        System.out.println("prueba de tabla :"+serie+" - "+num+fech);
+
+        System.out.println("prueba de tabla :" + serie + " - " + num + fech);
         try {
             consultarAnioGuiaRemision(fech, serie, num);
-            System.out.println("idGuia tabal"+idGuia);
+            System.out.println("idGuia tabal" + idGuia);
         } catch (Exception ex) {
             Logger.getLogger(GuiaRemisionVista.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -599,7 +598,7 @@ public class GuiaRemisionVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable1KeyReleased
 
     private void comboBoxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxFiltroItemStateChanged
-         if (comboBoxFiltro.getSelectedItem() == "SERIE DE GUIA") {
+        if (comboBoxFiltro.getSelectedItem() == "SERIE DE GUIA") {
             filtro = "g.serieGuia";
             listaGuiaDeRemision(filtro, txtLike.getText());
             System.out.println(filtro);
@@ -631,27 +630,32 @@ public class GuiaRemisionVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboBoxFiltroItemStateChanged
 
     private void txtLikeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLikeKeyReleased
-            listaGuiaDeRemision(filtro, txtLike.getText());
+        listaGuiaDeRemision(filtro, txtLike.getText());
     }//GEN-LAST:event_txtLikeKeyReleased
 
     private void buttonEditarGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarGuiaActionPerformed
-        GuiaRemision guia = null;
         try {
-            guia = new GuiaRemision();
-        } catch (Exception ex) {
-            Logger.getLogger(GuiaRemisionVista.class.getName()).log(Level.SEVERE, null, ex);
+            GuiaRemision guia = null;
+            try {
+                guia = new GuiaRemision();
+                Principal.jDesktopPane1.add(guia);
+                guia.toFront();
+                guia.setVisible(true);
+                GuiaRemision.pasarGuiaRemision();
+            } catch (Exception ex) {
+                Logger.getLogger(GuiaRemisionVista.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (NullPointerException ex) {
+            Logger.getLogger(Articulos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Principal.jDesktopPane1.add(guia);
-        guia.toFront();
-        guia.setVisible(true);
-        GuiaRemision.pasarGuiaRemision();
+
     }//GEN-LAST:event_buttonEditarGuiaActionPerformed
 
     private void comboBoxEstadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxEstadoItemStateChanged
-         if (comboBoxEstado.getSelectedIndex() != 0) {
+        if (comboBoxEstado.getSelectedIndex() != 0) {
             estadoCombo = comboBoxEstado.getSelectedItem().toString();
-        } else{
-            estadoCombo="";
+        } else {
+            estadoCombo = "";
         }
     }//GEN-LAST:event_comboBoxEstadoItemStateChanged
 
@@ -681,7 +685,7 @@ public class GuiaRemisionVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonExportExcelActionPerformed
 
     private void buttonVerGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVerGuiaActionPerformed
-        GenerarReporte guiaRep= new GenerarReporte();
+        GenerarReporte guiaRep = new GenerarReporte();
         try {
             guiaRep.ReporteGuia(idGuia);
         } catch (SQLException ex) {
@@ -692,8 +696,8 @@ public class GuiaRemisionVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonVerGuiaActionPerformed
 
     private void buttonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonImprimirActionPerformed
-         GenerarReporte guiaRep= new GenerarReporte();
-        
+        GenerarReporte guiaRep = new GenerarReporte();
+
         try {
             guiaRep.ImprimirGuia(idGuia);
         } catch (SQLException ex) {
@@ -756,23 +760,19 @@ public class GuiaRemisionVista extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTipoComp;
     // End of variables declaration//GEN-END:variables
 
+    GuiaDeRemisionController guiacontroler = new GuiaDeRemisionController();
+    GuiaDeRemision guia;
 
-GuiaDeRemisionController guiacontroler=new GuiaDeRemisionController();
-GuiaDeRemision guia; 
+    ClienteController clientecontroler = new ClienteController();
+    Cliente cliente;
 
-ClienteController clientecontroler= new ClienteController();
-Cliente cliente;
+    DetalleGuiaDeRemisionController detGuiaController = new DetalleGuiaDeRemisionController();
+    DetalleGuiaDeRemision detGuia;
 
-DetalleGuiaDeRemisionController detGuiaController = new DetalleGuiaDeRemisionController();
-DetalleGuiaDeRemision detGuia;
-
-
-    
-    
- void listaGuiaDeRemision(String valor,String nombre) {
+    void listaGuiaDeRemision(String valor, String nombre) {
         List<GuiaDeRemision> lista;
         try {
-            lista = guiacontroler.GuiaDeRemisionFiltrar(valor,nombre);
+            lista = guiacontroler.GuiaDeRemisionFiltrar(valor, nombre);
             verGuiaDeRemision(lista);
 
         } catch (Exception e) {
@@ -781,36 +781,34 @@ DetalleGuiaDeRemision detGuia;
         }
     }
 
-     private void verGuiaDeRemision(List<GuiaDeRemision> lista) {
-        
+    private void verGuiaDeRemision(List<GuiaDeRemision> lista) {
+
         DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
         tabla.setRowCount(0);
         for (GuiaDeRemision guiaRemi : lista) {
-           
-           
-                Object[] fila = {guiaRemi.getSerieGuia(), guiaRemi.getNumGuia(), guiaRemi.getCliente(),guiaRemi.getTipoComprobante(), 
-                                 guiaRemi.getNumComprobante(), guiaRemi.getFechEmi(), guiaRemi.getFechaTraslado(),
-                                 guiaRemi.getEstado(), guiaRemi.getObservacion()};
-                
-                tabla.addRow(fila);
-            }
-        
-    }
-     
-//-------------------------------- Consultas ---------------------------------------------------
 
-private void consultarAnioGuiaRemision(String f, String s, String n) throws Exception {
+            Object[] fila = {guiaRemi.getSerieGuia(), guiaRemi.getNumGuia(), guiaRemi.getCliente(), guiaRemi.getTipoComprobante(),
+                guiaRemi.getNumComprobante(), guiaRemi.getFechEmi(), guiaRemi.getFechaTraslado(),
+                guiaRemi.getEstado(), guiaRemi.getObservacion()};
+
+            tabla.addRow(fila);
+        }
+
+    }
+
+//-------------------------------- Consultas ---------------------------------------------------
+    private void consultarAnioGuiaRemision(String f, String s, String n) throws Exception {
         guia = guiacontroler.GuiaDeRemisionBuscarAnio(f, s, n);
         if (guia != null) {
-            idGuia=guia.getIdGuiaRemi();
-            System.out.println("iddeGuia:"+idGuia);
-            anio=Integer.parseInt(guia.getAnio());
-            System.out.println("año:"+anio);
+            idGuia = guia.getIdGuiaRemi();
+            System.out.println("iddeGuia:" + idGuia);
+            anio = Integer.parseInt(guia.getAnio());
+            System.out.println("año:" + anio);
         }
-  
+
     }
 
- private void consultarClientePorId(int iddecliente) throws Exception {
+    private void consultarClientePorId(int iddecliente) throws Exception {
         cliente = clientecontroler.ClienteBuscar1(iddecliente);
         if (cliente != null) {
 
@@ -819,49 +817,49 @@ private void consultarAnioGuiaRemision(String f, String s, String n) throws Exce
             JOptionPane.showMessageDialog(null, "Cliente no registrado por ahora");
             //System.out.println("Error");
         }
- }
- 
- private void consultarMotivo(int im) throws Exception {
+    }
+
+    private void consultarMotivo(int im) throws Exception {
         motivoguia = motivoguiacontroler.MotivoGuiaBuscarId(im);
         if (motivoguia != null) {
 
-            idMotivo=motivoguia.getIdMotivoGuia();
-            motivo=motivoguia.getMotivo();
-            tipo=motivoguia.getIdMotivoGuia()+".- "+motivoguia.getMotivo();
+            idMotivo = motivoguia.getIdMotivoGuia();
+            motivo = motivoguia.getMotivo();
+            tipo = motivoguia.getIdMotivoGuia() + ".- " + motivoguia.getMotivo();
 
         } else {
             JOptionPane.showMessageDialog(null, "Motivo no registrado");
             //System.out.println("Error");
         }
- 
- }
 
-private void consultarGuiaRemision(int idguia) throws Exception {
-        guia= guiacontroler.GuiaDeRemisionBuscar(idguia);
+    }
+
+    private void consultarGuiaRemision(int idguia) throws Exception {
+        guia = guiacontroler.GuiaDeRemisionBuscar(idguia);
         if (guia != null) {
 
             idGuia = guia.getIdGuiaRemi();
             System.out.println(idGuia);
-            serie=guia.getSerieGuia();
+            serie = guia.getSerieGuia();
             txtSerie.setText(guia.getSerieGuia());
             txtNum.setText(guia.getNumGuia());
-            num=guia.getNumGuia();
+            num = guia.getNumGuia();
             txtFechEmi.setText(guia.getFechEmi());
-            fech=guia.getFechEmi();
-            fechTras=guia.getFechaTraslado();
+            fech = guia.getFechEmi();
+            fechTras = guia.getFechaTraslado();
             txtFechaLlegada.setText(guia.getFechaTraslado());
             dirPar = guia.getDirecPart();
             txtDirPart.setText(guia.getDirecPart());
-            System.out.println("direccion de partida:"+dirPar);
-            dirLle=guia.getDirecLleg();
+            System.out.println("direccion de partida:" + dirPar);
+            dirLle = guia.getDirecLleg();
             txtDirLleg.setText(guia.getDirecLleg());
-            System.out.println("direccion de llegada: "+dirLle);
-            idCli=guia.getIdCliente();
+            System.out.println("direccion de llegada: " + dirLle);
+            idCli = guia.getIdCliente();
             consultarClientePorId(idCli);
-            tipoDoc=guia.getTipoDocCli();
-            conclusion=guia.getMotivoDescripcion();
+            tipoDoc = guia.getTipoDocCli();
+            conclusion = guia.getMotivoDescripcion();
             txtConclusion.setText(guia.getMotivoDescripcion());
-            idMotivo=guia.getIdMotivoGuia();
+            idMotivo = guia.getIdMotivoGuia();
             consultarMotivo(idMotivo);
             String testValueM = tipo;
             for (int i = 0; i < comboBoxTipo.getModel().getSize(); i++) {
@@ -871,16 +869,16 @@ private void consultarGuiaRemision(int idguia) throws Exception {
                     break;
                 }
             }
-            nombTrans=guia.getNomTransp();
-            rucTrans=guia.getRucTransp();
+            nombTrans = guia.getNomTransp();
+            rucTrans = guia.getRucTransp();
             txtTipoComp.setText(guia.getTipoComprobante());
-            tipoCom=guia.getTipoComprobante();
+            tipoCom = guia.getTipoComprobante();
             txtNumComp.setText(guia.getNumComprobante());
-            numCom=guia.getNumComprobante();
-            marca=guia.getVehMarca();
-            cert=guia.getVehCertif();
-            lic=guia.getVehLic();
-            estado=guia.getEstado();
+            numCom = guia.getNumComprobante();
+            marca = guia.getVehMarca();
+            cert = guia.getVehCertif();
+            lic = guia.getVehLic();
+            estado = guia.getEstado();
             String testValue1 = estado;
             for (int i = 0; i < comboBoxEstado.getModel().getSize(); i++) {
                 if (comboBoxEstado.getItemAt(i).equals(testValue1)) {
@@ -890,16 +888,16 @@ private void consultarGuiaRemision(int idguia) throws Exception {
                 }
             }
             txtObser.setText(guia.getObservacion());
-            numPedido=guia.getNumPedi();
+            numPedido = guia.getNumPedi();
 
         } else {
             JOptionPane.showMessageDialog(null, "Guia de Remision no registrada");
-                     //System.out.println("Error");         
+            //System.out.println("Error");         
         }
-    } 
+    }
 
 //--------------------------------- Tabla ---------------------------------------
-void listaDetalleGuiaDeRemision(int id) {
+    void listaDetalleGuiaDeRemision(int id) {
         List<DetalleGuiaDeRemision> lista;
         try {
             lista = detGuiaController.DetalleGuiaDeRemisionFiltrar(id);
@@ -911,22 +909,21 @@ void listaDetalleGuiaDeRemision(int id) {
         }
     }
 
-private void verDetalleGuiaDeRemision(List<DetalleGuiaDeRemision> lista) {
-        
+    private void verDetalleGuiaDeRemision(List<DetalleGuiaDeRemision> lista) {
+
         DefaultTableModel tabla = (DefaultTableModel) jTable2.getModel();
         tabla.setRowCount(0);
         for (DetalleGuiaDeRemision detGuia : lista) {
-           
-           
-                Object[] fila = {detGuia.getIdDetalleGuia(),detGuia.getCant(), detGuia.getCod(), detGuia.getDescrip(), detGuia.getUniMed()};
-                tabla.addRow(fila);
-            }
-        
+
+            Object[] fila = {detGuia.getIdDetalleGuia(), detGuia.getCant(), detGuia.getCod(), detGuia.getDescrip(), detGuia.getUniMed()};
+            tabla.addRow(fila);
+        }
+
     }
 
 //------------------------------------- Procesar ----------------------------------
     private void procesar(int op) {
-        guia= leerDatos();
+        guia = leerDatos();
         try {
             System.out.println("11111111111");
             String msg = guiacontroler.GuiaDeRemisionProcesar(guia, op);
@@ -936,12 +933,11 @@ private void verDetalleGuiaDeRemision(List<DetalleGuiaDeRemision> lista) {
             System.out.println("Error" + e.getMessage());
         }
     }
-    
- //------------------------------------- Leer Datos --------------------------------
-    
-private GuiaDeRemision leerDatos() {
+
+    //------------------------------------- Leer Datos --------------------------------
+    private GuiaDeRemision leerDatos() {
         GuiaDeRemision guiaRem = new GuiaDeRemision();
-        
+
         guiaRem.setIdGuiaRemi(idGuia);
         guiaRem.setNumGuia(num);
         guiaRem.setSerieGuia(serie);
@@ -963,7 +959,7 @@ private GuiaDeRemision leerDatos() {
         guiaRem.setEstado(estadoCombo);
         guiaRem.setObservacion(txtObser.getText());
         guiaRem.setNumPedi(numPedido);
-        
+
         return guiaRem;
     }
 
@@ -983,4 +979,3 @@ private GuiaDeRemision leerDatos() {
         txtDirLleg.setText("");
     }
 }
-

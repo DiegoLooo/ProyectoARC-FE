@@ -19,7 +19,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static vistas.DetalleProformas.obj;
 
 /**
  *
@@ -32,7 +31,7 @@ public class CajaChicaRegistro extends javax.swing.JInternalFrame {
      */
     int idCaja;
     int tabla;
-    
+
     public CajaChicaRegistro() throws Exception {
         initComponents();
         txtFechaCaja.setText(fechaActual());
@@ -41,7 +40,7 @@ public class CajaChicaRegistro extends javax.swing.JInternalFrame {
         txtIngreso.setText("0");
         consultarSumaTotal();
         habilitarInicio();
-       
+
     }
 
     /**
@@ -327,7 +326,7 @@ public class CajaChicaRegistro extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCerrarActionPerformed
-      dispose();
+        dispose();
     }//GEN-LAST:event_buttonCerrarActionPerformed
 
     private void buttonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegistrarActionPerformed
@@ -374,19 +373,19 @@ public class CajaChicaRegistro extends javax.swing.JInternalFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         tabla = jTable1.getSelectedRow();
         idCaja = Integer.parseInt(jTable1.getValueAt(tabla, 0).toString());
-        
+
         try {
             consultar(idCaja);
         } catch (Exception ex) {
             Logger.getLogger(CajaChicaRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
         habilitarBuscar();
-        
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void buttonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNuevoActionPerformed
-       limpiar();
-       habilitarNuevo();
+        limpiar();
+        habilitarNuevo();
     }//GEN-LAST:event_buttonNuevoActionPerformed
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
@@ -405,12 +404,12 @@ public class CajaChicaRegistro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable1KeyReleased
 
     private void buttonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimpiarActionPerformed
-         limpiar();
-         habilitarInicio();
+        limpiar();
+        habilitarInicio();
     }//GEN-LAST:event_buttonLimpiarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-           clsExportarExcel obj = new clsExportarExcel();
+        clsExportarExcel obj = new clsExportarExcel();
         try {
             obj.exportarExcel(jTable1);
         } catch (IOException ex) {
@@ -423,19 +422,17 @@ public class CajaChicaRegistro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonModificarActionPerformed
 
     private void buttonReporteCajaChicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReporteCajaChicaActionPerformed
-         ExportarCajaChica expCaja = null;
+
+        ExportarCajaChica expCaja = null;
         try {
             expCaja = new ExportarCajaChica();
-        } catch (SQLException ex) {
-            Logger.getLogger(CajaChicaRegistro.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CajaChicaRegistro.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
+            Principal.jDesktopPane1.add(expCaja);
+            expCaja.toFront();
+            expCaja.setVisible(true);
+        } catch (SQLException | NullPointerException | ClassNotFoundException | ParseException ex) {
             Logger.getLogger(CajaChicaRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Principal.jDesktopPane1.add(expCaja);
-        expCaja.toFront();
-        expCaja.setVisible(true);
+
     }//GEN-LAST:event_buttonReporteCajaChicaActionPerformed
 
     private void txtDescripCajaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripCajaKeyTyped
@@ -475,8 +472,8 @@ public class CajaChicaRegistro extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtIngreso;
     // End of variables declaration//GEN-END:variables
 
-CajaChicaController cajaController=new CajaChicaController();
-CajaChica caja;
+    CajaChicaController cajaController = new CajaChicaController();
+    CajaChica caja;
 
 //-------------------------- Consultar -----------------------------------------
     private void consultar(int id) throws Exception {
@@ -488,14 +485,12 @@ CajaChica caja;
             txtDescripCaja.setText(caja.getDescripCaja());
             txtEgreso.setText(caja.getEgreso());
             txtIngreso.setText(caja.getIngreso());
-           
 
         } else {
             JOptionPane.showMessageDialog(null, "Item no registrado");
             //System.out.println("Error");
         }
     }
-
 
 // -------------------------- Procesar ------------------------------------------------------
     private void procesar(int op) {
@@ -523,7 +518,7 @@ CajaChica caja;
         return caj;
     }
 
- //-------------------------------- Tabla --------------------------------------
+    //-------------------------------- Tabla --------------------------------------
     void listaCajaChica() {
         List<CajaChica> lista;
         try {
@@ -536,12 +531,12 @@ CajaChica caja;
         }
     }
 
-     private void verCajaChica(List<CajaChica> lista) {
+    private void verCajaChica(List<CajaChica> lista) {
 
         DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
         tabla.setRowCount(0);
         for (CajaChica cajChic : lista) {
-            Object[] fila = {cajChic.getIdCajaChica(),cajChic.getFechaCaja(), cajChic.getDescripCaja(), cajChic.getEgreso(), cajChic.getIngreso()};
+            Object[] fila = {cajChic.getIdCajaChica(), cajChic.getFechaCaja(), cajChic.getDescripCaja(), cajChic.getEgreso(), cajChic.getIngreso()};
             tabla.addRow(fila);
 
         }
@@ -556,14 +551,14 @@ CajaChica caja;
     }
 
 //---------------- Limpiar --------------------------------------
-    void limpiar(){
-     txtFechaCaja.setText(fechaActual());
-     txtDescripCaja.setText("");
-     txtEgreso.setText("0");
-     txtIngreso.setText("0");
+    void limpiar() {
+        txtFechaCaja.setText(fechaActual());
+        txtDescripCaja.setText("");
+        txtEgreso.setText("0");
+        txtIngreso.setText("0");
     }
-    
-   // -----------------Suma------------------------------
+
+    // -----------------Suma------------------------------
     void consultarSumaTotal() throws Exception {
         caja = cajaController.CajaChicaCalcular();
 
@@ -574,9 +569,9 @@ CajaChica caja;
                 labelTotalEgresos.setText("00000000.00");
             }
             if (caja.getTotalIngreso() != null) {
-                 labelTotalIngresos.setText(caja.getTotalIngreso());
+                labelTotalIngresos.setText(caja.getTotalIngreso());
             } else {
-                 labelTotalIngresos.setText("00000000.00");
+                labelTotalIngresos.setText("00000000.00");
             }
             if (caja.getDiferencia() != null) {
                 labelSaldo.setText(caja.getDiferencia());
@@ -593,10 +588,9 @@ CajaChica caja;
             //System.out.println("Error");
         }
     }
-    
+
     //------------------------- Habilitar -----------------------------------
-    
-     public void habilitarInicio() {
+    public void habilitarInicio() {
         buttonEliminar.setEnabled(false);
         buttonGuardar.setEnabled(false);
         buttonRegistrar.setEnabled(false);
@@ -634,7 +628,7 @@ CajaChica caja;
         txtFechaCaja.setEnabled(false);
         txtDescripCaja.setEnabled(false);
         txtEgreso.setEnabled(false);
-        txtIngreso.setEnabled(false); 
+        txtIngreso.setEnabled(false);
 
     }
 
@@ -677,8 +671,7 @@ CajaChica caja;
         txtIngreso.setEnabled(false);
 
     }
-    
-    
+
     public void habilitarModificar() {
         buttonEliminar.setEnabled(false);
         buttonGuardar.setEnabled(true);
@@ -692,7 +685,5 @@ CajaChica caja;
         txtIngreso.setEnabled(true);
 
     }
-    
-   
 
 }

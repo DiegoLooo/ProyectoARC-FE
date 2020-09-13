@@ -22,19 +22,20 @@ public class AccesoDB {
 
         String texto = "";
         try {
-            BufferedReader bf = new BufferedReader(new FileReader(direccion));
-            String temp = "";
-            String bfRead;
-            while ((bfRead = bf.readLine()) != null) {
-                //haz el ciclo, mientras bfRead tiene datos
-                temp = temp + bfRead; //guardado el texto del archivo
+            try (BufferedReader bf = new BufferedReader(new FileReader(direccion))) {
+                String temp = "";
+                String bfRead;
+                while ((bfRead = bf.readLine()) != null) {
+                    //haz el ciclo, mientras bfRead tiene datos
+                    temp = temp + bfRead; //guardado el texto del archivo
+                }
+                texto = temp;
             }
-            texto = temp;
-
         } catch (IOException e) {
             System.err.println("No se encontro archivo");
         } finally {
             System.out.println("Fin");
+            
         }
 
         return texto;

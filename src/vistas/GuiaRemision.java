@@ -35,6 +35,7 @@ import reportes.GenerarReporte;
  * @author ARCRODINPC-06
  */
 public class GuiaRemision extends javax.swing.JInternalFrame {
+
     static int idCliente;
     static int idGuiaRem;
     static String serieGuia;
@@ -46,29 +47,29 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
     String dir;
     String tipo;
     String estadoCombo;
-    String estado="PENDIENTE";
-    String observacion="";
-    
+    String estado = "PENDIENTE";
+    String observacion = "";
+
     String numeroGuia;
-    boolean mensa=false;
-    
+    boolean mensa = false;
+
     int generarNum;
-    
+
     String conclu;
     int idMotivo;
     String motivo;
-    
-    static String idPedidoParaGuia="";
-    
+
+    static String idPedidoParaGuia = "";
+
     String clienteGuia;
-    
-    static int idclienteNuevo=0;
-    
-    MotivoGuiaController motivoguiacontroler=new MotivoGuiaController();
+
+    static int idclienteNuevo = 0;
+
+    MotivoGuiaController motivoguiacontroler = new MotivoGuiaController();
     MotivoGuia motivoguia;
-    
+
     int idTransportista;
-    
+
     TransportistaController transportistacontroler = new TransportistaController();
     Transportista transportista;
 
@@ -84,12 +85,11 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
         comboBoxNumSerie.setSelectedIndex(0);
         txtTipoComp.setText("FACTURA");
         txtNumCorr.setText("");
-        
+
         comboBoxMotivo.setModel(motivoguiacontroler.ListarComboMotivoGuia());
-        
-        
+
         comboBoxRazSocial.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
-           
+
             public void keyReleased(KeyEvent evt) {
 
                 // aca falta validar que me ejecute el campo
@@ -98,7 +98,7 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
                     limpiarComboCliente();
                     try {
                         consultarComboCliente(comboBoxRazSocial.getItemAt(0));
-                             
+
                         //aCargarContactosCombo(cadenaEscrita);
                     } catch (Exception ex) {
                         Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
@@ -109,7 +109,7 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
                             // compara si el texto escrito se ecuentra en la lista
                             // busca el texto escrito en la base de datos, solo pasa si es identico
                             consultarComboCliente(cadenaEscrita);
-                                                      
+
 //                            a = labelIdProforma.getText();
 //                            b = Integer.parseInt(a);
                         } catch (Exception ex) {
@@ -121,7 +121,7 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
                                 if (comboBoxRazSocial.getItemAt(i).equals(cadenaEscrita)) {
                                     consultarComboCliente(comboBoxRazSocial.getItemAt(i));
 //                                    comboBoxContactoCliente.setModel(proformacontroler.ListarCombodeContacto(comboRazonSocial.getItemAt(i)));
-                                    
+
                                     break;
                                 }
                             }
@@ -143,17 +143,17 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
                         comboBoxRazSocial.getEditor().setItem(cadenaEscrita);
                         comboBoxRazSocial.showPopup();
                     } else {
-                       comboBoxRazSocial.addItem(cadenaEscrita);
+                        comboBoxRazSocial.addItem(cadenaEscrita);
                     }
                 }
             }
         });
-     comboBoxDirPar.setSelectedIndex(0);
-     comboBoxMotivo.setSelectedIndex(0);
-     txtNumComp.setText("F001-00000XXX");
-     
-     comboBoxTransportista.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
-           
+        comboBoxDirPar.setSelectedIndex(0);
+        comboBoxMotivo.setSelectedIndex(0);
+        txtNumComp.setText("F001-00000XXX");
+
+        comboBoxTransportista.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+
             public void keyReleased(KeyEvent evt) {
 
                 // aca falta validar que me ejecute el campo
@@ -162,7 +162,7 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
                     limpiarComboTransportista();
                     try {
                         consultarTransportista(comboBoxTransportista.getItemAt(0));
-                             
+
                         //aCargarContactosCombo(cadenaEscrita);
                     } catch (Exception ex) {
                         Logger.getLogger(Transportista.class.getName()).log(Level.SEVERE, null, ex);
@@ -173,7 +173,7 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
                             // compara si el texto escrito se ecuentra en la lista
                             // busca el texto escrito en la base de datos, solo pasa si es identico
                             consultarTransportista(cadenaEscrita);
-                                                      
+
 //                            a = labelIdProforma.getText();
 //                            b = Integer.parseInt(a);
                         } catch (Exception ex) {
@@ -185,7 +185,7 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
                                 if (comboBoxTransportista.getItemAt(i).equals(cadenaEscrita)) {
                                     consultarTransportista(comboBoxTransportista.getItemAt(i));
 //                                    comboBoxContactoCliente.setModel(proformacontroler.ListarCombodeContacto(comboRazonSocial.getItemAt(i)));
-                                    
+
                                     break;
                                 }
                             }
@@ -207,14 +207,13 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
                         comboBoxTransportista.getEditor().setItem(cadenaEscrita);
                         comboBoxTransportista.showPopup();
                     } else {
-                       comboBoxTransportista.addItem(cadenaEscrita);
+                        comboBoxTransportista.addItem(cadenaEscrita);
                     }
                 }
             }
         });
-     
+
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -820,7 +819,7 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
                 si = false;
             }
         }
-       
+
         if (idCliente == 0) {
             JOptionPane.showMessageDialog(null, "Llenar el campo de Cliente(Dar enter)");
         } else if ("".equals(txtDirLle.getText())) {
@@ -829,11 +828,11 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Llenar correctamente el campo Número de Comprobante(No debe contener \"X\")");
         } else if (".".equals(comboBoxNumSerie.getEditor().getItem().toString())) {
             JOptionPane.showMessageDialog(null, "Verificar el Número de Serie sea correcto");
-        } else if(comboBoxMotivo.getSelectedIndex()==0){
+        } else if (comboBoxMotivo.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Debe elegir el motivo de traslado");
-        }else {
+        } else {
             try {
-                txtNumCorr.setText(String.format("%06d", GenerarCodigo( comboBoxNumSerie.getEditor().getItem().toString())));
+                txtNumCorr.setText(String.format("%06d", GenerarCodigo(comboBoxNumSerie.getEditor().getItem().toString())));
             } catch (Exception ex) {
                 Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -844,15 +843,15 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
                 Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
             }
             habilitarRegistrar();
-            idclienteNuevo=0;
-            PedidosVista.idclientePedAGuia=0;
+            idclienteNuevo = 0;
+            PedidosVista.idclientePedAGuia = 0;
         }
 
     }//GEN-LAST:event_buttonRegistrarActionPerformed
 
     private void buttonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardarActionPerformed
-        if("".equals(txtNumPedido.getText()) || "-".equals(txtNumPedido.getText())){
-            idPedidoParaGuia="";
+        if ("".equals(txtNumPedido.getText()) || "-".equals(txtNumPedido.getText())) {
+            idPedidoParaGuia = "";
         }
         procesar(2);
         habilitarGuardar();
@@ -862,7 +861,7 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_buttonGuardarActionPerformed
 
     private void buttonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEliminarActionPerformed
@@ -874,20 +873,20 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
     private void buttonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimpiarActionPerformed
         limpiar();
         listaDetalleGuiaDeRemision();
-        habilitarInicio();      
+        habilitarInicio();
     }//GEN-LAST:event_buttonLimpiarActionPerformed
 
     private void buttonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNuevoActionPerformed
         if (idclienteNuevo != 0) {
             limpiar();
-            idCliente=idclienteNuevo;
+            idCliente = idclienteNuevo;
             try {
                 consultarClientePorId(idCliente);
             } catch (Exception ex) {
                 Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
             }
-            PedidosVista.idclientePedAGuia=0;
-            idclienteNuevo=0;
+            PedidosVista.idclientePedAGuia = 0;
+            idclienteNuevo = 0;
             habilitarNuevo();
         } else if (idclienteNuevo == 0) {
             limpiar();
@@ -901,35 +900,34 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         tabla = jTable1.getSelectedRow();
-        idDetalleGuia=jTable1.getValueAt(tabla, 0).toString();
-        descrip=jTable1.getValueAt(tabla, 3).toString();
-        idDetGuia1=Integer.parseInt(idDetalleGuia);
+        idDetalleGuia = jTable1.getValueAt(tabla, 0).toString();
+        descrip = jTable1.getValueAt(tabla, 3).toString();
+        idDetGuia1 = Integer.parseInt(idDetalleGuia);
         DetallesGuiaRemision detGuia = new DetallesGuiaRemision();
         Principal.jDesktopPane1.add(detGuia);
         detGuia.toFront();
         detGuia.setVisible(true);
-        
+
         try {
             DetallesGuiaRemision.consultar(idDetGuia1);
         } catch (Exception ex) {
             Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
 //        try {
 //            DetallesGuiaRemision.consultar(idGuiaRem);
 //        } catch (Exception ex) {
 //            Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-        
-        DetallesGuiaRemision.habilitarTabla();        
+        DetallesGuiaRemision.habilitarTabla();
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void comboBoxDirParItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxDirParItemStateChanged
-    
+
     }//GEN-LAST:event_comboBoxDirParItemStateChanged
 
     private void comboBoxMotivoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxMotivoItemStateChanged
-        if (comboBoxMotivo.getSelectedIndex() != 0 && comboBoxMotivo.getSelectedIndex() != 13  ) {
+        if (comboBoxMotivo.getSelectedIndex() != 0 && comboBoxMotivo.getSelectedIndex() != 13) {
             tipo = comboBoxMotivo.getSelectedItem().toString();
             System.out.println(tipo);
             try {
@@ -937,7 +935,7 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
             } catch (Exception ex) {
                 Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if (comboBoxMotivo.getSelectedIndex()==13){
+        } else if (comboBoxMotivo.getSelectedIndex() == 13) {
             tipo = comboBoxMotivo.getSelectedItem().toString();
             System.out.println(tipo);
             try {
@@ -946,20 +944,20 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
                 Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
             }
             txtConclusion.setText("PIEZA TERMINADA");
-        }else{
-        
+        } else {
+
         }
     }//GEN-LAST:event_comboBoxMotivoItemStateChanged
 
     private void buttonVistaPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVistaPdfActionPerformed
-         GenerarReporte guiaRep= new GenerarReporte();
+        GenerarReporte guiaRep = new GenerarReporte();
         try {
-             try {
-                 // guiaRep.ReporteGuia(idGuiaRem);
-                 guiaRep.ReporteGuiaGuardar(idGuiaRem, serieGuia, numGuia);
-             } catch (IOException ex) {
-                 Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
-             }
+            try {
+                // guiaRep.ReporteGuia(idGuiaRem);
+                guiaRep.ReporteGuiaGuardar(idGuiaRem, serieGuia, numGuia);
+            } catch (IOException ex) {
+                Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -968,7 +966,7 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonVistaPdfActionPerformed
 
     private void buttonImprimirGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonImprimirGuiaActionPerformed
-       GenerarReporte guiaRep= new GenerarReporte();
+        GenerarReporte guiaRep = new GenerarReporte();
         try {
             guiaRep.ImprimirGuia(idGuiaRem);
         } catch (SQLException ex) {
@@ -977,7 +975,7 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
             Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
         }
         procesarUpdateEstado(2);
-        
+
     }//GEN-LAST:event_buttonImprimirGuiaActionPerformed
 
     private void buttonAgregarDesdeCotiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarDesdeCotiActionPerformed
@@ -1020,49 +1018,55 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonSiguienteActionPerformed
 
     private void buttonAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAnteriorActionPerformed
-         numeroGuia = String.format("%06d", (Integer.parseInt(txtNumCorr.getText()) -1));
-         String nums=comboBoxNumSerie.getEditor().getItem().toString();
-         int aio=Integer.parseInt(txtAnio.getText());
-    limpiar();
-    
-    try {
-            consultarGuiaRemision(nums,numeroGuia,aio);
-        } catch (Exception ex) {
-            Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        listaDetalleGuiaDeRemision();
-        habilitarBuscar();
-        
-       if (mensa == true) {
-       numeroGuia = String.format("%06d", (Integer.parseInt(numeroGuia)+1));
-      
+        numeroGuia = String.format("%06d", (Integer.parseInt(txtNumCorr.getText()) - 1));
+        String nums = comboBoxNumSerie.getEditor().getItem().toString();
+        int aio = Integer.parseInt(txtAnio.getText());
+        limpiar();
+
         try {
-            consultarGuiaRemision(nums,numeroGuia,aio);
+            consultarGuiaRemision(nums, numeroGuia, aio);
         } catch (Exception ex) {
             Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
         }
         listaDetalleGuiaDeRemision();
         habilitarBuscar();
-       }
-       mensa=false;
+
+        if (mensa == true) {
+            numeroGuia = String.format("%06d", (Integer.parseInt(numeroGuia) + 1));
+
+            try {
+                consultarGuiaRemision(nums, numeroGuia, aio);
+            } catch (Exception ex) {
+                Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            listaDetalleGuiaDeRemision();
+            habilitarBuscar();
+        }
+        mensa = false;
     }//GEN-LAST:event_buttonAnteriorActionPerformed
 
     private void buttonAgregarDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarDireccionActionPerformed
-       if(idCliente!=0){
-        DireccionAGuiaRemision dirGuia = null;
         try {
-            dirGuia = new DireccionAGuiaRemision();
-        } catch (Exception ex) {
-            Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
+            if (idCliente != 0) {
+                DireccionAGuiaRemision dirGuia = null;
+                try {
+                    dirGuia = new DireccionAGuiaRemision();
+                    Principal.jDesktopPane1.add(dirGuia);
+                    dirGuia.toFront();
+                    dirGuia.setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(GuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, "Llenar el campo de Cliente (Dar Enter)");
+            }
+        } catch (NullPointerException ex) {
+            Logger.getLogger(Articulos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Principal.jDesktopPane1.add(dirGuia);
-        dirGuia.toFront();
-        dirGuia.setVisible(true);
-       }else {
-       
-           JOptionPane.showMessageDialog(null, "Llenar el campo de Cliente (Dar Enter)");
-       
-       }
+
+
     }//GEN-LAST:event_buttonAgregarDireccionActionPerformed
 
     private void buttonTransportistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTransportistaActionPerformed
@@ -1145,21 +1149,19 @@ public class GuiaRemision extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTipoDoc;
     // End of variables declaration//GEN-END:variables
 
-ClienteController clientecontroler= new ClienteController();
-Cliente cliente;
+    ClienteController clientecontroler = new ClienteController();
+    Cliente cliente;
 
-GuiaDeRemisionController guiacontroler=new GuiaDeRemisionController();
-GuiaDeRemision guia;
+    GuiaDeRemisionController guiacontroler = new GuiaDeRemisionController();
+    GuiaDeRemision guia;
 
-PedidoController pedidocontroler=new PedidoController();
-Pedido pedido;
+    PedidoController pedidocontroler = new PedidoController();
+    Pedido pedido;
 
-static DetalleGuiaDeRemisionController detGuiaController = new DetalleGuiaDeRemisionController();
-static DetalleGuiaDeRemision detGuia;
-
+    static DetalleGuiaDeRemisionController detGuiaController = new DetalleGuiaDeRemisionController();
+    static DetalleGuiaDeRemision detGuia;
 
 //------------------------------ RazonSocial ---------------------------------------------------
-
     private void consultarComboCliente(String razonsocial) throws Exception {
         cliente = clientecontroler.ClienteBuscar(razonsocial);
         if (cliente != null) {
@@ -1167,20 +1169,20 @@ static DetalleGuiaDeRemision detGuia;
             idCliente = cliente.getIdCliente();
             comboBoxRazSocial.setSelectedItem(cliente.getRazonSocial());
             txtRuc.setText(cliente.getRuc());
-           // txtDirLle.setText(cliente.getDireccion());
-            
+            // txtDirLle.setText(cliente.getDireccion());
+
         } else {
             JOptionPane.showMessageDialog(null, "Cliente no esta registrado");
             //System.out.println("Error");
         }
     }
-    
+
     public void limpiarComboCliente() {
         comboBoxRazSocial.setSelectedItem("");
         txtRuc.setText("");
         txtDirLle.setText("");
     }
-    
+
     private boolean comparar(String cadena) {
         Object[] lista = comboBoxRazSocial.getComponents();
         boolean encontrado = false;
@@ -1192,10 +1194,8 @@ static DetalleGuiaDeRemision detGuia;
         }
         return encontrado;
     }
- 
-    
- //-------------------------------- ComboBox Transportista ---------------------
-    
+
+    //-------------------------------- ComboBox Transportista ---------------------
     public void limpiarComboTransportista() {
         comboBoxTransportista.setSelectedItem("");
         txtNomTrans.setText("");
@@ -1204,7 +1204,7 @@ static DetalleGuiaDeRemision detGuia;
         txtCertVeh.setText("");
         txtLicVeh.setText("");
     }
-    
+
     private boolean compararTrans(String cadena) {
         Object[] lista = comboBoxTransportista.getComponents();
         boolean encontrado = false;
@@ -1216,15 +1216,15 @@ static DetalleGuiaDeRemision detGuia;
         }
         return encontrado;
     }
-    
+
 //------------------------------------ Consultar -------------------------------
-private void consultarGuiaRemision(int idguia) throws Exception {
-        guia= guiacontroler.GuiaDeRemisionBuscar(idguia);
+    private void consultarGuiaRemision(int idguia) throws Exception {
+        guia = guiacontroler.GuiaDeRemisionBuscar(idguia);
         if (guia != null) {
 
             idGuiaRem = guia.getIdGuiaRemi();
             System.out.println(idGuiaRem);
-            
+
             String testValue1 = guia.getSerieGuia();
             for (int i = 0; i < comboBoxNumSerie.getModel().getSize(); i++) {
                 if (comboBoxNumSerie.getItemAt(i).equals(testValue1)) {
@@ -1233,9 +1233,9 @@ private void consultarGuiaRemision(int idguia) throws Exception {
                     break;
                 }
             }
-            serieGuia=guia.getSerieGuia();
+            serieGuia = guia.getSerieGuia();
             txtNumCorr.setText(guia.getNumGuia());
-            numGuia=guia.getNumGuia();
+            numGuia = guia.getNumGuia();
             txtFechEmi.setText(guia.getFechEmi());
             txtFechTras.setText(guia.getFechaTraslado());
             dir = guia.getDirecPart();
@@ -1249,12 +1249,12 @@ private void consultarGuiaRemision(int idguia) throws Exception {
                 }
             }
             txtDirLle.setText(guia.getDirecLleg());
-            idCliente=guia.getIdCliente();
+            idCliente = guia.getIdCliente();
             consultarClientePorId(idCliente);
             txtTipoDoc.setText(guia.getTipoDocCli());
-            
-            conclu=guia.getMotivoDescripcion();
-            idMotivo=guia.getIdMotivoGuia();
+
+            conclu = guia.getMotivoDescripcion();
+            idMotivo = guia.getIdMotivoGuia();
             consultarMotivo(idMotivo);
             String testValueM = tipo;
             for (int i = 0; i < comboBoxMotivo.getModel().getSize(); i++) {
@@ -1273,19 +1273,19 @@ private void consultarGuiaRemision(int idguia) throws Exception {
             txtMarcaVeh.setText(guia.getVehMarca());
             txtCertVeh.setText(guia.getVehCertif());
             txtLicVeh.setText(guia.getVehLic());
-            estado=guia.getEstado();
-            observacion=guia.getObservacion();
+            estado = guia.getEstado();
+            observacion = guia.getObservacion();
             txtNumPedido.setText(guia.getNumPedi());
 
         } else {
             JOptionPane.showMessageDialog(null, "Guia de Remision no registrada");
-                     //System.out.println("Error");
-                     mensa=true;
+            //System.out.println("Error");
+            mensa = true;
         }
     }
 
-private void consultarGuiaRemision(String serie, String num, int anio) throws Exception {
-        guia= guiacontroler.GuiaDeRemisionBuscar(serie, num, anio);
+    private void consultarGuiaRemision(String serie, String num, int anio) throws Exception {
+        guia = guiacontroler.GuiaDeRemisionBuscar(serie, num, anio);
         if (guia != null) {
 
             idGuiaRem = guia.getIdGuiaRemi();
@@ -1298,20 +1298,20 @@ private void consultarGuiaRemision(String serie, String num, int anio) throws Ex
                     break;
                 }
             }
-            serieGuia=guia.getSerieGuia();
+            serieGuia = guia.getSerieGuia();
             txtNumCorr.setText(guia.getNumGuia());
-            numGuia=guia.getNumGuia();
+            numGuia = guia.getNumGuia();
             txtFechEmi.setText(guia.getFechEmi());
             txtFechTras.setText(guia.getFechaTraslado());
             dir = guia.getDirecPart();
             System.out.println("dirPart" + dir);
             comboBoxDirPar.setSelectedItem(guia.getDirecPart());
             txtDirLle.setText(guia.getDirecLleg());
-            idCliente=guia.getIdCliente();
+            idCliente = guia.getIdCliente();
             consultarClientePorId(idCliente);
             txtTipoDoc.setText(guia.getTipoDocCli());
-            conclu=guia.getMotivoDescripcion();
-            idMotivo=guia.getIdMotivoGuia();
+            conclu = guia.getMotivoDescripcion();
+            idMotivo = guia.getIdMotivoGuia();
             consultarMotivo(idMotivo);
             String testValueM = tipo;
             for (int i = 0; i < comboBoxMotivo.getModel().getSize(); i++) {
@@ -1330,11 +1330,11 @@ private void consultarGuiaRemision(String serie, String num, int anio) throws Ex
             txtMarcaVeh.setText(guia.getVehMarca());
             txtCertVeh.setText(guia.getVehCertif());
             txtLicVeh.setText(guia.getVehLic());
-            estado=guia.getEstado();
-            observacion=guia.getObservacion();
-            idPedidoParaGuia=guia.getNumPedi();
+            estado = guia.getEstado();
+            observacion = guia.getObservacion();
+            idPedidoParaGuia = guia.getNumPedi();
             if (!"".equals(guia.getNumPedi())) {
-                
+
                 consultarPedido(Integer.parseInt(guia.getNumPedi()));
             } else {
                 txtNumPedido.setText("-");
@@ -1342,40 +1342,40 @@ private void consultarGuiaRemision(String serie, String num, int anio) throws Ex
 
         } else {
             JOptionPane.showMessageDialog(null, "Guia de Remision no registrada");
-                     //System.out.println("Error");
-                     mensa=true;
+            //System.out.println("Error");
+            mensa = true;
         }
     }
 
- private void consultarClientePorId(int iddecliente) throws Exception {
+    private void consultarClientePorId(int iddecliente) throws Exception {
         cliente = clientecontroler.ClienteBuscar1(iddecliente);
         if (cliente != null) {
 
             //txtRazonSocial.setText(pro.getRazonSocial());
             comboBoxRazSocial.setSelectedItem(cliente.getRazonSocial());
-            clienteGuia=cliente.getRazonSocial();
+            clienteGuia = cliente.getRazonSocial();
             txtRuc.setText(cliente.getRuc());
         } else {
             JOptionPane.showMessageDialog(null, "Cliente no registrado por ahora");
             //System.out.println("Error");
         }
- }
+    }
 
- 
- private void consultarPedido(int idp) throws Exception {
+    private void consultarPedido(int idp) throws Exception {
         pedido = pedidocontroler.PedidoBuscar(idp);
         if (pedido != null) {
-            
-           txtNumPedido.setText(String.format("%06d",pedido.getNumPedido()));
-                                    
+
+            txtNumPedido.setText(String.format("%06d", pedido.getNumPedido()));
+
         } else {
 //            JOptionPane.showMessageDialog(null, "Cliente no esta registrado");
             //System.out.println("Error");
         }
     }
 //------------------------------------- Procesar ----------------------------------
+
     private void procesar(int op) {
-        guia= leerDatos();
+        guia = leerDatos();
         try {
             System.out.println("11111111111");
             String msg = guiacontroler.GuiaDeRemisionProcesar(guia, op);
@@ -1385,37 +1385,36 @@ private void consultarGuiaRemision(String serie, String num, int anio) throws Ex
             System.out.println("Error" + e.getMessage());
         }
     }
-    
+
     private void consultarMotivo(String cg) throws Exception {
         motivoguia = motivoguiacontroler.MotivoGuiaBuscarCombox(cg);
         if (motivoguia != null) {
 
-            idMotivo=motivoguia.getIdMotivoGuia();
-            motivo=motivoguia.getMotivo();
+            idMotivo = motivoguia.getIdMotivoGuia();
+            motivo = motivoguia.getMotivo();
 
         } else {
             JOptionPane.showMessageDialog(null, "Motivo no registrado");
             //System.out.println("Error");
         }
     }
-    
+
     private void consultarMotivo(int im) throws Exception {
         motivoguia = motivoguiacontroler.MotivoGuiaBuscarId(im);
         if (motivoguia != null) {
 
-            idMotivo=motivoguia.getIdMotivoGuia();
-            motivo=motivoguia.getMotivo();
-            tipo=motivoguia.getIdMotivoGuia()+".- "+motivoguia.getMotivo();
+            idMotivo = motivoguia.getIdMotivoGuia();
+            motivo = motivoguia.getMotivo();
+            tipo = motivoguia.getIdMotivoGuia() + ".- " + motivoguia.getMotivo();
 
         } else {
             JOptionPane.showMessageDialog(null, "Motivo no registrado");
             //System.out.println("Error");
         }
     }
-    
-    
+
     private void procesarUpdateEstado(int op) {
-        guia= leerDatosUpdate();
+        guia = leerDatosUpdate();
         try {
             System.out.println("11111111111");
             String msg = guiacontroler.GuiaDeRemisionProcesar(guia, op);
@@ -1425,9 +1424,8 @@ private void consultarGuiaRemision(String serie, String num, int anio) throws Ex
             System.out.println("Error" + e.getMessage());
         }
     }
-    
-  //----------------------- Consultar Transportista ----------------------------
-    
+
+    //----------------------- Consultar Transportista ----------------------------
     private void consultarTransportista(String nombreTrans) throws Exception {
         transportista = transportistacontroler.TransportistaBuscarNombre(nombreTrans);
         if (transportista != null) {
@@ -1446,15 +1444,14 @@ private void consultarGuiaRemision(String serie, String num, int anio) throws Ex
             //System.out.println("Error");
         }
     }
-    
- //------------------------------------- Leer Datos --------------------------------
-    
-private GuiaDeRemision leerDatos() {
+
+    //------------------------------------- Leer Datos --------------------------------
+    private GuiaDeRemision leerDatos() {
         GuiaDeRemision guiaRem = new GuiaDeRemision();
-        
+
         guiaRem.setIdGuiaRemi(idGuiaRem);
         guiaRem.setNumGuia(txtNumCorr.getText());
-        numGuia=txtNumCorr.getText();
+        numGuia = txtNumCorr.getText();
         guiaRem.setSerieGuia(comboBoxNumSerie.getEditor().getItem().toString());
         guiaRem.setFechEmi(txtFechEmi.getText());
         guiaRem.setFechaTraslado(txtFechTras.getText());
@@ -1474,16 +1471,16 @@ private GuiaDeRemision leerDatos() {
         guiaRem.setEstado(estado);
         guiaRem.setObservacion(observacion);
         guiaRem.setNumPedi(idPedidoParaGuia);
-        
+
         return guiaRem;
     }
 
-private GuiaDeRemision leerDatosUpdate() {
+    private GuiaDeRemision leerDatosUpdate() {
         GuiaDeRemision guiaRem = new GuiaDeRemision();
-        
+
         guiaRem.setIdGuiaRemi(idGuiaRem);
         guiaRem.setNumGuia(txtNumCorr.getText());
-        numGuia=txtNumCorr.getText();
+        numGuia = txtNumCorr.getText();
         guiaRem.setSerieGuia(comboBoxNumSerie.getEditor().getItem().toString());
         guiaRem.setFechEmi(txtFechEmi.getText());
         guiaRem.setFechaTraslado(txtFechTras.getText());
@@ -1503,11 +1500,12 @@ private GuiaDeRemision leerDatosUpdate() {
         guiaRem.setEstado("EMITIDO");
         guiaRem.setObservacion(observacion);
         guiaRem.setNumPedi(txtNumPedido.getText());
-        
+
         return guiaRem;
     }
 //--------------------------------- Tabla ---------------------------------------
-static void listaDetalleGuiaDeRemision() {
+
+    static void listaDetalleGuiaDeRemision() {
         List<DetalleGuiaDeRemision> lista;
         try {
             lista = detGuiaController.DetalleGuiaDeRemisionFiltrar(idGuiaRem);
@@ -1520,25 +1518,25 @@ static void listaDetalleGuiaDeRemision() {
     }
 
     static private void verDetalleGuiaDeRemision(List<DetalleGuiaDeRemision> lista) {
-        
+
         DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
         tabla.setRowCount(0);
         for (DetalleGuiaDeRemision detGuia : lista) {
-           
-           
-                Object[] fila = {detGuia.getIdDetalleGuia(),detGuia.getCant(), detGuia.getCod(), detGuia.getDescrip(), detGuia.getUniMed()};
-                tabla.addRow(fila);
-            }
-        
+
+            Object[] fila = {detGuia.getIdDetalleGuia(), detGuia.getCant(), detGuia.getCod(), detGuia.getDescrip(), detGuia.getUniMed()};
+            tabla.addRow(fila);
+        }
+
     }
 // ------------------------ Fecha --> Indica la fecha del dia --------------------
+
     public String fechaActual() {
         Date fecha = new Date();
 
         SimpleDateFormat formatofecha = new SimpleDateFormat("yyyy-MM-dd");
         return formatofecha.format(fecha);
     }
-    
+
     public String anioActual() {
         Date fecha = new Date();
 
@@ -1547,9 +1545,9 @@ static void listaDetalleGuiaDeRemision() {
     }
 
 //------------------------------------ Limpiar -------------------------------
-void limpiar() {
-        idGuiaRem=0;
-        idCliente=0;
+    void limpiar() {
+        idGuiaRem = 0;
+        idCliente = 0;
         listaDetalleGuiaDeRemision();
         comboBoxNumSerie.setSelectedIndex(0);
         txtNumCorr.setText("");
@@ -1571,7 +1569,7 @@ void limpiar() {
         txtLicVeh.setText("");
         txtNumPedido.setText("");
         comboBoxTransportista.setSelectedItem("");
-        idPedidoParaGuia="";
+        idPedidoParaGuia = "";
     }
 //------------------------------------- Habilitar ------------------------
 
@@ -1697,8 +1695,8 @@ void limpiar() {
         buttonTransportista.setEnabled(false);
         buttonPedido.setEnabled(false);
     }
-    
-void habilitarRegistrar() {
+
+    void habilitarRegistrar() {
 
         buttonBuscar.setEnabled(false);
         buttonLimpiar.setEnabled(true);
@@ -1713,7 +1711,7 @@ void habilitarRegistrar() {
         buttonImprimirGuia.setEnabled(true);
         buttonSiguiente.setEnabled(true);
         buttonAnterior.setEnabled(true);
-        
+
         comboBoxNumSerie.setEnabled(false);
         txtNumCorr.setEnabled(false);
         txtFechEmi.setEnabled(false);
@@ -1739,7 +1737,7 @@ void habilitarRegistrar() {
         buttonPedido.setEnabled(false);
     }
 
-void habilitarModificar() {
+    void habilitarModificar() {
 
         buttonBuscar.setEnabled(false);
         buttonLimpiar.setEnabled(false);
@@ -1780,7 +1778,7 @@ void habilitarModificar() {
         buttonPedido.setEnabled(true);
     }
 
-void habilitarGuardar() {
+    void habilitarGuardar() {
 
         buttonBuscar.setEnabled(false);
         buttonLimpiar.setEnabled(true);
@@ -1821,7 +1819,7 @@ void habilitarGuardar() {
         buttonPedido.setEnabled(false);
     }
 
-void habilitarEliminar() {
+    void habilitarEliminar() {
 
         buttonBuscar.setEnabled(true);
         buttonLimpiar.setEnabled(true);
@@ -1865,30 +1863,29 @@ void habilitarEliminar() {
 //----------------- metodo que jala desde Guia Remisión Vista  -------------
     static void pasarGuiaRemision() {
         txtAnio.setText(Integer.toString(GuiaRemisionVista.anio));
-        String testValuex= GuiaRemisionVista.serie;
-            for (int i = 0; i < comboBoxNumSerie.getModel().getSize(); i++) {
-                if (comboBoxNumSerie.getItemAt(i).equals(testValuex)) {
-                    System.out.println(i);
-                    comboBoxNumSerie.setSelectedIndex(i);
-                    break;
-                }
+        String testValuex = GuiaRemisionVista.serie;
+        for (int i = 0; i < comboBoxNumSerie.getModel().getSize(); i++) {
+            if (comboBoxNumSerie.getItemAt(i).equals(testValuex)) {
+                System.out.println(i);
+                comboBoxNumSerie.setSelectedIndex(i);
+                break;
             }
+        }
         txtNumCorr.setText(GuiaRemisionVista.num);
-              
-    }
-    
- // ------------------- metodo que jala la direccion del cliente  ---------------------
-    static void direccionAGuia(){
-    
-        txtDirLle.setText(DireccionAGuiaRemision.direc);
-    
-    }
-    
- //-------------consultas para generar codigo -------------------    
 
+    }
+
+    // ------------------- metodo que jala la direccion del cliente  ---------------------
+    static void direccionAGuia() {
+
+        txtDirLle.setText(DireccionAGuiaRemision.direc);
+
+    }
+
+    //-------------consultas para generar codigo -------------------    
     int GenerarCodigo(String nums) throws Exception {
         String nug;
-        guia = guiacontroler.GuiaDeRemisionBuscarUltimoId( nums);
+        guia = guiacontroler.GuiaDeRemisionBuscarUltimoId(nums);
         if (guia != null) {
             nug = guia.getNumGuia();
             generarNum = Integer.parseInt(nug);
@@ -1902,21 +1899,20 @@ void habilitarEliminar() {
             System.out.println("ultimoNum : " + generarNum);
         }
         return generarNum;
-       
+
     }
-    
-    
-   static void numYIdPedidoParaGuia() {
+
+    static void numYIdPedidoParaGuia() {
         idPedidoParaGuia = IdPedidoParaGuiaDeRemision.idPedidoStatic;
-        System.out.println("Id Pedido para Guia: "+ idPedidoParaGuia);
+        System.out.println("Id Pedido para Guia: " + idPedidoParaGuia);
         txtNumPedido.setText(IdPedidoParaGuiaDeRemision.numPedidoStatic);
-        System.out.println("Num Pedido para Guia: "+ IdPedidoParaGuiaDeRemision.numPedidoStatic);
+        System.out.println("Num Pedido para Guia: " + IdPedidoParaGuiaDeRemision.numPedidoStatic);
     }
-   
- // ------ Cliente de Pedidos a Guia Remision ----------------
-   static void clienteDePedidoAGuia(){
-    idclienteNuevo=PedidosVista.idclientePedAGuia;
-   
-   }
+
+    // ------ Cliente de Pedidos a Guia Remision ----------------
+    static void clienteDePedidoAGuia() {
+        idclienteNuevo = PedidosVista.idclientePedAGuia;
+
+    }
 
 }

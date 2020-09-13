@@ -26,23 +26,22 @@ import javax.swing.JOptionPane;
  * @author ARCRODINPC-06
  */
 public class ArticulosDeInventario extends javax.swing.JInternalFrame {
-    
+
     Connection conexion;
     CallableStatement cs = null;
     ResultSet rs = null;
     Statement s = null;
     PreparedStatement ps = null;
     String q;
-    
-    
+
     int ultimoId;
     int idInventario;
     String idInvCombo;
-    
+
     static int idArt;
     static String artid;
     static String codArt;
-    String tipoArt="SELECCIONAR";
+    String tipoArt = "SELECCIONAR";
 
     /**
      * Creates new form Articulos
@@ -378,7 +377,7 @@ public class ArticulosDeInventario extends javax.swing.JInternalFrame {
             Logger.getLogger(ArticulosDeInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
         habilitarRegistrar();
-        
+
     }//GEN-LAST:event_buttonRegistrarActionPerformed
 
     private void buttonBuscarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarCodigoActionPerformed
@@ -471,38 +470,33 @@ public class ArticulosDeInventario extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtPulg;
     // End of variables declaration//GEN-END:variables
 
-ArticuloController obj= new ArticuloController();
-Articulo pro;
+    ArticuloController obj = new ArticuloController();
+    Articulo pro;
 
-InventarioController inventariocontroler= new InventarioController();
-Inventario inventario;
-
-
+    InventarioController inventariocontroler = new InventarioController();
+    Inventario inventario;
 
 // ------------------------- Procesar ----------------------------
-
-   private void procesar(int op ) {
-       pro=leerDatos();
+    private void procesar(int op) {
+        pro = leerDatos();
         try {
-            String msg=obj.ArticuloProcesar(pro,pro,op);
-            JOptionPane.showMessageDialog(null, msg);            
+            String msg = obj.ArticuloProcesar(pro, pro, op);
+            JOptionPane.showMessageDialog(null, msg);
         } catch (Exception e) {
             //JOptionPane.showMessageDialog(null, e.getMessage());
-             System.out.println("Error"+e.getMessage());
-        }       
-   }
-   
-   
- //-------------------------- Consultar -----------------------------
- //txtCodArticulo.getText(), idInventario
-   
-      private void consultar(String codA, int in) throws Exception {
-       pro=obj.ArticuloBuscar(codA, in);
-        if (pro!=null) {
-            
+            System.out.println("Error" + e.getMessage());
+        }
+    }
+
+    //-------------------------- Consultar -----------------------------
+    //txtCodArticulo.getText(), idInventario
+    private void consultar(String codA, int in) throws Exception {
+        pro = obj.ArticuloBuscar(codA, in);
+        if (pro != null) {
+
             labelIdArticulo.setText(Integer.toString(pro.getAidArticulo()));
-            
-            idInventario=pro.getIdInventario();
+
+            idInventario = pro.getIdInventario();
             String testValue2 = Integer.toString(idInventario);
             for (int i = 0; i < comboBoxInventario.getModel().getSize(); i++) {
                 if (comboBoxInventario.getItemAt(i).equals(testValue2)) {
@@ -511,35 +505,33 @@ Inventario inventario;
                     break;
                 }
             }
-            consultar(idInventario);            
-            
-            idArt=pro.getAidArticulo();
+            consultar(idInventario);
+
+            idArt = pro.getAidArticulo();
             txtCodArticulo.setText(pro.getCodigoArticulo());
-            codArt=pro.getCodigoArticulo();
+            codArt = pro.getCodigoArticulo();
             txtCodUbicacion.setText(pro.getCodigoUbicacion());
             txtNombre.setText(pro.getNombre());
             txtObservacion.setText(pro.getObservacion());
             txtDiametro.setText(pro.getDiametro());
             txtPulg.setText(pro.getDiamPulg());
-          //txtDiamInterno.setText("");
+            //txtDiamInterno.setText("");
             txtMedidaDia.setText(pro.getUnidadMedidaDia());
             txtLongitud.setText(pro.getLongitud());
             txtMedLongitud.setText(pro.getUnidadMedidaLong());
             txtProcedencia.setText(pro.getProcedencia());
             txtCantidad.setText(Integer.toString(pro.getCantidad()));
-            
-          }else{
-          JOptionPane.showMessageDialog(null, "Articulo no registrado");
-          //System.out.println("Error");
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Articulo no registrado");
+            //System.out.println("Error");
         }
     }
 
-
 //--------------------------- Leer Datos -----------------------
-
-     private Articulo leerDatos() {
+    private Articulo leerDatos() {
         Articulo art = new Articulo();
-        
+
         art.setIdInventario(idInventario);
         art.setCodigoArticulo(txtCodArticulo.getText());
         art.setCodigoUbicacion(txtCodUbicacion.getText());
@@ -554,182 +546,185 @@ Inventario inventario;
         art.setCantidad(Integer.parseInt(txtCantidad.getText()));
         art.setProcedencia(txtProcedencia.getText());
         art.setAidArticulo(idArt);
-        
+
         return art;
     }
 //------------------------------- Limpiar -------------------------
-    public void limpiar(){
-    
-    txtCodArticulo.setText("");
-    txtCodUbicacion.setText("");
-    txtNombre.setText("");
-    txtObservacion.setText("");
-    txtDiametro.setText("");
-    txtPulg.setText("");
-    txtMedidaDia.setText("MM");
-    txtLongitud.setText("");
-    txtMedLongitud.setText("MM");
-    txtCantidad.setText("");
-    txtProcedencia.setText("");
-    labelIdArticulo.setText("000000");
-    
+
+    public void limpiar() {
+
+        txtCodArticulo.setText("");
+        txtCodUbicacion.setText("");
+        txtNombre.setText("");
+        txtObservacion.setText("");
+        txtDiametro.setText("");
+        txtPulg.setText("");
+        txtMedidaDia.setText("MM");
+        txtLongitud.setText("");
+        txtMedLongitud.setText("MM");
+        txtCantidad.setText("");
+        txtProcedencia.setText("");
+        labelIdArticulo.setText("000000");
+
     }
 //------------------------------ Habilitar -----------------------
-public void habilitarInicio(){
-    buttonBuscarCodigo.setEnabled(true);
-    buttonLimpiar.setEnabled(true);
-    buttonNuevo.setEnabled(true);
-    buttonRegistrar.setEnabled(false);
-    buttonModificar.setEnabled(false);
-    buttonGuardar.setEnabled(false);
-    buttonEliminar.setEnabled(false);
 
-    txtCodArticulo.setEnabled(true);
-    txtCodUbicacion.setEnabled(false);
-    txtNombre.setEnabled(false);
-    txtObservacion.setEnabled(false);
-    txtDiametro.setEnabled(false);
-    txtPulg.setEnabled(false);
-    txtMedidaDia.setEnabled(false);
-    txtLongitud.setEnabled(false);
-    txtMedLongitud.setEnabled(false);
-    txtCantidad.setEnabled(false);
-    txtProcedencia.setEnabled(false);      
+    public void habilitarInicio() {
+        buttonBuscarCodigo.setEnabled(true);
+        buttonLimpiar.setEnabled(true);
+        buttonNuevo.setEnabled(true);
+        buttonRegistrar.setEnabled(false);
+        buttonModificar.setEnabled(false);
+        buttonGuardar.setEnabled(false);
+        buttonEliminar.setEnabled(false);
+
+        txtCodArticulo.setEnabled(true);
+        txtCodUbicacion.setEnabled(false);
+        txtNombre.setEnabled(false);
+        txtObservacion.setEnabled(false);
+        txtDiametro.setEnabled(false);
+        txtPulg.setEnabled(false);
+        txtMedidaDia.setEnabled(false);
+        txtLongitud.setEnabled(false);
+        txtMedLongitud.setEnabled(false);
+        txtCantidad.setEnabled(false);
+        txtProcedencia.setEnabled(false);
     }
-    
-    public void habilitarNuevo(){
-    buttonBuscarCodigo.setEnabled(false);
-    buttonLimpiar.setEnabled(true);
-    buttonNuevo.setEnabled(false);
-    buttonRegistrar.setEnabled(true);
-    buttonModificar.setEnabled(false);
-    buttonGuardar.setEnabled(false);
-    buttonEliminar.setEnabled(false);
 
-    txtCodArticulo.setEnabled(true);
-    txtCodUbicacion.setEnabled(true);
-    txtNombre.setEnabled(true);
-    txtObservacion.setEnabled(true);
-    txtDiametro.setEnabled(true);
-    txtPulg.setEnabled(true);
-    txtMedidaDia.setEnabled(true);
-    txtLongitud.setEnabled(true);
-    txtMedLongitud.setEnabled(true);
-    txtCantidad.setEnabled(true);
-    txtProcedencia.setEnabled(true);      
+    public void habilitarNuevo() {
+        buttonBuscarCodigo.setEnabled(false);
+        buttonLimpiar.setEnabled(true);
+        buttonNuevo.setEnabled(false);
+        buttonRegistrar.setEnabled(true);
+        buttonModificar.setEnabled(false);
+        buttonGuardar.setEnabled(false);
+        buttonEliminar.setEnabled(false);
+
+        txtCodArticulo.setEnabled(true);
+        txtCodUbicacion.setEnabled(true);
+        txtNombre.setEnabled(true);
+        txtObservacion.setEnabled(true);
+        txtDiametro.setEnabled(true);
+        txtPulg.setEnabled(true);
+        txtMedidaDia.setEnabled(true);
+        txtLongitud.setEnabled(true);
+        txtMedLongitud.setEnabled(true);
+        txtCantidad.setEnabled(true);
+        txtProcedencia.setEnabled(true);
     }
-    
-    public void habilitarRegistrar(){
-    buttonBuscarCodigo.setEnabled(false);
-    buttonLimpiar.setEnabled(true);
-    buttonNuevo.setEnabled(false);
-    buttonRegistrar.setEnabled(false);
-    buttonModificar.setEnabled(true);
-    buttonGuardar.setEnabled(false);
-    buttonEliminar.setEnabled(true);
 
-    txtCodArticulo.setEnabled(false);
-    txtCodUbicacion.setEnabled(false);
-    txtNombre.setEnabled(false);
-    txtObservacion.setEnabled(false);
-    txtDiametro.setEnabled(false);
-    txtPulg.setEnabled(false);
-    txtMedidaDia.setEnabled(false);
-    txtLongitud.setEnabled(false);
-    txtMedLongitud.setEnabled(false);
-    txtCantidad.setEnabled(false);
-    txtProcedencia.setEnabled(false);      
+    public void habilitarRegistrar() {
+        buttonBuscarCodigo.setEnabled(false);
+        buttonLimpiar.setEnabled(true);
+        buttonNuevo.setEnabled(false);
+        buttonRegistrar.setEnabled(false);
+        buttonModificar.setEnabled(true);
+        buttonGuardar.setEnabled(false);
+        buttonEliminar.setEnabled(true);
+
+        txtCodArticulo.setEnabled(false);
+        txtCodUbicacion.setEnabled(false);
+        txtNombre.setEnabled(false);
+        txtObservacion.setEnabled(false);
+        txtDiametro.setEnabled(false);
+        txtPulg.setEnabled(false);
+        txtMedidaDia.setEnabled(false);
+        txtLongitud.setEnabled(false);
+        txtMedLongitud.setEnabled(false);
+        txtCantidad.setEnabled(false);
+        txtProcedencia.setEnabled(false);
     }
-    
-    public void habilitarModificar(){
-    buttonBuscarCodigo.setEnabled(false);
-    buttonLimpiar.setEnabled(false);
-    buttonNuevo.setEnabled(false);
-    buttonRegistrar.setEnabled(false);
-    buttonModificar.setEnabled(false);
-    buttonGuardar.setEnabled(true);
-    buttonEliminar.setEnabled(false);
 
-    txtCodArticulo.setEnabled(true);
-    txtCodUbicacion.setEnabled(true);
-    txtNombre.setEnabled(true);
-    txtObservacion.setEnabled(true);
-    txtDiametro.setEnabled(true);
-    txtPulg.setEnabled(true);
-    txtMedidaDia.setEnabled(true);
-    txtLongitud.setEnabled(true);
-    txtMedLongitud.setEnabled(true);
-    txtCantidad.setEnabled(true);
-    txtProcedencia.setEnabled(true);      
+    public void habilitarModificar() {
+        buttonBuscarCodigo.setEnabled(false);
+        buttonLimpiar.setEnabled(false);
+        buttonNuevo.setEnabled(false);
+        buttonRegistrar.setEnabled(false);
+        buttonModificar.setEnabled(false);
+        buttonGuardar.setEnabled(true);
+        buttonEliminar.setEnabled(false);
+
+        txtCodArticulo.setEnabled(true);
+        txtCodUbicacion.setEnabled(true);
+        txtNombre.setEnabled(true);
+        txtObservacion.setEnabled(true);
+        txtDiametro.setEnabled(true);
+        txtPulg.setEnabled(true);
+        txtMedidaDia.setEnabled(true);
+        txtLongitud.setEnabled(true);
+        txtMedLongitud.setEnabled(true);
+        txtCantidad.setEnabled(true);
+        txtProcedencia.setEnabled(true);
     }
-    
-    public void habilitarBuscar(){
-    buttonBuscarCodigo.setEnabled(true);
-    buttonLimpiar.setEnabled(true);
-    buttonNuevo.setEnabled(false);
-    buttonRegistrar.setEnabled(false);
-    buttonModificar.setEnabled(true);
-    buttonGuardar.setEnabled(false);
-    buttonEliminar.setEnabled(true);
 
-    txtCodArticulo.setEnabled(true);
-    txtCodUbicacion.setEnabled(false);
-    txtNombre.setEnabled(false);
-    txtObservacion.setEnabled(false);
-    txtDiametro.setEnabled(false);
-    txtPulg.setEnabled(false);
-    txtMedidaDia.setEnabled(false);
-    txtLongitud.setEnabled(false);
-    txtMedLongitud.setEnabled(false);
-    txtCantidad.setEnabled(false);
-    txtProcedencia.setEnabled(false);      
+    public void habilitarBuscar() {
+        buttonBuscarCodigo.setEnabled(true);
+        buttonLimpiar.setEnabled(true);
+        buttonNuevo.setEnabled(false);
+        buttonRegistrar.setEnabled(false);
+        buttonModificar.setEnabled(true);
+        buttonGuardar.setEnabled(false);
+        buttonEliminar.setEnabled(true);
+
+        txtCodArticulo.setEnabled(true);
+        txtCodUbicacion.setEnabled(false);
+        txtNombre.setEnabled(false);
+        txtObservacion.setEnabled(false);
+        txtDiametro.setEnabled(false);
+        txtPulg.setEnabled(false);
+        txtMedidaDia.setEnabled(false);
+        txtLongitud.setEnabled(false);
+        txtMedLongitud.setEnabled(false);
+        txtCantidad.setEnabled(false);
+        txtProcedencia.setEnabled(false);
     }
-    
-    public void habilitarEliminar(){
-    buttonBuscarCodigo.setEnabled(true);
-    buttonLimpiar.setEnabled(true);
-    buttonNuevo.setEnabled(true);
-    buttonRegistrar.setEnabled(false);
-    buttonModificar.setEnabled(false);
-    buttonGuardar.setEnabled(false);
-    buttonEliminar.setEnabled(false);
 
-    txtCodArticulo.setEnabled(true);
-    txtCodUbicacion.setEnabled(false);
-    txtNombre.setEnabled(false);
-    txtObservacion.setEnabled(false);
-    txtDiametro.setEnabled(false);
-    txtPulg.setEnabled(false);
-    txtMedidaDia.setEnabled(false);
-    txtLongitud.setEnabled(false);
-    txtMedLongitud.setEnabled(false);
-    txtCantidad.setEnabled(false);
-    txtProcedencia.setEnabled(false);      
+    public void habilitarEliminar() {
+        buttonBuscarCodigo.setEnabled(true);
+        buttonLimpiar.setEnabled(true);
+        buttonNuevo.setEnabled(true);
+        buttonRegistrar.setEnabled(false);
+        buttonModificar.setEnabled(false);
+        buttonGuardar.setEnabled(false);
+        buttonEliminar.setEnabled(false);
+
+        txtCodArticulo.setEnabled(true);
+        txtCodUbicacion.setEnabled(false);
+        txtNombre.setEnabled(false);
+        txtObservacion.setEnabled(false);
+        txtDiametro.setEnabled(false);
+        txtPulg.setEnabled(false);
+        txtMedidaDia.setEnabled(false);
+        txtLongitud.setEnabled(false);
+        txtMedLongitud.setEnabled(false);
+        txtCantidad.setEnabled(false);
+        txtProcedencia.setEnabled(false);
     }
-     public void habilitarGuardar(){
-    buttonBuscarCodigo.setEnabled(false);
-    buttonLimpiar.setEnabled(true);
-    buttonNuevo.setEnabled(false);
-    buttonRegistrar.setEnabled(false);
-    buttonModificar.setEnabled(true);
-    buttonGuardar.setEnabled(false);
-    buttonEliminar.setEnabled(true);
 
-    txtCodArticulo.setEnabled(false);
-    txtCodUbicacion.setEnabled(false);
-    txtNombre.setEnabled(false);
-    txtObservacion.setEnabled(false);
-    txtDiametro.setEnabled(false);
-    txtPulg.setEnabled(false);
-    txtMedidaDia.setEnabled(false);
-    txtLongitud.setEnabled(false);
-    txtMedLongitud.setEnabled(false);
-    txtCantidad.setEnabled(false);
-    txtProcedencia.setEnabled(false);      
+    public void habilitarGuardar() {
+        buttonBuscarCodigo.setEnabled(false);
+        buttonLimpiar.setEnabled(true);
+        buttonNuevo.setEnabled(false);
+        buttonRegistrar.setEnabled(false);
+        buttonModificar.setEnabled(true);
+        buttonGuardar.setEnabled(false);
+        buttonEliminar.setEnabled(true);
+
+        txtCodArticulo.setEnabled(false);
+        txtCodUbicacion.setEnabled(false);
+        txtNombre.setEnabled(false);
+        txtObservacion.setEnabled(false);
+        txtDiametro.setEnabled(false);
+        txtPulg.setEnabled(false);
+        txtMedidaDia.setEnabled(false);
+        txtLongitud.setEnabled(false);
+        txtMedLongitud.setEnabled(false);
+        txtCantidad.setEnabled(false);
+        txtProcedencia.setEnabled(false);
     }
 
 //----------------------------- Cargar Inventarios ---------------------------------     
-public JComboBox<String> CargarInventarios() throws SQLException, ClassNotFoundException {
+    public JComboBox<String> CargarInventarios() throws SQLException, ClassNotFoundException {
         comboBoxInventario.removeAllItems();
         comboBoxInventario.addItem("Inventario");
         try {
@@ -751,54 +746,56 @@ public JComboBox<String> CargarInventarios() throws SQLException, ClassNotFoundE
     }
 
 // ------------------ Ultimo id Inventario -------------------------------------
-private void consultarUltimoId() throws Exception {
-        inventario = inventariocontroler.InventarioBuscarUltimoId();
-        if (inventario != null) {
+    private void consultarUltimoId() throws NullPointerException {
+        try {
+            inventario = inventariocontroler.InventarioBuscarUltimoId();
+//            if (inventario != null) {
+//            }
+            ultimoId = inventario.getIdInventario();
+            idInventario = ultimoId;
+
+            String testValue2 = Integer.toString(idInventario);
+            for (int i = 0; i < comboBoxInventario.getModel().getSize(); i++) {
+                if (comboBoxInventario.getItemAt(i).equals(testValue2)) {
+                    System.out.println(i);
+                    comboBoxInventario.setSelectedIndex(i);
+                    break;
+                }
+            }
+            consultar(idInventario);
+        } catch (Exception ex) {
+            Logger.getLogger(ArticulosDeInventario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ultimoId = inventario.getIdInventario();
-        idInventario=ultimoId;
-        
-         String testValue2 = Integer.toString(idInventario);
-            for (int i = 0; i < comboBoxInventario.getModel().getSize(); i++) {
-                if (comboBoxInventario.getItemAt(i).equals(testValue2)) {
-                    System.out.println(i);
-                    comboBoxInventario.setSelectedIndex(i);
-                    break;
-                }
-            }
-        consultar(idInventario);
-        
+
     }
 
-private void ubicarId(int id) throws Exception {
-        idInventario=id;
-        
-         String testValue2 = Integer.toString(idInventario);
-            for (int i = 0; i < comboBoxInventario.getModel().getSize(); i++) {
-                if (comboBoxInventario.getItemAt(i).equals(testValue2)) {
-                    System.out.println(i);
-                    comboBoxInventario.setSelectedIndex(i);
-                    break;
-                }
+    private void ubicarId(int id) throws Exception {
+        idInventario = id;
+
+        String testValue2 = Integer.toString(idInventario);
+        for (int i = 0; i < comboBoxInventario.getModel().getSize(); i++) {
+            if (comboBoxInventario.getItemAt(i).equals(testValue2)) {
+                System.out.println(i);
+                comboBoxInventario.setSelectedIndex(i);
+                break;
             }
+        }
         consultar(idInventario);
-        
+
     }
 
-
-void consultar(int id) throws Exception{
-        inventario= inventariocontroler.InventarioBuscar(id);
+    void consultar(int id) throws Exception {
+        inventario = inventariocontroler.InventarioBuscar(id);
         if (inventario != null) {
             System.out.println("22222222222222222");
-            idInventario=inventario.getIdInventario();
+            idInventario = inventario.getIdInventario();
             System.out.println("111111111111111111111");
-           
+
             txtFechInventario.setText(inventario.getFechReg());
-           
 
         } else {
             JOptionPane.showMessageDialog(null, "Articulo no registrado");
             //System.out.println("Error");
         }
-    } 
+    }
 }

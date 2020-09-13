@@ -9,6 +9,8 @@ import controller.ClienteController;
 import entity.Cliente;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -27,11 +29,10 @@ public final class Clientes extends javax.swing.JInternalFrame {
     String ruc;
 
     ClienteController obj = new ClienteController();
-    
+
     int cliUltimoId;
     int nuevoNumero;
     String numCeros;
-    
 
     /**
      * Creates new form Clientesvista
@@ -60,11 +61,11 @@ public final class Clientes extends javax.swing.JInternalFrame {
 
                             s = labelIdCliente.getText();
                             x = Integer.parseInt(s);
-                            
+
                         } catch (Exception ex) {
                             Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                     habilitarInicio();
+                        habilitarInicio();
 
                     } else {
                         try {
@@ -74,7 +75,7 @@ public final class Clientes extends javax.swing.JInternalFrame {
                                     Comborazonsocial.setSelectedIndex(i);
                                 }
                             }
-                          //  habilitarInicio();
+                            //  habilitarInicio();
                             habilitarBuscar();
                             s = labelIdCliente.getText();
                             x = Integer.parseInt(s);
@@ -392,7 +393,7 @@ public final class Clientes extends javax.swing.JInternalFrame {
             habilitarNuevo();
         } else {
             try {
-                if (consultarTextoCliente(Comborazonsocial.getEditor().getItem().toString().trim())== true) {
+                if (consultarTextoCliente(Comborazonsocial.getEditor().getItem().toString().trim()) == true) {
                     JOptionPane.showMessageDialog(null, "Razón Social del Cliente YA EXISTE!! REVISAR");
                     habilitarNuevo();
 
@@ -425,37 +426,43 @@ public final class Clientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonCerrarActionPerformed
 
     private void buttonAgregarContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarContactoActionPerformed
-        if (x != 0) {
-            ContactosClientes conCliente = null;
-            try {
-                conCliente = new ContactosClientes();
-            } catch (Exception ex) {
-                Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Principal.jDesktopPane1.add(conCliente);
-            conCliente.toFront();
-            conCliente.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Agregar Cliente");
 
+        try {
+            if (x != 0) {
+                ContactosClientes conCliente = null;
+                try {
+                    conCliente = new ContactosClientes();
+                    Principal.jDesktopPane1.add(conCliente);
+                    conCliente.toFront();
+                    conCliente.setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Agregar Cliente");
+
+            }
+        } catch (NullPointerException ex) {
+            Logger.getLogger(CajaChicaRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buttonAgregarContactoActionPerformed
 
     private void buttonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNuevoActionPerformed
         limpiar();
-        habilitarNuevo(); 
+        habilitarNuevo();
     }//GEN-LAST:event_buttonNuevoActionPerformed
 
     private void buttonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardarActionPerformed
-       procesar(2);
-       habilitarGuardar();
-       try {
-                consultar(Comborazonsocial.getEditor().getItem().toString());
-            } catch (Exception ex) {
-                Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            s = labelIdCliente.getText();
-            x = Integer.parseInt(s);
+        procesar(2);
+        habilitarGuardar();
+        try {
+            consultar(Comborazonsocial.getEditor().getItem().toString());
+        } catch (Exception ex) {
+            Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        s = labelIdCliente.getText();
+        x = Integer.parseInt(s);
     }//GEN-LAST:event_buttonGuardarActionPerformed
 
     private void buttonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEliminarActionPerformed
@@ -468,7 +475,7 @@ public final class Clientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonEliminarActionPerformed
 
     private void buttonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonModificarActionPerformed
-        habilitarModificar(); 
+        habilitarModificar();
     }//GEN-LAST:event_buttonModificarActionPerformed
 
     private void buttonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimpiarActionPerformed
@@ -484,19 +491,26 @@ public final class Clientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_textCategoriaActionPerformed
 
     private void buttonAgregarDirecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarDirecActionPerformed
-        if (x != 0) {
-            DireccionesAnexasRegistrar direccionRegistar = null;
-            try {
-                direccionRegistar = new DireccionesAnexasRegistrar();
-            } catch (Exception ex) {
-                Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            if (x != 0) {
+                DireccionesAnexasRegistrar direccionRegistar = null;
+                try {
+                    direccionRegistar = new DireccionesAnexasRegistrar();
+                    Principal.jDesktopPane1.add(direccionRegistar);
+                    direccionRegistar.toFront();
+                    direccionRegistar.setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Agregar Cliente");
             }
-            Principal.jDesktopPane1.add(direccionRegistar);
-            direccionRegistar.toFront();
-            direccionRegistar.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Agregar Cliente");
+        } catch (NullPointerException ex) {
+            Logger.getLogger(CajaChicaRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_buttonAgregarDirecActionPerformed
 
 
@@ -571,7 +585,6 @@ public final class Clientes extends javax.swing.JInternalFrame {
             textCategoria.setText(pro.getTipo());
             TextDireccion.setText(pro.getDireccion());
             textAreaObservacion.setText(pro.getObservacion());
-            
 
         } else {
             JOptionPane.showMessageDialog(null, "Cliente no registrado");
@@ -583,8 +596,8 @@ public final class Clientes extends javax.swing.JInternalFrame {
         pro = obj.ClienteBuscar(razonsocial);
         if (pro != null) {
 
-            labelIdCliente.setText(pro.getIdCliente()+ "");
-            cliente=pro.getRazonSocial();
+            labelIdCliente.setText(pro.getIdCliente() + "");
+            cliente = pro.getRazonSocial();
             txtCodigoCliente.setText(pro.getCodigoCliente());
             textRuc.setText(pro.getRuc());
             textCategoria.setText(pro.getTipo());
@@ -596,24 +609,24 @@ public final class Clientes extends javax.swing.JInternalFrame {
             //System.out.println("Error");
         }
     }
-    
+
     private boolean consultarTextoCliente(String razonsocial) throws Exception {
         pro = obj.ClienteBuscar(razonsocial);
         if (pro != null) {
             return true;
-            
+
         } else {
             System.out.println("no existe cliente");
             return false;
         }
     }
-    
-     private boolean consultarRucCliente(String rc) throws Exception {
+
+    private boolean consultarRucCliente(String rc) throws Exception {
         pro = obj.ClienteBuscarRuc(rc);
-        if (pro!= null) {
+        if (pro != null) {
             return true;
         } else {
-            return false; 
+            return false;
         }
     }
 
@@ -633,7 +646,7 @@ public final class Clientes extends javax.swing.JInternalFrame {
 
     private Cliente leerDatos2() {
         Cliente cli = new Cliente();
-        
+
         cli.setCodigoCliente(txtCodigoCliente.getText());
         cli.setRazonSocial(Comborazonsocial.getEditor().getItem().toString().trim());
         cli.setRuc(textRuc.getText().trim());
@@ -656,7 +669,7 @@ public final class Clientes extends javax.swing.JInternalFrame {
 
     }
 
-    public void habilitarInicio(){
+    public void habilitarInicio() {
         buttonAgregarContacto.setEnabled(false);
         buttonAgregarDirec.setEnabled(false);
         buttonLimpiar.setEnabled(true);
@@ -665,25 +678,6 @@ public final class Clientes extends javax.swing.JInternalFrame {
         buttonNuevo.setEnabled(true);
         buttonRegistrar.setEnabled(false);
         buttonEliminar.setEnabled(false);
-        
-        textCategoria.setEnabled(false);
-        Comborazonsocial.setEnabled(true);
-        txtCodigoCliente.setEnabled(false);
-        textRuc.setEnabled(false);
-        TextDireccion.setEnabled(false);
-        textAreaObservacion.setEnabled(false);
-    }
-    
-     public void habilitarBuscar(){
-        buttonAgregarContacto.setEnabled(true);
-        buttonAgregarDirec.setEnabled(true);
-        buttonLimpiar.setEnabled(true);
-        buttonModificar.setEnabled(true);
-        buttonGuardar.setEnabled(false);
-        buttonNuevo.setEnabled(false);
-        buttonRegistrar.setEnabled(false);
-        buttonEliminar.setEnabled(true);
-       
 
         textCategoria.setEnabled(false);
         Comborazonsocial.setEnabled(true);
@@ -692,8 +686,26 @@ public final class Clientes extends javax.swing.JInternalFrame {
         TextDireccion.setEnabled(false);
         textAreaObservacion.setEnabled(false);
     }
-     
-     public void habilitarModificar(){
+
+    public void habilitarBuscar() {
+        buttonAgregarContacto.setEnabled(true);
+        buttonAgregarDirec.setEnabled(true);
+        buttonLimpiar.setEnabled(true);
+        buttonModificar.setEnabled(true);
+        buttonGuardar.setEnabled(false);
+        buttonNuevo.setEnabled(false);
+        buttonRegistrar.setEnabled(false);
+        buttonEliminar.setEnabled(true);
+
+        textCategoria.setEnabled(false);
+        Comborazonsocial.setEnabled(true);
+        txtCodigoCliente.setEnabled(false);
+        textRuc.setEnabled(false);
+        TextDireccion.setEnabled(false);
+        textAreaObservacion.setEnabled(false);
+    }
+
+    public void habilitarModificar() {
         buttonAgregarContacto.setEnabled(false);
         buttonAgregarDirec.setEnabled(false);
         buttonLimpiar.setEnabled(true);
@@ -702,7 +714,7 @@ public final class Clientes extends javax.swing.JInternalFrame {
         buttonNuevo.setEnabled(false);
         buttonRegistrar.setEnabled(false);
         buttonEliminar.setEnabled(false);
-       
+
         textCategoria.setEnabled(true);
         Comborazonsocial.setEnabled(true);
         txtCodigoCliente.setEnabled(true);
@@ -710,7 +722,8 @@ public final class Clientes extends javax.swing.JInternalFrame {
         TextDireccion.setEnabled(true);
         textAreaObservacion.setEnabled(true);
     }
-     public void habilitarGuardar(){
+
+    public void habilitarGuardar() {
         buttonAgregarContacto.setEnabled(true);
         buttonAgregarDirec.setEnabled(true);
         buttonLimpiar.setEnabled(true);
@@ -719,7 +732,7 @@ public final class Clientes extends javax.swing.JInternalFrame {
         buttonNuevo.setEnabled(false);
         buttonRegistrar.setEnabled(false);
         buttonEliminar.setEnabled(true);
-       
+
         textCategoria.setEnabled(false);
         Comborazonsocial.setEnabled(true);
         txtCodigoCliente.setEnabled(false);
@@ -727,7 +740,8 @@ public final class Clientes extends javax.swing.JInternalFrame {
         TextDireccion.setEnabled(false);
         textAreaObservacion.setEnabled(false);
     }
-     public void habilitarEliminar(){
+
+    public void habilitarEliminar() {
         buttonAgregarContacto.setEnabled(false);
         buttonAgregarDirec.setEnabled(false);
         buttonLimpiar.setEnabled(true);
@@ -736,7 +750,7 @@ public final class Clientes extends javax.swing.JInternalFrame {
         buttonNuevo.setEnabled(true);
         buttonRegistrar.setEnabled(false);
         buttonEliminar.setEnabled(false);
-       
+
         textCategoria.setEnabled(false);
         Comborazonsocial.setEnabled(true);
         txtCodigoCliente.setEnabled(false);
@@ -744,8 +758,8 @@ public final class Clientes extends javax.swing.JInternalFrame {
         TextDireccion.setEnabled(false);
         textAreaObservacion.setEnabled(false);
     }
-     
-     public void habilitarNuevo(){
+
+    public void habilitarNuevo() {
         buttonAgregarContacto.setEnabled(false);
         buttonAgregarDirec.setEnabled(false);
         buttonLimpiar.setEnabled(true);
@@ -754,7 +768,7 @@ public final class Clientes extends javax.swing.JInternalFrame {
         buttonNuevo.setEnabled(false);
         buttonRegistrar.setEnabled(true);
         buttonEliminar.setEnabled(false);
-     
+
         textCategoria.setEnabled(true);
         Comborazonsocial.setEnabled(true);
         txtCodigoCliente.setEnabled(true);
@@ -762,8 +776,8 @@ public final class Clientes extends javax.swing.JInternalFrame {
         TextDireccion.setEnabled(true);
         textAreaObservacion.setEnabled(true);
     }
-     
-    public void habilitarRegistrar(){
+
+    public void habilitarRegistrar() {
         buttonAgregarContacto.setEnabled(true);
         buttonAgregarDirec.setEnabled(true);
         buttonLimpiar.setEnabled(true);
@@ -772,7 +786,7 @@ public final class Clientes extends javax.swing.JInternalFrame {
         buttonNuevo.setEnabled(false);
         buttonRegistrar.setEnabled(false);
         buttonEliminar.setEnabled(true);
-    
+
         textCategoria.setEnabled(false);
         Comborazonsocial.setEnabled(false);
         txtCodigoCliente.setEnabled(false);
@@ -780,7 +794,7 @@ public final class Clientes extends javax.swing.JInternalFrame {
         TextDireccion.setEnabled(false);
         textAreaObservacion.setEnabled(false);
     }
-    
+
     private void consultarUltimoId() throws Exception {
         pro = obj.ClienteUltimoId();
         if (pro != null) {
@@ -798,18 +812,18 @@ public final class Clientes extends javax.swing.JInternalFrame {
 
     void generarCodigoCliente() throws Exception {
         String CRuc = textRuc.getText();
-        
+
         consultarUltimoId();
         nuevoNumero = cliUltimoId + 1;
         numCeros = String.format("%04d", nuevoNumero);
-        
+
         if ("".equals(CRuc)) {
             String codigo = "3" + numCeros;
             System.out.println("codigoClienteSinRuc" + codigo);
             txtCodigoCliente.setText(codigo);
         } else {
             String sSubCadena = CRuc.substring(0, 1);
-            String codigo = sSubCadena+numCeros;
+            String codigo = sSubCadena + numCeros;
             System.out.println("codigoClienteConRuc" + codigo);
             txtCodigoCliente.setText(codigo);
         }

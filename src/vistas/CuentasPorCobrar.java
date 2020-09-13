@@ -11,7 +11,6 @@ import controller.TipoCambioController;
 import entity.Cliente;
 import entity.RegistroVenta;
 import entity.TipoCambio;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -26,13 +25,12 @@ import reportes.GenerarReporte;
  *
  * @author ARCRODINPC-05
  */
-
 public class CuentasPorCobrar extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CuentasPorCobrar
      */
-    String filtro="c.razonSocial";
+    String filtro = "c.razonSocial";
     int tabla;
     int idCliente;
     String razSocial;
@@ -41,18 +39,17 @@ public class CuentasPorCobrar extends javax.swing.JInternalFrame {
     static int idRegistroVentaStatic;
     String numero, serie;
     float cambioVenta;
-    static String serieStaticCobro,numeroStaticCobro;
-    
-    ClienteController clientecontroler=new ClienteController();
+    static String serieStaticCobro, numeroStaticCobro;
+
+    ClienteController clientecontroler = new ClienteController();
     Cliente cliente;
-    
+
     public CuentasPorCobrar() {
         initComponents();
-        listaVentasCobrar(filtro, "%"+txtLike.getText()+"%");
+        listaVentasCobrar(filtro, "%" + txtLike.getText() + "%");
         habilitarInicio();
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -399,7 +396,7 @@ public class CuentasPorCobrar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboBoxFiltroItemStateChanged
 
     private void txtLikeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLikeKeyReleased
-        listaVentasCobrar(filtro,txtLike.getText());
+        listaVentasCobrar(filtro, txtLike.getText());
     }//GEN-LAST:event_txtLikeKeyReleased
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
@@ -432,7 +429,7 @@ public class CuentasPorCobrar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable1KeyReleased
 
     private void buttonReporteVencidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReporteVencidosActionPerformed
-         GenerarReporte cuentasReport= new GenerarReporte();
+        GenerarReporte cuentasReport = new GenerarReporte();
         try {
             cuentasReport.ReporteCuentasCobrar(razSocial, "EN PROCESO");
         } catch (SQLException ex) {
@@ -443,7 +440,7 @@ public class CuentasPorCobrar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonReporteVencidosActionPerformed
 
     private void buttonImprimirReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonImprimirReporteActionPerformed
-        GenerarReporte cuentasReport= new GenerarReporte();
+        GenerarReporte cuentasReport = new GenerarReporte();
         try {
             cuentasReport.ImprimirCuentasCobrar(razSocial, "EN PROCESO");
         } catch (SQLException ex) {
@@ -454,16 +451,24 @@ public class CuentasPorCobrar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonImprimirReporteActionPerformed
 
     private void buttonRegistroVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegistroVentaActionPerformed
-        RegistroVentas reVet = null;
+
         try {
-            reVet = new RegistroVentas();
-        } catch (ParseException ex) {
-            Logger.getLogger(CuentasPorCobrar.class.getName()).log(Level.SEVERE, null, ex);
+            RegistroVentas reVet = null;
+            try {
+                reVet = new RegistroVentas();
+                Principal.jDesktopPane1.add(reVet);
+                reVet.toFront();
+                reVet.setVisible(true);
+                RegistroVentas.serieYNumeroDeVentaDeCuentasPorCobrar();
+            } catch (ParseException ex) {
+                Logger.getLogger(CuentasPorCobrar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } catch (NullPointerException ex) {
+            Logger.getLogger(CajaChicaRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Principal.jDesktopPane1.add(reVet);
-        reVet.toFront();
-        reVet.setVisible(true);
-        RegistroVentas.serieYNumeroDeVentaDeCuentasPorCobrar();
+
+
     }//GEN-LAST:event_buttonRegistroVentaActionPerformed
 
     private void buttonVistaTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVistaTotalActionPerformed
@@ -471,22 +476,22 @@ public class CuentasPorCobrar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonVistaTotalActionPerformed
 
     private void buttonVistaVencidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVistaVencidosActionPerformed
-       listaVentasCobrarReporteVencidos("c.razonSocial", razSocial);
+        listaVentasCobrarReporteVencidos("c.razonSocial", razSocial);
     }//GEN-LAST:event_buttonVistaVencidosActionPerformed
 
     private void buttonReporteTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReporteTotalActionPerformed
-         GenerarReporte cuentasReport= new GenerarReporte();
+        GenerarReporte cuentasReport = new GenerarReporte();
         try {
             cuentasReport.ReporteCuentasCobrarTodo(razSocial, "EN PROCESO");
         } catch (SQLException ex) {
             Logger.getLogger(CuentasPorCobrar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CuentasPorCobrar.class.getName()).log(Level.SEVERE, null, ex);
-        }  
+        }
     }//GEN-LAST:event_buttonReporteTotalActionPerformed
 
     private void buttonImprimirTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonImprimirTotalActionPerformed
-        GenerarReporte cuentasReport= new GenerarReporte();
+        GenerarReporte cuentasReport = new GenerarReporte();
         try {
             cuentasReport.ImprimirCuentasCobrarTodo(razSocial, "EN PROCESO");
         } catch (SQLException ex) {
@@ -531,13 +536,13 @@ public class CuentasPorCobrar extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtRazSocialReport;
     private javax.swing.JTextField txtSerie;
     // End of variables declaration//GEN-END:variables
- 
- RegistroVentaController registroventacontroler=new RegistroVentaController();
- RegistroVenta registroventa;
- 
- TipoCambioController tipocambiocontroler = new TipoCambioController();
- TipoCambio tipocambio;
- 
+
+    RegistroVentaController registroventacontroler = new RegistroVentaController();
+    RegistroVenta registroventa;
+
+    TipoCambioController tipocambiocontroler = new TipoCambioController();
+    TipoCambio tipocambio;
+
 //--------------------------------------- Tabla 1 -----------------------------------------
     void listaVentasCobrar(String nombreFiltro, String valorFiltro) {
         List<RegistroVenta> lista;
@@ -552,16 +557,16 @@ public class CuentasPorCobrar extends javax.swing.JInternalFrame {
     }
 
     void verVentas(List<RegistroVenta> lista) throws Exception {
-        
+
         DefaultTableModel tabla1 = (DefaultTableModel) jTable1.getModel();
         tabla1.setRowCount(0);
         for (RegistroVenta reve : lista) {
-            
+
             Object[] fila = {reve.getIdCliente(), reve.getRazonSocial(), reve.getRuc(), reve.getSumaTotal()};
             tabla1.addRow(fila);
         }
     }
-    
+
 //--------------------------------------- Tabla 2 -----------------------------------------
     void listaVentasCobrarReporteVencidos(String nombreFiltro, String valorFiltro) {
         List<RegistroVenta> lista;
@@ -586,6 +591,7 @@ public class CuentasPorCobrar extends javax.swing.JInternalFrame {
             System.out.println("ERROR: " + e.getMessage());
         }
     }
+
     void verCobroReporte(List<RegistroVenta> lista) throws Exception {
         String dol, sol;
         DefaultTableModel tabla1 = (DefaultTableModel) jTable2.getModel();
@@ -601,129 +607,124 @@ public class CuentasPorCobrar extends javax.swing.JInternalFrame {
             } else {
                 dol = "00.00";
             }
-                       
-            Object[] fila = {reve.getIdRegistroVenta(),reve.getNumComprobante(),
-                             reve.getFechaEmision(),dol,sol,reve.getFechaVencimiento(),
-                             reve.getDeuda(), reve.getObservacion()};
+
+            Object[] fila = {reve.getIdRegistroVenta(), reve.getNumComprobante(),
+                reve.getFechaEmision(), dol, sol, reve.getFechaVencimiento(),
+                reve.getDeuda(), reve.getObservacion()};
             tabla1.addRow(fila);
         }
     }
-    
+
 //--------------------------- Consultar Registro Venta -------------------------
-    
-     private void consultarRegistroVenta(int id) throws Exception {
+    private void consultarRegistroVenta(int id) throws Exception {
         registroventa = registroventacontroler.RegistroVentaPorId(id);
         if (registroventa != null) {
-            
-            
-            idRegistroVenta=registroventa.getIdRegistroVenta();
-            idRegistroVentaStatic=registroventa.getIdRegistroVenta();
+
+            idRegistroVenta = registroventa.getIdRegistroVenta();
+            idRegistroVentaStatic = registroventa.getIdRegistroVenta();
             labelComprobante.setText(registroventa.getTipoComprobante());
-            serie=registroventa.getSerie();
+            serie = registroventa.getSerie();
             txtSerie.setText(registroventa.getSerie());
-            serieStaticCobro=registroventa.getSerie();
-            numero=registroventa.getNumero();
+            serieStaticCobro = registroventa.getSerie();
+            numero = registroventa.getNumero();
             txtNumero.setText(registroventa.getNumero());
-            numeroStaticCobro=registroventa.getNumero();
+            numeroStaticCobro = registroventa.getNumero();
             txtNumCotizacion.setText(registroventa.getCodProforma());
             txtNumPedido.setText(registroventa.getNumPedido());
             consultarTipoCambio(registroventa.getFechaEmision());
-            
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Pedido no registrado");
-           
+
             System.out.println("Pedido no registrado");
         }
     }
-     
-     void consultarTipoCambio(String f) throws Exception {
-        tipocambio =tipocambiocontroler.TipoCambioBuscarCambio(f) ;
+
+    void consultarTipoCambio(String f) throws Exception {
+        tipocambio = tipocambiocontroler.TipoCambioBuscarCambio(f);
 
         if (tipocambio != null) {
-            cambioVenta=tipocambio.getPrecioVenta();
+            cambioVenta = tipocambio.getPrecioVenta();
         } else {
 //            JOptionPane.showMessageDialog(null, "tipo cambio no registradas");
             System.out.println("Error");
         }
     }
-    
 
 //------------------------------------ Limpiar ---------------------------------
-     
-   void limpiarInformacion(){
-       labelComprobante.setText("COMPROBANTE");
-       txtSerie.setText("");
-       txtNumero.setText("");
-       txtNumCotizacion.setText("");
-       txtNumPedido.setText("");
-   }
-   
-   void limpiarTabla(){
-       txtRazSocialReport.setText("");
-       labelComprobante.setText("COMPROBANTE");
-       txtSerie.setText("");
-       txtNumero.setText("");
-       txtNumCotizacion.setText("");
-       txtNumPedido.setText("");
-       listaVentasCobrarReporteTotal(filtro,"");
-   }
-   
-//------------------------- Habilitar ----------------------------------
-   void habilitarInicio(){
-       
-       labelComprobante.setEnabled(false);
-       txtSerie.setEnabled(false);
-       txtNumero.setEnabled(false);
-       txtNumCotizacion.setEnabled(false);
-       txtNumPedido.setEnabled(false);
-       
-       buttonLimpiarInformacion.setEnabled(false);
-       buttonVistaTotal.setEnabled(false);
-       buttonVistaVencidos.setEnabled(false);
-       buttonLimpiarInformacion.setEnabled(false);
-       buttonReporteTotal.setEnabled(false);
-       buttonReporteVencidos.setEnabled(false);
-       buttonImprimirTotal.setEnabled(false);
-       buttonImprimirReporte.setEnabled(false);
-       buttonRegistroVenta.setEnabled(false);
-   }
-   
-   void habilitarBuscar(){
-   
-       labelComprobante.setEnabled(false);
-       txtSerie.setEnabled(false);
-       txtNumero.setEnabled(false);
-       txtNumCotizacion.setEnabled(false);
-       txtNumPedido.setEnabled(false);
-       
-       buttonLimpiarInformacion.setEnabled(true);
-       buttonVistaTotal.setEnabled(true);
-       buttonVistaVencidos.setEnabled(true);
-       buttonLimpiarInformacion.setEnabled(true);
-       buttonReporteTotal.setEnabled(true);
-       buttonReporteVencidos.setEnabled(true);
-       buttonImprimirTotal.setEnabled(true);
-       buttonImprimirReporte.setEnabled(true);
-       buttonRegistroVenta.setEnabled(false);
-   }
+    void limpiarInformacion() {
+        labelComprobante.setText("COMPROBANTE");
+        txtSerie.setText("");
+        txtNumero.setText("");
+        txtNumCotizacion.setText("");
+        txtNumPedido.setText("");
+    }
 
-   void habilitarBuscarTabla(){
-   
-       labelComprobante.setEnabled(false);
-       txtSerie.setEnabled(false);
-       txtNumero.setEnabled(false);
-       txtNumCotizacion.setEnabled(false);
-       txtNumPedido.setEnabled(false);
-       
-       buttonLimpiarInformacion.setEnabled(true);
-       buttonVistaTotal.setEnabled(true);
-       buttonVistaVencidos.setEnabled(true);
-       buttonLimpiarInformacion.setEnabled(true);
-       buttonReporteTotal.setEnabled(true);
-       buttonReporteVencidos.setEnabled(true);
-       buttonImprimirTotal.setEnabled(true);
-       buttonImprimirReporte.setEnabled(true);
-       buttonRegistroVenta.setEnabled(true);
-   }
+    void limpiarTabla() {
+        txtRazSocialReport.setText("");
+        labelComprobante.setText("COMPROBANTE");
+        txtSerie.setText("");
+        txtNumero.setText("");
+        txtNumCotizacion.setText("");
+        txtNumPedido.setText("");
+        listaVentasCobrarReporteTotal(filtro, "");
+    }
+
+//------------------------- Habilitar ----------------------------------
+    void habilitarInicio() {
+
+        labelComprobante.setEnabled(false);
+        txtSerie.setEnabled(false);
+        txtNumero.setEnabled(false);
+        txtNumCotizacion.setEnabled(false);
+        txtNumPedido.setEnabled(false);
+
+        buttonLimpiarInformacion.setEnabled(false);
+        buttonVistaTotal.setEnabled(false);
+        buttonVistaVencidos.setEnabled(false);
+        buttonLimpiarInformacion.setEnabled(false);
+        buttonReporteTotal.setEnabled(false);
+        buttonReporteVencidos.setEnabled(false);
+        buttonImprimirTotal.setEnabled(false);
+        buttonImprimirReporte.setEnabled(false);
+        buttonRegistroVenta.setEnabled(false);
+    }
+
+    void habilitarBuscar() {
+
+        labelComprobante.setEnabled(false);
+        txtSerie.setEnabled(false);
+        txtNumero.setEnabled(false);
+        txtNumCotizacion.setEnabled(false);
+        txtNumPedido.setEnabled(false);
+
+        buttonLimpiarInformacion.setEnabled(true);
+        buttonVistaTotal.setEnabled(true);
+        buttonVistaVencidos.setEnabled(true);
+        buttonLimpiarInformacion.setEnabled(true);
+        buttonReporteTotal.setEnabled(true);
+        buttonReporteVencidos.setEnabled(true);
+        buttonImprimirTotal.setEnabled(true);
+        buttonImprimirReporte.setEnabled(true);
+        buttonRegistroVenta.setEnabled(false);
+    }
+
+    void habilitarBuscarTabla() {
+
+        labelComprobante.setEnabled(false);
+        txtSerie.setEnabled(false);
+        txtNumero.setEnabled(false);
+        txtNumCotizacion.setEnabled(false);
+        txtNumPedido.setEnabled(false);
+
+        buttonLimpiarInformacion.setEnabled(true);
+        buttonVistaTotal.setEnabled(true);
+        buttonVistaVencidos.setEnabled(true);
+        buttonLimpiarInformacion.setEnabled(true);
+        buttonReporteTotal.setEnabled(true);
+        buttonReporteVencidos.setEnabled(true);
+        buttonImprimirTotal.setEnabled(true);
+        buttonImprimirReporte.setEnabled(true);
+        buttonRegistroVenta.setEnabled(true);
+    }
 }

@@ -36,23 +36,22 @@ public class ArticulosVista extends javax.swing.JInternalFrame {
     /**
      * Creates new form ArticulosVista
      */
-    
     Connection conexion;
     CallableStatement cs = null;
     ResultSet rs = null;
     Statement s = null;
     PreparedStatement ps = null;
     String q;
-    
+
     int ultimoId;
     String idInvCombo;
-    
-    String filtro="concat(articulo.diametro,' ',articulo.unidadMedidaDiam)";
+
+    String filtro = "concat(articulo.diametro,' ',articulo.unidadMedidaDiam)";
     int tabla;
     String codArt;
     String codUb;
     String LonReal;
-    
+
     int idInventario;
     int idArticulo;
     String codArti;
@@ -67,9 +66,9 @@ public class ArticulosVista extends javax.swing.JInternalFrame {
     int cant;
     String Proce;
     String obs;
-    
-   float num, res,nume,deno, resFra;
-    
+
+    float num, res, nume, deno, resFra;
+
     public ArticulosVista() throws SQLException, ClassNotFoundException, Exception {
         initComponents();
         listaArticulo(filtro, txtFiltro.getText(), idInventario);
@@ -444,11 +443,11 @@ public class ArticulosVista extends javax.swing.JInternalFrame {
 
     private void buttonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCerrarActionPerformed
         dispose();
-        
+
     }//GEN-LAST:event_buttonCerrarActionPerformed
 
     private void txtFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyReleased
-       listaArticulo(filtro,txtFiltro.getText(), idInventario);
+        listaArticulo(filtro, txtFiltro.getText(), idInventario);
     }//GEN-LAST:event_txtFiltroKeyReleased
 
     private void comboBoxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxFiltroItemStateChanged
@@ -474,7 +473,7 @@ public class ArticulosVista extends javax.swing.JInternalFrame {
             System.out.println(filtro);
         } else if (comboBoxFiltro.getSelectedItem() == "TUBOS") {
             filtro = "articulo.nombre";
-            listaArticulo(filtro,"TUBO", idInventario);
+            listaArticulo(filtro, "TUBO", idInventario);
             System.out.println(filtro);
         } else if (comboBoxFiltro.getSelectedItem() == "SELECCIONAR") {
             filtro = "concat(articulo.diametro,' ',articulo.unidadMedidaDiam)";
@@ -486,16 +485,16 @@ public class ArticulosVista extends javax.swing.JInternalFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         limpiarTabla();
         habilitarInicio();
-        
-        tabla=jTable1.getSelectedRow();
-        idArticulo=Integer.parseInt(jTable1.getValueAt(tabla,0).toString());
-        idInventario=Integer.parseInt( jTable1.getValueAt(tabla,1).toString());
-        codArt = jTable1.getValueAt(tabla,2).toString();
+
+        tabla = jTable1.getSelectedRow();
+        idArticulo = Integer.parseInt(jTable1.getValueAt(tabla, 0).toString());
+        idInventario = Integer.parseInt(jTable1.getValueAt(tabla, 1).toString());
+        codArt = jTable1.getValueAt(tabla, 2).toString();
         codUb = jTable1.getValueAt(tabla, 3).toString();
         LonReal = jTable1.getValueAt(tabla, 9).toString();
-        
+
         try {
-            consultarArticulo(codArt,idInventario);
+            consultarArticulo(codArt, idInventario);
         } catch (Exception ex) {
             Logger.getLogger(ArticulosVista.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -547,11 +546,11 @@ public class ArticulosVista extends javax.swing.JInternalFrame {
 
             try {
                 consultar(idInventario);
-           } catch (Exception ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(ArticulosDeInventario.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            listaArticulo(filtro,txtFiltro.getText(), idInventario);
+
+            listaArticulo(filtro, txtFiltro.getText(), idInventario);
 
         } else {
 
@@ -563,10 +562,10 @@ public class ArticulosVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtFiltroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if("".equals(txtNumerador.getText())&& "".equals(txtDenominador.getText())){
+        if ("".equals(txtNumerador.getText()) && "".equals(txtDenominador.getText())) {
             calculo();
             System.out.println("vacio");
-        }else{
+        } else {
             calculoFracion();
             System.out.println("no vacio");
         }
@@ -622,18 +621,16 @@ public class ArticulosVista extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtObser;
     // End of variables declaration//GEN-END:variables
 
-ArticuloController obj =new ArticuloController();
-Articulo pro;
+    ArticuloController obj = new ArticuloController();
+    Articulo pro;
 
-InventarioController inventariocontroler = new InventarioController();
-Inventario inventario;
+    InventarioController inventariocontroler = new InventarioController();
+    Inventario inventario;
 
-
-
- private void listaArticulo(String filtrar,String filter, int idv) {
+    private void listaArticulo(String filtrar, String filter, int idv) {
         List<Articulo> lista;
         try {
-            lista = obj.ArticuloFiltrar(filtrar,filter, idv);
+            lista = obj.ArticuloFiltrar(filtrar, filter, idv);
             verPedido(lista);
 
         } catch (Exception e) {
@@ -643,39 +640,38 @@ Inventario inventario;
     }
 
     private void verPedido(List<Articulo> lista) {
-       
+
         DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
         tabla.setRowCount(0);
-        
+
         for (Articulo art : lista) {
-            
+
 //            
-      
-            Object[] fila = {art.getAidArticulo(),art.getIdInventario(),art.getCodigoArticulo(), art.getCodigoUbicacion(),
-                             art.getDiametro(),art.getDiamPulg(),art.getProcedencia(), art.getLongitud(),art.getLongCortes(), 
-                             art.getLongitudReal(), art.getObservacion()};
+            Object[] fila = {art.getAidArticulo(), art.getIdInventario(), art.getCodigoArticulo(), art.getCodigoUbicacion(),
+                art.getDiametro(), art.getDiamPulg(), art.getProcedencia(), art.getLongitud(), art.getLongCortes(),
+                art.getLongitudReal(), art.getObservacion()};
             tabla.addRow(fila);
 
         }
     }
-    
-  //------------------------ Consultar Articulo ----------------------
-     private void consultarArticulo(String codigo, int iv) throws Exception {
+
+    //------------------------ Consultar Articulo ----------------------
+    private void consultarArticulo(String codigo, int iv) throws Exception {
         pro = obj.ArticuloBuscar(codigo, iv);
         if (pro != null) {
 
             idArticulo = pro.getAidArticulo();
-            idInventario=pro.getIdInventario();
+            idInventario = pro.getIdInventario();
             txtCodArt.setText(pro.getCodigoArticulo());
             codArti = pro.getCodigoArticulo();
-            txtCodUbi.setText(pro.getCodigoUbicacion()); 
+            txtCodUbi.setText(pro.getCodigoUbicacion());
             codUbicacion = pro.getCodigoUbicacion();
             txtNomArt.setText(pro.getNombre());
             nombre = pro.getNombre();
-             txtObser.setText(pro.getObservacion());
+            txtObser.setText(pro.getObservacion());
             obs = pro.getObservacion();//Observación
             dia = pro.getDiametro();
-            diaPulg=pro.getDiamPulg();
+            diaPulg = pro.getDiamPulg();
             txtLongReal.setText(pro.getLongitudReal());
             longReal = pro.getLongitudReal(); //diametroInterno
             unidadDia = pro.getUnidadMedidaDia();
@@ -689,28 +685,26 @@ Inventario inventario;
             //System.out.println("Error");
         }
     }
-   
 
 //-------------------- Limpiar ---------------------------------
-
-    void limpiar() {        
-        txtCodUbi.setText("");        
+    void limpiar() {
+        txtCodUbi.setText("");
         txtLongReal.setText("");
         txtObser.setText("");
         txtCodArt.setText("");
         txtNomArt.setText("");
         txtFiltro.setText("");
-        
+
     }
-    
-     void limpiarTabla() {        
-        txtCodUbi.setText("");        
+
+    void limpiarTabla() {
+        txtCodUbi.setText("");
         txtLongReal.setText("");
         txtObser.setText("");
         txtCodArt.setText("");
-        
+
     }
-    
+
     void habilitarModificar() {
         txtCodArt.setEnabled(false);
         txtCodUbi.setEnabled(true);
@@ -721,7 +715,7 @@ Inventario inventario;
         buttonGuardar.setEnabled(true);
     }
 
-     void habilitarInicio() {
+    void habilitarInicio() {
         txtCodArt.setEnabled(false);
         txtCodUbi.setEnabled(false);
         txtLongReal.setEnabled(false);
@@ -730,24 +724,23 @@ Inventario inventario;
         buttonModificar.setEnabled(true);
         buttonGuardar.setEnabled(false);
     }
-     //----------------------- Procesar ---------------------
-    
+    //----------------------- Procesar ---------------------
+
     private void procesar(int op) {
-       pro=leerDatos();
+        pro = leerDatos();
         try {
-            String msg=obj.ArticuloProcesar(pro, pro,op);
-            JOptionPane.showMessageDialog(null, msg);            
+            String msg = obj.ArticuloProcesar(pro, pro, op);
+            JOptionPane.showMessageDialog(null, msg);
         } catch (Exception e) {
             //JOptionPane.showMessageDialog(null, e.getMessage());
-             System.out.println("Error"+e.getMessage());
-        }       
-   }
-    
- //--------------------------- Leer Datos -------------------------------
-    
-   private Articulo leerDatos() {
+            System.out.println("Error" + e.getMessage());
+        }
+    }
+
+    //--------------------------- Leer Datos -------------------------------
+    private Articulo leerDatos() {
         Articulo art = new Articulo();
-        
+
         art.setIdInventario(idInventario);
         art.setCodigoArticulo(codArti);
         art.setCodigoUbicacion(txtCodUbi.getText());
@@ -762,13 +755,12 @@ Inventario inventario;
         art.setCantidad(cant);
         art.setProcedencia(Proce);
         art.setAidArticulo(idArticulo);
-        
+
         return art;
     }
-   
+
 //--------------------------------- Cargar Inventario ------------------------------
-  
-   public JComboBox<String> CargarInventarios() throws SQLException, ClassNotFoundException {
+    public JComboBox<String> CargarInventarios() throws SQLException, ClassNotFoundException {
         comboBoxInventario.removeAllItems();
         comboBoxInventario.addItem("Inventario");
         try {
@@ -789,15 +781,16 @@ Inventario inventario;
         return comboBoxInventario;
     }
 
-   // ------------------ Ultimo id Inventario -------------------------------------
-private void consultarUltimoId() throws Exception {
-        inventario = inventariocontroler.InventarioBuscarUltimoId();
-        if (inventario != null) {
-        }
-        ultimoId = inventario.getIdInventario();
-        idInventario=ultimoId;
-        
-         String testValue2 = Integer.toString(idInventario);
+    // ------------------ Ultimo id Inventario -------------------------------------
+    private void consultarUltimoId() throws NullPointerException {
+        try {
+            inventario = inventariocontroler.InventarioBuscarUltimoId();
+//            if (inventario != null) {
+//            }
+            ultimoId = inventario.getIdInventario();
+            idInventario = ultimoId;
+
+            String testValue2 = Integer.toString(idInventario);
             for (int i = 0; i < comboBoxInventario.getModel().getSize(); i++) {
                 if (comboBoxInventario.getItemAt(i).equals(testValue2)) {
                     System.out.println(i);
@@ -805,26 +798,28 @@ private void consultarUltimoId() throws Exception {
                     break;
                 }
             }
-        consultar(idInventario);
-        
+            consultar(idInventario);
+        } catch (Exception ex) {
+            Logger.getLogger(ArticulosVista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
-void consultar(int id) throws Exception{
-        inventario= inventariocontroler.InventarioBuscar(id);
+    void consultar(int id) throws Exception {
+        inventario = inventariocontroler.InventarioBuscar(id);
         if (inventario != null) {
             System.out.println("22222222222222222");
-            idInventario=inventario.getIdInventario();
-             
+            idInventario = inventario.getIdInventario();
+
             txtFechInventario.setText(inventario.getFechReg());
             txtEncargado.setText(inventario.getEncargado());
             txtEstado.setText(inventario.getEstado());
-           
 
         } else {
             JOptionPane.showMessageDialog(null, "Articulo no registrado");
             //System.out.println("Error");
         }
-    } 
+    }
 
     void calculo() {
 
@@ -834,28 +829,27 @@ void consultar(int id) throws Exception{
         res = (float) (num * 25.4);
         txtNumMm.setText(df.format(res));
     }
-   
+
     void calculoFracion() {
-         
+
         DecimalFormat df = new DecimalFormat("0.00");
         String cero;
         num = Float.parseFloat(txtNum.getText());
         nume = Float.parseFloat(txtNumerador.getText());
         deno = Float.parseFloat(txtDenominador.getText());
-        cero=Float.toString(num);
-        
-         resFra = num + (nume / deno);
-         res = (float) (resFra * 25.4);
-        
-     
+        cero = Float.toString(num);
+
+        resFra = num + (nume / deno);
+        res = (float) (resFra * 25.4);
+
         txtNumMm.setText(df.format(res));
     }
-    
-     void limpiarConvertir(){
+
+    void limpiarConvertir() {
         txtNumerador.setText("");
         txtDenominador.setText("");
         txtNum.setText("0");
         txtNumMm.setText("");
-       
+
     }
 }

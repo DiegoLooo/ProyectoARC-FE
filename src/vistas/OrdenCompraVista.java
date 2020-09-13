@@ -38,8 +38,6 @@ import reportes.GenerarReporte;
  *
  * @author ARCRODINPC-05
  */
-
-
 public class OrdenCompraVista extends javax.swing.JInternalFrame {
 
     /**
@@ -61,21 +59,20 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
     private String observacion;
     private String docExterno;
     private String obsInter;
-    
-    private String comboEstadoOrdenCompra;
-    
-    private String filtro ="p.razonSocial";
-    
-    private int tabla;
 
+    private String comboEstadoOrdenCompra;
+
+    private String filtro = "p.razonSocial";
+
+    private int tabla;
 
     public OrdenCompraVista() {
         initComponents();
-        listaOrdenCompra(filtro,txtFiltro.getText());
+        listaOrdenCompra(filtro, txtFiltro.getText());
         habilitarInicio();
-        jTable1.setDefaultRenderer (Object.class, new RowsRenderer());
+        jTable1.setDefaultRenderer(Object.class, new RowsRenderer());
     }
-    
+
     public class RowsRenderer extends DefaultTableCellRenderer {
 
         @Override
@@ -86,24 +83,24 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
             if ("APROBADO".equals((jTable1.getValueAt(row, column)))) {
                 this.setOpaque(true);
                 this.setForeground(Color.decode("#009900"));//verde
-                
+
             } else if ("ANULADO".equals((jTable1.getValueAt(row, column)))) {
                 this.setOpaque(true);
                 this.setForeground(Color.RED);
-                
-            } else if ((!"APROBADO".equals((jTable1.getValueAt(row, column)))) && 
-                       (!"ANULADO".equals((jTable1.getValueAt(row, column))))) {
+
+            } else if ((!"APROBADO".equals((jTable1.getValueAt(row, column))))
+                    && (!"ANULADO".equals((jTable1.getValueAt(row, column))))) {
                 this.setOpaque(true);
                 this.setForeground(Color.BLACK);
             }
-            
+
             if (selected) {
                 setBackground(Color.decode("#39698a"));
                 setForeground(Color.decode("#FFFFFF"));
-            } else{
+            } else {
                 setBackground(Color.WHITE);
             }
-            
+
             return this;
         }
     }
@@ -592,7 +589,7 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         tabla = jTable1.getSelectedRow();
-        idOrdenCompra= Integer.parseInt(jTable1.getValueAt(tabla, 0).toString());
+        idOrdenCompra = Integer.parseInt(jTable1.getValueAt(tabla, 0).toString());
         try {
             consultarOrdenCompra(idOrdenCompra);
         } catch (Exception ex) {
@@ -608,43 +605,43 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void comboBoxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxFiltroItemStateChanged
-         if (comboBoxFiltro.getSelectedItem() == "PROVEEDOR") {
+        if (comboBoxFiltro.getSelectedItem() == "PROVEEDOR") {
             filtro = "p.razonSocial";
-            listaOrdenCompra(filtro,txtFiltro.getText());
+            listaOrdenCompra(filtro, txtFiltro.getText());
             System.out.println(filtro);
         } else if (comboBoxFiltro.getSelectedItem() == "NUM. ORDEN COMPRA") {
             filtro = "o.oc_num";
-            listaOrdenCompra(filtro,txtFiltro.getText());
+            listaOrdenCompra(filtro, txtFiltro.getText());
             System.out.println(filtro);
         } else if (comboBoxFiltro.getSelectedItem() == "CONTACTO PROVEEDOR") {
             filtro = "concat(c.nombres,' ',c.apellidos)";
-            listaOrdenCompra(filtro,txtFiltro.getText());
+            listaOrdenCompra(filtro, txtFiltro.getText());
             System.out.println(filtro);
         } else if (comboBoxFiltro.getSelectedItem() == "FECHA EMISIÓN") {
             filtro = "o.oc_fecha";
-            listaOrdenCompra(filtro,txtFiltro.getText());
+            listaOrdenCompra(filtro, txtFiltro.getText());
             System.out.println(filtro);
         } else if (comboBoxFiltro.getSelectedItem() == "LUGAR ENTREGA") {
             filtro = "o.oc_lugarEntrega";
-            listaOrdenCompra(filtro,txtFiltro.getText());
+            listaOrdenCompra(filtro, txtFiltro.getText());
             System.out.println(filtro);
         } else if (comboBoxFiltro.getSelectedItem() == "FECHA ENTREGA") {
             filtro = "o.oc_fechaEntrega";
-            listaOrdenCompra(filtro,txtFiltro.getText());
+            listaOrdenCompra(filtro, txtFiltro.getText());
             System.out.println(filtro);
         } else if (comboBoxFiltro.getSelectedItem() == "ESTADO") {
             filtro = "o.oc_estado";
-            listaOrdenCompra(filtro,txtFiltro.getText());
+            listaOrdenCompra(filtro, txtFiltro.getText());
             System.out.println(filtro);
         } else if (comboBoxFiltro.getSelectedItem() == "SELECCIONAR") {
             filtro = "p.razonSocial";
-            listaOrdenCompra(filtro,txtFiltro.getText());
+            listaOrdenCompra(filtro, txtFiltro.getText());
             System.out.println(filtro);
         }
     }//GEN-LAST:event_comboBoxFiltroItemStateChanged
 
     private void txtFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyReleased
-        listaOrdenCompra(filtro,txtFiltro.getText());
+        listaOrdenCompra(filtro, txtFiltro.getText());
     }//GEN-LAST:event_txtFiltroKeyReleased
 
     private void buttonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardarActionPerformed
@@ -691,23 +688,28 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonModificarActionPerformed
 
     private void buttonModificarOrdenCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonModificarOrdenCompraActionPerformed
-        OrdenesCompra ordcomp = null;
         try {
-            ordcomp = new OrdenesCompra();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(OrdenCompraVista.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(OrdenCompraVista.class.getName()).log(Level.SEVERE, null, ex);
+            OrdenesCompra ordcomp = null;
+            try {
+                ordcomp = new OrdenesCompra();
+                Principal.jDesktopPane1.add(ordcomp);
+                ordcomp.toFront();
+                ordcomp.setVisible(true);
+                OrdenesCompra.NumOrdenCompra();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(OrdenCompraVista.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(OrdenCompraVista.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (NullPointerException ex) {
+            Logger.getLogger(Articulos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Principal.jDesktopPane1.add(ordcomp);
-        ordcomp.toFront();
-        ordcomp.setVisible(true);
-        OrdenesCompra.NumOrdenCompra();
+
     }//GEN-LAST:event_buttonModificarOrdenCompraActionPerformed
 
     private void buttonPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPdfActionPerformed
         GenerarReporte ordC = new GenerarReporte();
-         System.out.println("");
+        System.out.println("");
         try {
             ordC.ReporteOrdenCompra(idOrdenCompra);
         } catch (SQLException ex) {
@@ -715,7 +717,7 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(OrdenCompraVista.class.getName()).log(Level.SEVERE, null, ex);
         }
-   
+
     }//GEN-LAST:event_buttonPdfActionPerformed
 
     private void buttonImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonImprimirActionPerformed
@@ -793,41 +795,40 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTlf1;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
-    
-    OrdenCompraController ordencompracontroler=new OrdenCompraController();
+
+    OrdenCompraController ordencompracontroler = new OrdenCompraController();
     OrdenCompra ordencompra;
-    
-    DetalleOrdenCompraController detalleordencompracontroler= new DetalleOrdenCompraController();
+
+    DetalleOrdenCompraController detalleordencompracontroler = new DetalleOrdenCompraController();
     DetalleOrdenCompra detalleordencompra;
-    
-    ProveedorController proveedorcontroler= new ProveedorController();
+
+    ProveedorController proveedorcontroler = new ProveedorController();
     Proveedor proveedor;
-    
-    ContactoProveedorController contactoproveedorcontroler= new ContactoProveedorController();
+
+    ContactoProveedorController contactoproveedorcontroler = new ContactoProveedorController();
     ContactoProveedor contactoproveedor;
-    
-    UsuarioController usuariocontroler=new UsuarioController();
+
+    UsuarioController usuariocontroler = new UsuarioController();
     Usuario usuario;
-    
+
 //------------------------ Procesar -------------------------------------
- void procesar(int op) {
+    void procesar(int op) {
         ordencompra = leerDatos();
         try {
-                 String msg = ordencompracontroler.OrdenCompraProcesar(ordencompra, op);
+            String msg = ordencompracontroler.OrdenCompraProcesar(ordencompra, op);
             JOptionPane.showMessageDialog(null, msg);
         } catch (Exception e) {
             //JOptionPane.showMessageDialog(null, e.getMessage());
             System.out.println("Error" + e.getMessage());
         }
-    } 
- 
- //----------------------- Leer Datos ----------------------------------------
- 
-     OrdenCompra leerDatos() {
+    }
+
+    //----------------------- Leer Datos ----------------------------------------
+    OrdenCompra leerDatos() {
         OrdenCompra ordcom = new OrdenCompra();
-        
+
         System.out.println("entrando a leer datos");
-        
+
         ordcom.setOc_id(idOrdenCompra);
         ordcom.setOc_num(numOrdenCompra);
         ordcom.setOc_fecha(fechaEmision);
@@ -843,15 +844,15 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
         ordcom.setOc_estado(comboEstadoOrdenCompra);
         ordcom.setOc_observacion(observacion);
         ordcom.setOc_obsInterna(txtObsInterna.getText());
-            
+
         return ordcom;
     }
-    
+
 //--------------------------- Consultar Orden Compra ---------------------------
-  private void consultarProveedor(int idP) throws Exception {
+    private void consultarProveedor(int idP) throws Exception {
         proveedor = proveedorcontroler.ProveedorBuscarId(idP);
         if (proveedor != null) {
-            
+
             idProveedor = proveedor.getIdProveedor();
             txtProveedor.setText(proveedor.getRazonSocial());
             txtRuc.setText(proveedor.getRuc());
@@ -863,94 +864,94 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
             //System.out.println("Error");
         }
     }
-  
-   private void consultarContactoProveedorId(int idCP) throws Exception {
+
+    private void consultarContactoProveedorId(int idCP) throws Exception {
 
         contactoproveedor = contactoproveedorcontroler.ContactoProveedorBuscar(idCP);
         if (contactoproveedor != null) {
             idContactoProveedor = contactoproveedor.getIdContactoProveedor();
-            txtContactoProveedor.setText(contactoproveedor.getNombres()+" "+contactoproveedor.getApellidos());
+            txtContactoProveedor.setText(contactoproveedor.getNombres() + " " + contactoproveedor.getApellidos());
             txtCorreo.setText(contactoproveedor.getCorreo());
             txtTlf1.setText(contactoproveedor.getTlf1());
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "EL Proveedor no tiene contactos, Registre un contacto!!!!");
             //System.out.println("Error");
         }
     }
- 
+
     private void consultarUsuario(int idUs) throws Exception {
         usuario = usuariocontroler.UsuarioBuscar2(idUs);
         if (usuario != null) {
-            txtUsuario.setText( usuario.getNombres()+ " " +usuario.getApellidos());
+            txtUsuario.setText(usuario.getNombres() + " " + usuario.getApellidos());
         } else {
             JOptionPane.showMessageDialog(null, "Usuario no registrado");
             //System.out.println("Error");
         }
     }
+
     private void consultarOrdenCompra(int id) throws Exception {
         ordencompra = ordencompracontroler.OrdenCompraBuscar(id);
         if (ordencompra != null) {
-            
+
             idOrdenCompra = ordencompra.getOc_id();
             numOrdenCompra = ordencompra.getOc_num();
-            numOrdenCompraParaModificar= ordencompra.getOc_num();
+            numOrdenCompraParaModificar = ordencompra.getOc_num();
             txtNumOrdCompra.setText(String.format("%06d", ordencompra.getOc_num()));
             fechaEmision = ordencompra.getOc_fecha();
-            anio=anioFecha(ordencompra.getOc_fecha());
+            anio = anioFecha(ordencompra.getOc_fecha());
             idProveedor = ordencompra.getOc_idProveedor_fk();
             consultarProveedor(idProveedor);
-            
+
             idContactoProveedor = ordencompra.getOc_idContactoProv_fk();
             consultarContactoProveedorId(idContactoProveedor);
-            
+
             moneda = ordencompra.getOc_moneda();
             txtMoneda.setText(ordencompra.getOc_moneda());
-            
+
             formaPago = ordencompra.getOc_formaPago();
             txtFormaPago.setText(ordencompra.getOc_formaPago());
-            
-            fechaEntrega= ordencompra.getOc_fechaEntrega();
+
+            fechaEntrega = ordencompra.getOc_fechaEntrega();
             txtFechaEntrega.setText(ordencompra.getOc_fechaEntrega());
-            
-            tiempoEntrega=ordencompra.getOc_tiempoEntrega();
+
+            tiempoEntrega = ordencompra.getOc_tiempoEntrega();
             txtTiempoEntrega.setText(ordencompra.getOc_tiempoEntrega());
-           
-            idUsuario=ordencompra.getOc_idUsuario_fk();
+
+            idUsuario = ordencompra.getOc_idUsuario_fk();
             consultarUsuario(idUsuario);
-            
-            lugarEntrega=ordencompra.getOc_lugarEntrega();
+
+            lugarEntrega = ordencompra.getOc_lugarEntrega();
             txtLugarEntrega.setText(ordencompra.getOc_lugarEntrega());
-            
-            comboEstadoOrdenCompra=ordencompra.getOc_estado();
-            System.out.println("Estado de orden de compra" +comboEstadoOrdenCompra);
+
+            comboEstadoOrdenCompra = ordencompra.getOc_estado();
+            System.out.println("Estado de orden de compra" + comboEstadoOrdenCompra);
 
             String testValue4 = comboEstadoOrdenCompra;
-            
+
             for (int i = 0; i < comboBoxEstadoOrdenCompra.getModel().getSize(); i++) {
                 if (comboBoxEstadoOrdenCompra.getItemAt(i).equals(testValue4)) {
                     System.out.println(i);
                     comboBoxEstadoOrdenCompra.setSelectedIndex(i);
                     break;
-                }else {
+                } else {
                     comboBoxEstadoOrdenCompra.setSelectedIndex(0);
                 }
             }
-            docExterno=ordencompra.getOc_docExterno();
+            docExterno = ordencompra.getOc_docExterno();
             txtObs.setText(ordencompra.getOc_observacion());
-            observacion=ordencompra.getOc_observacion();
+            observacion = ordencompra.getOc_observacion();
             txtObsInterna.setText(ordencompra.getOc_obsInterna());
-            obsInter=ordencompra.getOc_obsInterna();
-            
+            obsInter = ordencompra.getOc_obsInterna();
+
         } else {
             JOptionPane.showMessageDialog(null, "Orden de Compra no registrado");
             System.out.println("Orden de Compra no registrado");
         }
     }
-    
+
     //--------------------------- Consultar Pago ---------------------------------
-    
-  void consultarPago(int idoc) throws Exception {
+    void consultarPago(int idoc) throws Exception {
         detalleordencompra = detalleordencompracontroler.DetalleOrdenCompraTotal(idoc);
 
         if (detalleordencompra != null) {
@@ -976,7 +977,8 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
         }
     }
 //------------------------------ Tabla ------------------------------------------------------
- void listaOrdenCompra(String valorFiltro,String filtrolike) {
+
+    void listaOrdenCompra(String valorFiltro, String filtrolike) {
         List<OrdenCompra> lista;
         try {
             lista = ordencompracontroler.OrdenCompraFiltrar(valorFiltro, filtrolike);
@@ -993,13 +995,13 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
         DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
         tabla.setRowCount(0);
         for (OrdenCompra ordc : lista) {
-            numeroorden=String.format("%06d",ordc.getOc_num());
-            Object[] fila = {ordc.getOc_id(),numeroorden, ordc.getProveedor(), ordc.getContacto(), ordc.getOc_fecha(), ordc.getOc_fechaEntrega(),
-                             ordc.getOc_estado(), ordc.getOc_obsInterna()};
+            numeroorden = String.format("%06d", ordc.getOc_num());
+            Object[] fila = {ordc.getOc_id(), numeroorden, ordc.getProveedor(), ordc.getContacto(), ordc.getOc_fecha(), ordc.getOc_fechaEntrega(),
+                ordc.getOc_estado(), ordc.getOc_obsInterna()};
             tabla.addRow(fila);
         }
     }
-    
+
 //------------------------- Lista detalle Pedido ---------------------------
     void listaDetalleOrdenCompra(int id) {
         List<DetalleOrdenCompra> lista;
@@ -1030,15 +1032,15 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
             }
 
             Object[] fila = {detoc.getDoc_id(), detoc.getDoc_item(), detoc.getDoc_cantidad(),
-                detoc.getDoc_desc(),detoc.getDoc_valorUnit(),f, it};
+                detoc.getDoc_desc(), detoc.getDoc_valorUnit(), f, it};
             tabla.addRow(fila);
         }
 
     }
 //--------------------------- Limpiar --------------------------------------
-    
-    void limpiar(){
-    
+
+    void limpiar() {
+
         txtRuc.setText("");
         txtProveedor.setText("");
         txtContactoProveedor.setText("");
@@ -1059,10 +1061,9 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
         txtTlf1.setText("");
         txtRuc.setText("");
     }
-    
+
 //------------------------- Habilitar -----------------------------------------
-    
-    void habilitarInicio(){
+    void habilitarInicio() {
 
         txtNumOrdCompra.setEnabled(false);
         txtRuc.setEnabled(false);
@@ -1079,16 +1080,16 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
         txtLugarEntrega.setEnabled(false);
         txtUsuario.setEnabled(false);
         comboBoxEstadoOrdenCompra.setEnabled(false);
-        
+
         buttonModificar.setEnabled(false);
         buttonGuardar.setEnabled(false);
         buttonModificarOrdenCompra.setEnabled(false);
         buttonPdf.setEnabled(false);
         buttonImprimir.setEnabled(false);
     }
-    
-    void habilitarBuscar(){
-        
+
+    void habilitarBuscar() {
+
         txtNumOrdCompra.setEnabled(true);
         txtRuc.setEnabled(true);
         txtProveedor.setEnabled(true);
@@ -1104,16 +1105,16 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
         txtLugarEntrega.setEnabled(true);
         txtUsuario.setEnabled(true);
         comboBoxEstadoOrdenCompra.setEnabled(false);
-        
+
         buttonModificar.setEnabled(true);
         buttonGuardar.setEnabled(false);
         buttonModificarOrdenCompra.setEnabled(true);
         buttonPdf.setEnabled(true);
         buttonImprimir.setEnabled(true);
     }
-    
-    void habilitarModificar(){
-    
+
+    void habilitarModificar() {
+
         txtNumOrdCompra.setEnabled(false);
         txtRuc.setEnabled(false);
         txtProveedor.setEnabled(false);
@@ -1129,16 +1130,16 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
         txtLugarEntrega.setEnabled(false);
         txtUsuario.setEnabled(false);
         comboBoxEstadoOrdenCompra.setEnabled(true);
-        
+
         buttonModificar.setEnabled(false);
         buttonGuardar.setEnabled(true);
         buttonModificarOrdenCompra.setEnabled(false);
         buttonPdf.setEnabled(false);
         buttonImprimir.setEnabled(false);
     }
-    
-    void habilitarGuardar(){
-        
+
+    void habilitarGuardar() {
+
         txtNumOrdCompra.setEnabled(true);
         txtRuc.setEnabled(true);
         txtProveedor.setEnabled(true);
@@ -1154,16 +1155,15 @@ public class OrdenCompraVista extends javax.swing.JInternalFrame {
         txtLugarEntrega.setEnabled(true);
         txtUsuario.setEnabled(true);
         comboBoxEstadoOrdenCompra.setEnabled(false);
-        
+
         buttonModificar.setEnabled(true);
         buttonGuardar.setEnabled(false);
         buttonModificarOrdenCompra.setEnabled(true);
         buttonPdf.setEnabled(true);
         buttonImprimir.setEnabled(true);
     }
-    
-    
- //------------------------------ Fecha Anio ------------------------------------
+
+    //------------------------------ Fecha Anio ------------------------------------
     public String anioFecha(String f) throws ParseException {
         Calendar fecha = Calendar.getInstance();
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");

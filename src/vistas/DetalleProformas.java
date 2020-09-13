@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import static vistas.Proformas.categoria4;
 
 /**
  *
@@ -29,13 +28,11 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
     static String itemS = "";
     static String cantidadS = "";
     static String precioS = "";
-    
+
     static String precioDolarCro;
     static String precioSolCro;
-    
-    
 
-    public DetalleProformas( String descripcion, String precio) {
+    public DetalleProformas(String descripcion, String precio) {
         this.valorDescripcion = descripcion;
         this.valorPrecio = precio;
 
@@ -43,8 +40,7 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
         txtPrecioUnitario.setText(valorPrecio);
 
     }
-    
-   
+
     public DetalleProformas() throws SQLException, ClassNotFoundException {
 
         initComponents();
@@ -314,7 +310,7 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCerrarActionPerformed
-      
+
         dispose();
 
     }//GEN-LAST:event_buttonCerrarActionPerformed
@@ -331,33 +327,33 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
         if ("DOLARES AMERICANOS".equals(Proformas.categoria4) && "SERVICIO".equals(Proformas.categoria2)) {
             try {
                 Proformas.consultarTotal(Proformas.txtFecha.getText());
-                if (Float.parseFloat(Proformas.total) >700) {
-                        Proformas.txtDetraccion.setText("SUJETO A DETRACCIÓN 12%(COD.OP. 022)");
-                    } else if (Float.parseFloat(Proformas.total) < 700 || Float.parseFloat(Proformas.total)==700 ) {
-                            Proformas.txtDetraccion.setText("");
-                        }else if ("DOLARES AMERICANOS".equals(Proformas.categoria4) && "PRODUCTO".equals(Proformas.categoria2)) {
-                                Proformas.txtDetraccion.setText("");
-                            }
+                if (Float.parseFloat(Proformas.total) > 700) {
+                    Proformas.txtDetraccion.setText("SUJETO A DETRACCIÓN 12%(COD.OP. 022)");
+                } else if (Float.parseFloat(Proformas.total) < 700 || Float.parseFloat(Proformas.total) == 700) {
+                    Proformas.txtDetraccion.setText("");
+                } else if ("DOLARES AMERICANOS".equals(Proformas.categoria4) && "PRODUCTO".equals(Proformas.categoria2)) {
+                    Proformas.txtDetraccion.setText("");
+                }
             } catch (Exception ex) {
                 Logger.getLogger(Proformas.class.getName()).log(Level.SEVERE, null, ex);
-                 }
-               
-            } else if ("SOLES".equals(Proformas.categoria4) && "SERVICIO".equals(Proformas.categoria2)) {
-                    if (Float.parseFloat(Proformas.labelTotal.getText()) > 700) {
-                            Proformas.txtDetraccion.setText("SUJETO A DETRACCIÓN 12%(COD.OP. 022)");
-                        } else if (Float.parseFloat(Proformas.labelTotal.getText()) <700 || Float.parseFloat(Proformas.labelTotal.getText()) ==700) {
-                                Proformas.txtDetraccion.setText("SUJETO A DETRACCIÓN 12%(COD.OP. 022)");
-                            }else if ("SOLES".equals(Proformas.categoria4) && "PRODUCTO".equals(Proformas.categoria2)) {
-                                    Proformas.txtDetraccion.setText("");
-                                }
-                } else {
-                        Proformas.txtDetraccion.setText("");
-                    }
+            }
+
+        } else if ("SOLES".equals(Proformas.categoria4) && "SERVICIO".equals(Proformas.categoria2)) {
+            if (Float.parseFloat(Proformas.labelTotal.getText()) > 700) {
+                Proformas.txtDetraccion.setText("SUJETO A DETRACCIÓN 12%(COD.OP. 022)");
+            } else if (Float.parseFloat(Proformas.labelTotal.getText()) < 700 || Float.parseFloat(Proformas.labelTotal.getText()) == 700) {
+                Proformas.txtDetraccion.setText("SUJETO A DETRACCIÓN 12%(COD.OP. 022)");
+            } else if ("SOLES".equals(Proformas.categoria4) && "PRODUCTO".equals(Proformas.categoria2)) {
+                Proformas.txtDetraccion.setText("");
+            }
+        } else {
+            Proformas.txtDetraccion.setText("");
+        }
         Descripcion = txtDescripcion.getText();
         Proformas.procesarProfUpdate(2);
         limpiar();
         habilitarInicio();
-        
+
 //        try {
 //            consultar(txtDescripcion.getText(), Proformas.b);
 //        } catch (Exception ex) {
@@ -371,42 +367,42 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
         procesar1(2);
         Proformas.listaDetalleProforma();
         try {
-            
+
             Proformas.consultarPago();
         } catch (Exception ex) {
             Logger.getLogger(DetalleProformas.class.getName()).log(Level.SEVERE, null, ex);
         }
         if ("DOLARES AMERICANOS".equals(Proformas.categoria4) && "SERVICIO".equals(Proformas.categoria2)) {
             try {
-              
+
                 Proformas.consultarTotal(Proformas.txtFecha.getText());
                 if (Float.parseFloat(Proformas.total) > 700) {
                     Proformas.txtDetraccion.setText("SUJETO A DETRACCIÓN 12%(COD.OP. 022)");
-                            
-                    } else if (Float.parseFloat(Proformas.total) < 700 || Float.parseFloat(Proformas.total)==700) {
-                             Proformas.txtDetraccion.setText("");
-                
-                        } else if ("DOLARES AMERICANOS".equals(Proformas.categoria4) && "PRODUCTO".equals(Proformas.categoria2)) {
-                                Proformas.txtDetraccion.setText("");
-                    }
+
+                } else if (Float.parseFloat(Proformas.total) < 700 || Float.parseFloat(Proformas.total) == 700) {
+                    Proformas.txtDetraccion.setText("");
+
+                } else if ("DOLARES AMERICANOS".equals(Proformas.categoria4) && "PRODUCTO".equals(Proformas.categoria2)) {
+                    Proformas.txtDetraccion.setText("");
+                }
             } catch (Exception ex) {
                 Logger.getLogger(Proformas.class.getName()).log(Level.SEVERE, null, ex);
             }
-             
+
         } else if ("SOLES".equals(Proformas.categoria4) && "SERVICIO".equals(Proformas.categoria2)) {
-                if (Float.parseFloat(Proformas.labelTotal.getText()) > 700) {
-                            Proformas.txtDetraccion.setText("SUJETO A DETRACCIÓN 12%(COD.OP. 022)");
-                        } else if (Float.parseFloat(Proformas.labelTotal.getText()) <700 || Float.parseFloat(Proformas.labelTotal.getText())==700) {
-                                Proformas.txtDetraccion.setText("");
-                            } else if ("SOLES".equals(Proformas.categoria4) && "PRODUCTO".equals(Proformas.categoria2)) {
-                                         Proformas.txtDetraccion.setText("");
-                      }
-            } else {
+            if (Float.parseFloat(Proformas.labelTotal.getText()) > 700) {
+                Proformas.txtDetraccion.setText("SUJETO A DETRACCIÓN 12%(COD.OP. 022)");
+            } else if (Float.parseFloat(Proformas.labelTotal.getText()) < 700 || Float.parseFloat(Proformas.labelTotal.getText()) == 700) {
                 Proformas.txtDetraccion.setText("");
+            } else if ("SOLES".equals(Proformas.categoria4) && "PRODUCTO".equals(Proformas.categoria2)) {
+                Proformas.txtDetraccion.setText("");
+            }
+        } else {
+            Proformas.txtDetraccion.setText("");
         }
 
         Proformas.procesarProfUpdate(2);
-       
+
         habilitarGuardar();
     }//GEN-LAST:event_buttonGuardarActionPerformed
 
@@ -462,15 +458,17 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonLimpiarActionPerformed
 
     private void buttonPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPrecioActionPerformed
+
         ValidarPrecio1 calcularPrecio = null;
         try {
             calcularPrecio = new ValidarPrecio1();
+            Principal.jDesktopPane1.add(calcularPrecio);
+            calcularPrecio.toFront();
+            calcularPrecio.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(DetalleProformas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Principal.jDesktopPane1.add(calcularPrecio);
-        calcularPrecio.toFront();
-        calcularPrecio.setVisible(true);
+
     }//GEN-LAST:event_buttonPrecioActionPerformed
 
     private void buttonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNuevoActionPerformed
@@ -542,7 +540,7 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
             System.out.println("Error" + e.getMessage());
         }
     }
-    
+
     static private void procesar1(int op) {
         pro = leerDatos1();
         try {
@@ -553,8 +551,8 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
             System.out.println("Error" + e.getMessage());
         }
     }
-    
-    static  void procesarProductoServ(String des,int op) {
+
+    static void procesarProductoServ(String des, int op) {
         pro = leerDatosProducto(des);
         try {
             String msg = obj.DetalleProformaProcesar(pro, op);
@@ -566,11 +564,11 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
     }
 
     // ------------------------ Consultar -------------------------
-      static void consultar( int id, int idDetalleProf) throws Exception {
+    static void consultar(int id, int idDetalleProf) throws Exception {
         //pro = obj.DetalleProformaBuscar(Descripcion,Proformas.a);
-        pro = obj.DetalleProformaBuscar(id,idDetalleProf);
+        pro = obj.DetalleProformaBuscar(id, idDetalleProf);
         if (pro != null) {
-            
+
             txtItem.setText(pro.getItem());
             txtCantidad.setText(pro.getCantidad());
             txtDescripcion.setText(pro.getDescripcion());
@@ -594,10 +592,10 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
         detProf.setDescripcion(txtDescripcion.getText());
         detProf.setDetalleDescrip(txtDetDescrip.getText());
         detProf.setPrecioUnitario(txtPrecioUnitario.getText());
-        
+
         return detProf;
     }
-    
+
     static private DetalleProforma leerDatos1() {
         DetalleProforma detProf = new DetalleProforma();
 
@@ -609,14 +607,13 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
         detProf.setDetalleDescrip(txtDetDescrip.getText());
         detProf.setPrecioUnitario(txtPrecioUnitario.getText());
         detProf.setIdDetalleProforma(Proformas.idDetalleProforma);
-        
+
         return detProf;
     }
-    
-    static private DetalleProforma leerDatosProducto( String des) {
+
+    static private DetalleProforma leerDatosProducto(String des) {
         DetalleProforma detProf = new DetalleProforma();
 
-        
         detProf.setIdProforma(Proformas.b);
         detProf.setItem("");
         detProf.setCantidad("");
@@ -626,7 +623,6 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
 
         return detProf;
     }
-    
 
     //-------------------------- Limpiar ---------------------------------
     public void limpiar() {
@@ -637,9 +633,9 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
         txtPrecioUnitario.setText("");
 
     }
-    
-    public void habilitarInicio(){
-        
+
+    public void habilitarInicio() {
+
         buttonLimpiar.setEnabled(false);
         buttonNuevo.setEnabled(false);
         buttonRegistrar.setEnabled(true);
@@ -648,16 +644,16 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
         buttonEliminar.setEnabled(false);
         buttonPrecio.setEnabled(true);
         buttonPrecioCromo.setEnabled(true);
-        
+
         txtItem.setEnabled(true);
         txtCantidad.setEnabled(true);
         txtDescripcion.setEnabled(true);
         txtDetDescrip.setEnabled(true);
         txtPrecioUnitario.setEnabled(true);
     }
-    
-    public void habilitarNuevo(){
-        
+
+    public void habilitarNuevo() {
+
         buttonLimpiar.setEnabled(false);
         buttonNuevo.setEnabled(false);
         buttonRegistrar.setEnabled(true);
@@ -666,16 +662,16 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
         buttonEliminar.setEnabled(false);
         buttonPrecio.setEnabled(true);
         buttonPrecioCromo.setEnabled(true);
-        
+
         txtItem.setEnabled(true);
         txtCantidad.setEnabled(true);
         txtDescripcion.setEnabled(true);
         txtDetDescrip.setEnabled(true);
         txtPrecioUnitario.setEnabled(true);
     }
-    
-     public void habilitarRegistrar(){
-        
+
+    public void habilitarRegistrar() {
+
         buttonLimpiar.setEnabled(false);
         buttonNuevo.setEnabled(true);
         buttonRegistrar.setEnabled(false);
@@ -684,16 +680,16 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
         buttonEliminar.setEnabled(true);
         buttonPrecio.setEnabled(false);
         buttonPrecioCromo.setEnabled(false);
-        
+
         txtItem.setEnabled(false);
         txtCantidad.setEnabled(false);
         txtDescripcion.setEnabled(false);
         txtDetDescrip.setEnabled(false);
         txtPrecioUnitario.setEnabled(false);
     }
-     
-         public void habilitarEliminar(){
-        
+
+    public void habilitarEliminar() {
+
         buttonLimpiar.setEnabled(false);
         buttonNuevo.setEnabled(true);
         buttonRegistrar.setEnabled(false);
@@ -702,16 +698,16 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
         buttonEliminar.setEnabled(false);
         buttonPrecio.setEnabled(false);
         buttonPrecioCromo.setEnabled(false);
-        
+
         txtItem.setEnabled(false);
         txtCantidad.setEnabled(false);
         txtDescripcion.setEnabled(false);
         txtDetDescrip.setEnabled(false);
         txtPrecioUnitario.setEnabled(false);
     }
-         
-    public void habilitarModificar(){
-        
+
+    public void habilitarModificar() {
+
         buttonLimpiar.setEnabled(false);
         buttonNuevo.setEnabled(false);
         buttonRegistrar.setEnabled(false);
@@ -720,16 +716,16 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
         buttonEliminar.setEnabled(false);
         buttonPrecio.setEnabled(true);
         buttonPrecioCromo.setEnabled(true);
-        
+
         txtItem.setEnabled(true);
         txtCantidad.setEnabled(true);
         txtDescripcion.setEnabled(true);
         txtDetDescrip.setEnabled(true);
         txtPrecioUnitario.setEnabled(true);
     }
-    
-    public void habilitarGuardar(){
-        
+
+    public void habilitarGuardar() {
+
         buttonLimpiar.setEnabled(false);
         buttonNuevo.setEnabled(false);
         buttonRegistrar.setEnabled(false);
@@ -738,16 +734,16 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
         buttonEliminar.setEnabled(true);
         buttonPrecio.setEnabled(false);
         buttonPrecioCromo.setEnabled(false);
-        
+
         txtItem.setEnabled(false);
         txtCantidad.setEnabled(false);
         txtDescripcion.setEnabled(false);
         txtDetDescrip.setEnabled(false);
         txtPrecioUnitario.setEnabled(false);
     }
-    
-        static void habilitarTabla(){
-        
+
+    static void habilitarTabla() {
+
         buttonLimpiar.setEnabled(false);
         buttonNuevo.setEnabled(false);
         buttonRegistrar.setEnabled(false);
@@ -756,23 +752,22 @@ public class DetalleProformas extends javax.swing.JInternalFrame {
         buttonEliminar.setEnabled(true);
         buttonPrecio.setEnabled(false);
         buttonPrecioCromo.setEnabled(false);
-        
+
         txtItem.setEnabled(false);
         txtCantidad.setEnabled(false);
         txtDescripcion.setEnabled(false);
         txtDetDescrip.setEnabled(false);
         txtPrecioUnitario.setEnabled(false);
     }
-        
-        
-   // ----------------------------- Método jala precio del cromado ---------------------
-        static void precioCromadoDolares(){
-        precioDolarCro=PrecioCromadoParaDetalleProforma.txtCostoDolar.getText();
+
+    // ----------------------------- Método jala precio del cromado ---------------------
+    static void precioCromadoDolares() {
+        precioDolarCro = PrecioCromadoParaDetalleProforma.txtCostoDolar.getText();
         txtPrecioUnitario.setText(precioDolarCro);
-        }
-        
-        static void precioCromadoSoles(){
-        precioSolCro=PrecioCromadoParaDetalleProforma.txtCostoSoles.getText();
+    }
+
+    static void precioCromadoSoles() {
+        precioSolCro = PrecioCromadoParaDetalleProforma.txtCostoSoles.getText();
         txtPrecioUnitario.setText(precioSolCro);
-        }
+    }
 }

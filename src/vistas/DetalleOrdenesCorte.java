@@ -15,7 +15,6 @@ import entity.Inventario;
 import java.awt.event.KeyEvent;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import static java.sql.JDBCType.NULL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,31 +31,30 @@ import javax.swing.table.DefaultTableModel;
  * @author ARCRODINPC-06
  */
 public class DetalleOrdenesCorte extends javax.swing.JInternalFrame {
-    
+
     Connection conexion;
     CallableStatement cs = null;
     ResultSet rs = null;
     Statement s = null;
     PreparedStatement ps = null;
     String q;
-    
+
     String idInvCombo;
-    
+
     static int idInventario;
-   // static String diametro;
+    // static String diametro;
     static String dia;
     static String diaInt;
     static String unidad;
     static int idArt;
     static int idDetOrd;
     int ultimoId;
-    
+
     String codArt;
-    
-    String filtro="concat(articulo.diametro,' ',articulo.unidadMedidaDiam)";
+
+    String filtro = "concat(articulo.diametro,' ',articulo.unidadMedidaDiam)";
     int tabla;
-    
-   
+
     static String tablaCodArt;
 
     /**
@@ -69,8 +67,8 @@ public class DetalleOrdenesCorte extends javax.swing.JInternalFrame {
         consultarUltimoIdInventario();
         listaArticulo(filtro, idInventario);
         habilitarInicio();
-        
-   }
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -346,7 +344,7 @@ public class DetalleOrdenesCorte extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCerrarActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_buttonCerrarActionPerformed
 
     private void buttonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegistrarActionPerformed
@@ -363,16 +361,16 @@ public class DetalleOrdenesCorte extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Logger.getLogger(DetalleOrdenesCorte.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         limpiar();
         listaArticulo(filtro, idInventario);
         limpiar();
         habilitarInicio();
-        
+
     }//GEN-LAST:event_buttonRegistrarActionPerformed
 
     private void buttonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardarActionPerformed
-        System.out.println(idDetOrd);      
+        System.out.println(idDetOrd);
         procesar(2);
         OrdenesCorte.listaDetalleOrdenCortePedido();
         habilitarGuardar();
@@ -390,7 +388,7 @@ public class DetalleOrdenesCorte extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonEliminarActionPerformed
 
     private void buttonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNuevoActionPerformed
-     habilitarNuevo();
+        habilitarNuevo();
     }//GEN-LAST:event_buttonNuevoActionPerformed
 
     private void buttonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonModificarActionPerformed
@@ -398,7 +396,7 @@ public class DetalleOrdenesCorte extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonModificarActionPerformed
 
     private void txtFiltroDiaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroDiaKeyReleased
-       listaArticulo(filtro, idInventario);
+        listaArticulo(filtro, idInventario);
     }//GEN-LAST:event_txtFiltroDiaKeyReleased
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -421,10 +419,10 @@ public class DetalleOrdenesCorte extends javax.swing.JInternalFrame {
 
             try {
                 consultarInventario(idInventario);
-           } catch (Exception ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(ArticulosDeInventario.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             listaArticulo(filtro, idInventario);
 
         } else {
@@ -433,7 +431,7 @@ public class DetalleOrdenesCorte extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboBoxInventarioItemStateChanged
 
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
-     
+
         if ((evt.getKeyCode() == KeyEvent.VK_DOWN) || (evt.getKeyCode() == KeyEvent.VK_UP)) {
             tabla = jTable1.getSelectedRow();
             idInventario = Integer.parseInt(jTable1.getValueAt(tabla, 0).toString());
@@ -479,17 +477,17 @@ public class DetalleOrdenesCorte extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField txtLongitud;
     // End of variables declaration//GEN-END:variables
 
-static DetalleOrdenCorteController obj=new DetalleOrdenCorteController();
-static DetalleOrdenCorte pro;
+    static DetalleOrdenCorteController obj = new DetalleOrdenCorteController();
+    static DetalleOrdenCorte pro;
 
-static ArticuloController obj1= new ArticuloController();
-static Articulo pro1;
+    static ArticuloController obj1 = new ArticuloController();
+    static Articulo pro1;
 
-InventarioController inventariocontroler = new InventarioController();
-Inventario inventario;
+    InventarioController inventariocontroler = new InventarioController();
+    Inventario inventario;
 
 // ---------------------------- Procesar --------------------------------    
-        private void procesar(int op) {
+    private void procesar(int op) {
         pro = leerDatos();
         try {
             String msg = obj.DetalleOrdenCorteProcesar(pro, op);
@@ -501,17 +499,17 @@ Inventario inventario;
     }
 //---------------------- Consultar ---------------------------------
 
-   static void consultaArticulo(String codDeArt, int iv) throws Exception {
-        pro1 = obj1.ArticuloBuscar(codDeArt,iv);
+    static void consultaArticulo(String codDeArt, int iv) throws Exception {
+        pro1 = obj1.ArticuloBuscar(codDeArt, iv);
         if (pro1 != null) {
 
             idArt = pro1.getAidArticulo();
             txtCodArticulo.setText(pro1.getCodigoArticulo());
-            idInventario=pro1.getIdInventario();
+            idInventario = pro1.getIdInventario();
             txtCodUbicacion.setText(pro1.getCodigoUbicacion());
             unidad = pro1.getUnidadMedidaDia();
             dia = pro1.getDiametro();
-           
+
             txtDiametro.setText(dia);
 
         } else {
@@ -520,27 +518,26 @@ Inventario inventario;
         }
     }
 
-     static void consultar(int id) throws Exception{
+    static void consultar(int id) throws Exception {
         pro = obj.DetalleOrdenCorteBuscarTodo(id);
         if (pro != null) {
-            
-            idDetOrd=pro.getIdDetalleOrdenCorte();
-            System.out.println("idDetalleOrdeeeeeeeen:"+idDetOrd);
+
+            idDetOrd = pro.getIdDetalleOrdenCorte();
+            System.out.println("idDetalleOrdeeeeeeeen:" + idDetOrd);
             idArt = pro.getIdArticulo();
-            consultarCodigo(idArt); 
+            consultarCodigo(idArt);
             txtDiametro.setText(pro.getDiametro());
             txtCantidad.setText(Integer.toString(pro.getCantidad()));
             txtLongitud.setText(pro.getLongitud());
-            
 
         } else {
             JOptionPane.showMessageDialog(null, "Articulo no registrado");
             //System.out.println("Error");
         }
-    
+
     }
-     
-   static void consultarCodigo(int id) throws Exception {
+
+    static void consultarCodigo(int id) throws Exception {
         pro1 = obj1.ArticuloBuscarCod(id);
         if (pro1 != null) {
 
@@ -552,29 +549,35 @@ Inventario inventario;
         }
 
     }
- 
-       private void consultarUltimoId() throws Exception {
-        pro= obj.DetalleOrdenCorteBuscarUltimoId();
-        if (pro != null) {
+
+    private void consultarUltimoId() throws NullPointerException {
+
+        try {
+            pro = obj.DetalleOrdenCorteBuscarUltimoId();
+//            if (pro != null) {
+//            }
+            ultimoId = pro.getIdDetalleOrdenCorte();
+        } catch (Exception ex) {
+            Logger.getLogger(DetalleOrdenesCorte.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ultimoId = pro.getIdDetalleOrdenCorte();
+
     }
- // -----------------------------Leer Datos ----------------------------------        
+    // -----------------------------Leer Datos ----------------------------------        
+
     private DetalleOrdenCorte leerDatos() {
 
         DetalleOrdenCorte detOrd = new DetalleOrdenCorte();
-        
+
         detOrd.setIdDetalleOrdenCorte(idDetOrd);
         detOrd.setIdOrdenCorte(OrdenesCorte.idOrdCort);
         detOrd.setDiametro(txtDiametro.getText());
         detOrd.setCantidad(Integer.parseInt(txtCantidad.getText()));
         detOrd.setLongitud(txtLongitud.getText());
         detOrd.setIdArticulo(idArt);
-        
 
         return detOrd;
     }
-    
+
 //---------------------- Limpiar ----------------------------------
     void limpiar() {
         txtCodArticulo.setText("");
@@ -583,100 +586,40 @@ Inventario inventario;
         txtDiametro.setText("");
         txtLongitud.setText("");
     }
-    
- //--------------------- Habilitar ---------------------------------
+
+    //--------------------- Habilitar ---------------------------------
     void habilitarInicio() {
-       
+
         buttonNuevo.setEnabled(false);
         buttonRegistrar.setEnabled(true);
         buttonModificar.setEnabled(false);
         buttonGuardar.setEnabled(false);
         buttonEliminar.setEnabled(false);
-        
+
         txtCodArticulo.setEnabled(true);
         txtCodUbicacion.setEnabled(true);
         txtCantidad.setEnabled(true);
         txtDiametro.setEnabled(true);
         txtLongitud.setEnabled(true);
     }
-    
+
     void habilitarNuevo() {
-      
+
         buttonNuevo.setEnabled(false);
         buttonRegistrar.setEnabled(true);
         buttonModificar.setEnabled(false);
         buttonGuardar.setEnabled(false);
         buttonEliminar.setEnabled(false);
-        
+
         txtCodArticulo.setEnabled(true);
         txtCodUbicacion.setEnabled(true);
         txtCantidad.setEnabled(true);
         txtDiametro.setEnabled(true);
         txtLongitud.setEnabled(true);
-    } 
-    
-        void habilitarRegistrar() {
-       
-        buttonNuevo.setEnabled(false);
-        buttonRegistrar.setEnabled(false);
-        buttonModificar.setEnabled(true);
-        buttonGuardar.setEnabled(false);
-        buttonEliminar.setEnabled(true);
-        
-        txtCodArticulo.setEnabled(false);
-        txtCodUbicacion.setEnabled(false);
-        txtCantidad.setEnabled(false);
-        txtDiametro.setEnabled(false);
-        txtLongitud.setEnabled(false);
-    } 
-        
-        void habilitarModificar() {
-       
-        buttonNuevo.setEnabled(false);
-        buttonRegistrar.setEnabled(false);
-        buttonModificar.setEnabled(false);
-        buttonGuardar.setEnabled(true);
-        buttonEliminar.setEnabled(false);
-        
-        txtCodArticulo.setEnabled(false);
-        txtCodUbicacion.setEnabled(false);
-        txtCantidad.setEnabled(true);
-        txtDiametro.setEnabled(false);
-        txtLongitud.setEnabled(true);
-    } 
-   
-        void habilitarGuardar() {
-       
-        buttonNuevo.setEnabled(false);
-        buttonRegistrar.setEnabled(false);
-        buttonModificar.setEnabled(true);
-        buttonGuardar.setEnabled(false);
-        buttonEliminar.setEnabled(true);
-        
-        txtCodArticulo.setEnabled(false);
-        txtCodUbicacion.setEnabled(false);
-        txtCantidad.setEnabled(false);
-        txtDiametro.setEnabled(false);
-        txtLongitud.setEnabled(false);
-    } 
-   
-        void habilitarEliminar() {
-     
-        buttonNuevo.setEnabled(true);
-        buttonRegistrar.setEnabled(false);
-        buttonModificar.setEnabled(false);
-        buttonGuardar.setEnabled(false);
-        buttonEliminar.setEnabled(false);
-        
-        txtCodArticulo.setEnabled(false);
-        txtCodUbicacion.setEnabled(false);
-        txtCantidad.setEnabled(false);
-        txtDiametro.setEnabled(false);
-        txtLongitud.setEnabled(false);
-    } 
-        
-    static void habilitarTabla() {
-      
+    }
+
+    void habilitarRegistrar() {
+
         buttonNuevo.setEnabled(false);
         buttonRegistrar.setEnabled(false);
         buttonModificar.setEnabled(true);
@@ -689,12 +632,72 @@ Inventario inventario;
         txtDiametro.setEnabled(false);
         txtLongitud.setEnabled(false);
     }
-    
-  //--------------------------- Tabla Articulos --------------------------------
-     private void listaArticulo(String filtrar, int v) {
+
+    void habilitarModificar() {
+
+        buttonNuevo.setEnabled(false);
+        buttonRegistrar.setEnabled(false);
+        buttonModificar.setEnabled(false);
+        buttonGuardar.setEnabled(true);
+        buttonEliminar.setEnabled(false);
+
+        txtCodArticulo.setEnabled(false);
+        txtCodUbicacion.setEnabled(false);
+        txtCantidad.setEnabled(true);
+        txtDiametro.setEnabled(false);
+        txtLongitud.setEnabled(true);
+    }
+
+    void habilitarGuardar() {
+
+        buttonNuevo.setEnabled(false);
+        buttonRegistrar.setEnabled(false);
+        buttonModificar.setEnabled(true);
+        buttonGuardar.setEnabled(false);
+        buttonEliminar.setEnabled(true);
+
+        txtCodArticulo.setEnabled(false);
+        txtCodUbicacion.setEnabled(false);
+        txtCantidad.setEnabled(false);
+        txtDiametro.setEnabled(false);
+        txtLongitud.setEnabled(false);
+    }
+
+    void habilitarEliminar() {
+
+        buttonNuevo.setEnabled(true);
+        buttonRegistrar.setEnabled(false);
+        buttonModificar.setEnabled(false);
+        buttonGuardar.setEnabled(false);
+        buttonEliminar.setEnabled(false);
+
+        txtCodArticulo.setEnabled(false);
+        txtCodUbicacion.setEnabled(false);
+        txtCantidad.setEnabled(false);
+        txtDiametro.setEnabled(false);
+        txtLongitud.setEnabled(false);
+    }
+
+    static void habilitarTabla() {
+
+        buttonNuevo.setEnabled(false);
+        buttonRegistrar.setEnabled(false);
+        buttonModificar.setEnabled(true);
+        buttonGuardar.setEnabled(false);
+        buttonEliminar.setEnabled(true);
+
+        txtCodArticulo.setEnabled(false);
+        txtCodUbicacion.setEnabled(false);
+        txtCantidad.setEnabled(false);
+        txtDiametro.setEnabled(false);
+        txtLongitud.setEnabled(false);
+    }
+
+    //--------------------------- Tabla Articulos --------------------------------
+    private void listaArticulo(String filtrar, int v) {
         List<Articulo> lista;
         try {
-            lista = obj1.ArticuloFiltrar(filtrar,txtFiltroDia.getText(),v);
+            lista = obj1.ArticuloFiltrar(filtrar, txtFiltroDia.getText(), v);
             verPedido(lista);
 
         } catch (Exception e) {
@@ -704,18 +707,18 @@ Inventario inventario;
     }
 
     private void verPedido(List<Articulo> lista) {
-       
+
         DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
         tabla.setRowCount(0);
-        
+
         for (Articulo art : lista) {
-      
-            Object[] fila = {art.getIdInventario(),art.getCodigoArticulo(), art.getCodigoUbicacion(), art.getDiametro(),art.getProcedencia(), art.getLongitud(),art.getLongCortes(), art.getLongitudReal(), art.getObservacion()};
+
+            Object[] fila = {art.getIdInventario(), art.getCodigoArticulo(), art.getCodigoUbicacion(), art.getDiametro(), art.getProcedencia(), art.getLongitud(), art.getLongCortes(), art.getLongitudReal(), art.getObservacion()};
             tabla.addRow(fila);
 
         }
     }
-    
+
     //----------------------------- Cargar Inventarios ---------------------------------     
     public JComboBox<String> CargarInventarios() throws SQLException, ClassNotFoundException {
         comboBoxInventario.removeAllItems();
@@ -739,22 +742,27 @@ Inventario inventario;
     }
 
 // ------------------ Ultimo id Inventario -------------------------------------
-    private void consultarUltimoIdInventario() throws Exception {
-        inventario = inventariocontroler.InventarioBuscarUltimoId();
-        if (inventario != null) {
-        }
-        ultimoId = inventario.getIdInventario();
-        idInventario = ultimoId;
+    private void consultarUltimoIdInventario() throws NullPointerException {
 
-        String testValue2 = Integer.toString(idInventario);
-        for (int i = 0; i < comboBoxInventario.getModel().getSize(); i++) {
-            if (comboBoxInventario.getItemAt(i).equals(testValue2)) {
-                System.out.println(i);
-                comboBoxInventario.setSelectedIndex(i);
-                break;
+        try {
+            inventario = inventariocontroler.InventarioBuscarUltimoId();
+//            if (inventario != null) {
+//            }
+            ultimoId = inventario.getIdInventario();
+            idInventario = ultimoId;
+
+            String testValue2 = Integer.toString(idInventario);
+            for (int i = 0; i < comboBoxInventario.getModel().getSize(); i++) {
+                if (comboBoxInventario.getItemAt(i).equals(testValue2)) {
+                    System.out.println(i);
+                    comboBoxInventario.setSelectedIndex(i);
+                    break;
+                }
             }
+            consultarInventario(idInventario);
+        } catch (Exception ex) {
+            Logger.getLogger(DetalleOrdenesCorte.class.getName()).log(Level.SEVERE, null, ex);
         }
-        consultarInventario(idInventario);
 
     }
 
@@ -774,6 +782,4 @@ Inventario inventario;
         }
     }
 
-    
-    
 }

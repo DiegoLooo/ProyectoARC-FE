@@ -38,22 +38,22 @@ public final class IinventarioRegistro extends javax.swing.JInternalFrame {
     Statement s = null;
     PreparedStatement ps = null;
     String q;
-    
-    String campo1="";
+
+    String campo1 = "";
     static int idInventario;
     int ultimoId;
     String usuariocombo;
     String estadocombo;
-    
+
     public IinventarioRegistro() throws SQLException, ClassNotFoundException {
         initComponents();
         CargarUsuarios();
         txtFechReg.setText(fechaActual());
         txtFechReal.setText(fechaActual());
-         
+
         comboBoxUsuario.setSelectedIndex(1);
         comboBoxEstado.setSelectedIndex(1);
-        
+
         habilitarInicio();
     }
 
@@ -282,35 +282,41 @@ public final class IinventarioRegistro extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCerrarActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_buttonCerrarActionPerformed
 
     private void buttonRegistrarTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegistrarTBActionPerformed
-        ArticulosDeInventario artDeInv=null;
         try {
-            artDeInv = new ArticulosDeInventario();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(IinventarioRegistro.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(IinventarioRegistro.class.getName()).log(Level.SEVERE, null, ex);
+
+            ArticulosDeInventario artDeInv = null;
+            try {
+                artDeInv = new ArticulosDeInventario();
+                Principal.jDesktopPane1.add(artDeInv);
+                artDeInv.toFront();
+                artDeInv.setVisible(true);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(IinventarioRegistro.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(IinventarioRegistro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (NullPointerException ex) {
+            Logger.getLogger(Articulos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Principal.jDesktopPane1.add(artDeInv);
-        artDeInv.toFront();
-        artDeInv.setVisible(true);
+
     }//GEN-LAST:event_buttonRegistrarTBActionPerformed
 
     private void comboBoxUsuarioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxUsuarioItemStateChanged
-         if (comboBoxUsuario.getSelectedIndex() != 0) {
+        if (comboBoxUsuario.getSelectedIndex() != 0) {
             usuariocombo = comboBoxUsuario.getSelectedItem().toString();
             System.out.println(usuariocombo);
-           
+
         } else {
 
         }
     }//GEN-LAST:event_comboBoxUsuarioItemStateChanged
 
     private void comboBoxEstadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxEstadoItemStateChanged
-          if (comboBoxEstado.getSelectedIndex() != 0) {
+        if (comboBoxEstado.getSelectedIndex() != 0) {
             estadocombo = comboBoxEstado.getSelectedItem().toString();
             System.out.println(estadocombo);
         } else {
@@ -392,31 +398,28 @@ public final class IinventarioRegistro extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea txtObser;
     // End of variables declaration//GEN-END:variables
 
-InventarioController inventariocontroler = new InventarioController();
-Inventario inventario;
+    InventarioController inventariocontroler = new InventarioController();
+    Inventario inventario;
 
-UsuarioController usuariocontroler= new UsuarioController();
-Usuario usuario;
-
+    UsuarioController usuariocontroler = new UsuarioController();
+    Usuario usuario;
 
 //------------------------- Procesar --------------
-
-private void procesar(int op) {
-       inventario=leerDatos();
+    private void procesar(int op) {
+        inventario = leerDatos();
         try {
-            String msg=inventariocontroler.InventarioProcesar(inventario, op);
-            JOptionPane.showMessageDialog(null, msg);            
+            String msg = inventariocontroler.InventarioProcesar(inventario, op);
+            JOptionPane.showMessageDialog(null, msg);
         } catch (Exception e) {
             //JOptionPane.showMessageDialog(null, e.getMessage());
-             System.out.println("Error"+e.getMessage());
-        }       
-   }
+            System.out.println("Error" + e.getMessage());
+        }
+    }
 
 //--------------------------- Leer Datos -----------------------
-
-     private Inventario leerDatos() {
+    private Inventario leerDatos() {
         Inventario inv = new Inventario();
-        
+
         inv.setFechReg(txtFechReg.getText());
         inv.setFechRea(txtFechReal.getText());
         inv.setEncargado(usuariocombo);
@@ -424,11 +427,12 @@ private void procesar(int op) {
         inv.setObser(txtObser.getText());
         inv.setCampo1(campo1);
         inv.setIdInventario(idInventario);
-        
+
         return inv;
     }
 //------------------------------- Cargar Usuarios ---------------------
-     public JComboBox<String> CargarUsuarios() throws SQLException, ClassNotFoundException {
+
+    public JComboBox<String> CargarUsuarios() throws SQLException, ClassNotFoundException {
         comboBoxUsuario.removeAllItems();
         comboBoxUsuario.addItem("Usuario");
         try {
@@ -448,31 +452,35 @@ private void procesar(int op) {
         }
         return comboBoxUsuario;
     }
-     
+
 //--------------------------------- Último Id ------------------------------------------
-  
-    private void consultarUltimoId() throws Exception {
-        inventario = inventariocontroler.InventarioBuscarUltimoId();
-        if (inventario != null) {
+    private void consultarUltimoId() throws NullPointerException {
+
+        try {
+            inventario = inventariocontroler.InventarioBuscarUltimoId();
+            //        if (inventario != null) {
+//        }
+            ultimoId = inventario.getIdInventario();
+            idInventario = ultimoId;
+            txtIdInventario.setText(Integer.toString(inventario.getIdInventario()));
+        } catch (Exception ex) {
+            Logger.getLogger(IinventarioRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ultimoId = inventario.getIdInventario();
-        idInventario=ultimoId;
-        txtIdInventario.setText(Integer.toString(inventario.getIdInventario()));
-        
+
     }
-    
+
 //-------------------------------- Consultar Inventario --------------------------------
-  void consultar(int id) throws Exception{
-        inventario= inventariocontroler.InventarioBuscar(id);
+    void consultar(int id) throws Exception {
+        inventario = inventariocontroler.InventarioBuscar(id);
         if (inventario != null) {
             System.out.println("22222222222222222");
-            idInventario=inventario.getIdInventario();
+            idInventario = inventario.getIdInventario();
             System.out.println("111111111111111111111");
             txtIdInventario.setText(Integer.toString(idInventario));
             txtFechReg.setText(inventario.getFechReg());
             txtFechReal.setText(inventario.getFechRea());
-            
-            usuariocombo=inventario.getEncargado();
+
+            usuariocombo = inventario.getEncargado();
             String testValue2 = usuariocombo;
             for (int i = 0; i < comboBoxUsuario.getModel().getSize(); i++) {
                 if (comboBoxUsuario.getItemAt(i).equals(testValue2)) {
@@ -481,8 +489,8 @@ private void procesar(int op) {
                     break;
                 }
             }
-            
-            estadocombo=inventario.getEstado();
+
+            estadocombo = inventario.getEstado();
             String testValue5 = estadocombo;
             for (int i = 0; i < comboBoxEstado.getModel().getSize(); i++) {
                 if (comboBoxEstado.getItemAt(i).equals(testValue5)) {
@@ -491,17 +499,16 @@ private void procesar(int op) {
                     break;
                 }
             }
-            
+
             txtObser.setText(inventario.getObser());
-            
 
         } else {
             JOptionPane.showMessageDialog(null, "Inventario no registrado");
             //System.out.println("Error");
             limpiar();
         }
-    } 
-  
+    }
+
 // ------------------------ Fecha --> Indica la fecha del dia --------------------
     public String fechaActual() {
         Date fecha = new Date();
@@ -509,21 +516,20 @@ private void procesar(int op) {
         SimpleDateFormat formatofecha = new SimpleDateFormat("yyyy-MM-dd");
         return formatofecha.format(fecha);
     }
-    
 
- //--------------------------- Limpiar ----------------------------------------
+    //--------------------------- Limpiar ----------------------------------------
     void limpiar() {
         txtIdInventario.setText("");
-        idInventario=0;
+        idInventario = 0;
         txtFechReg.setText(fechaActual());
         txtFechReal.setText(fechaActual());
         comboBoxUsuario.setSelectedIndex(1);
         comboBoxEstado.setSelectedIndex(1);
         txtObser.setText("");
     }
-    
- //--------------------------- Habilitar --------------------------------------
-    void habilitarInicio(){
+
+    //--------------------------- Habilitar --------------------------------------
+    void habilitarInicio() {
         buttonBuscar.setEnabled(true);
         buttonLimpiar.setEnabled(true);
         buttoNuevo.setEnabled(true);
@@ -532,7 +538,7 @@ private void procesar(int op) {
         buttonGuardar.setEnabled(false);
         buttonEliminar.setEnabled(false);
         buttonRegistrarTB.setEnabled(false);
-        
+
         txtIdInventario.setEnabled(true);
         txtFechReg.setEnabled(false);
         txtFechReal.setEnabled(false);
@@ -540,7 +546,7 @@ private void procesar(int op) {
         comboBoxEstado.setEnabled(false);
         txtObser.setEnabled(false);
     }
-    
+
     void habilitarBucar() {
         buttonBuscar.setEnabled(false);
         buttonLimpiar.setEnabled(true);
@@ -558,7 +564,7 @@ private void procesar(int op) {
         comboBoxEstado.setEnabled(false);
         txtObser.setEnabled(false);
     }
-    
+
     void habilitarNuevo() {
         buttonBuscar.setEnabled(false);
         buttonLimpiar.setEnabled(true);
@@ -640,7 +646,7 @@ private void procesar(int op) {
         buttonGuardar.setEnabled(false);
         buttonEliminar.setEnabled(false);
         buttonRegistrarTB.setEnabled(false);
-        
+
         txtIdInventario.setEnabled(true);
         txtFechReg.setEnabled(false);
         txtFechReal.setEnabled(false);
@@ -648,5 +654,5 @@ private void procesar(int op) {
         comboBoxEstado.setEnabled(false);
         txtObser.setEnabled(false);
     }
-  
+
 }

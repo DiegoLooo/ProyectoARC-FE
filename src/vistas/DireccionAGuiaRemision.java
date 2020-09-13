@@ -27,15 +27,13 @@ public class DireccionAGuiaRemision extends javax.swing.JInternalFrame {
     int tabla;
     String dirNexa;
     static String direc;
-    
-    
-    
+
     public DireccionAGuiaRemision() throws Exception {
         initComponents();
-        System.out.println("idCliente: "+GuiaRemision.idCliente);    
+        System.out.println("idCliente: " + GuiaRemision.idCliente);
         consultarClientePorId(GuiaRemision.idCliente);
         listaDireccionAnexa(GuiaRemision.idCliente);
-        direc=txtDirFiscal.getText();
+        direc = txtDirFiscal.getText();
     }
 
     /**
@@ -218,10 +216,10 @@ public class DireccionAGuiaRemision extends javax.swing.JInternalFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         tabla = jTable1.getSelectedRow();
-        dirNexa =jTable1.getValueAt(tabla, 1).toString();
+        dirNexa = jTable1.getValueAt(tabla, 1).toString();
         txtDireccion.setText(dirNexa);
-        direc=dirNexa;
-        System.out.println("direccion para guia: "+direc);
+        direc = dirNexa;
+        System.out.println("direccion para guia: " + direc);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void buttonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimpiarActionPerformed
@@ -230,7 +228,7 @@ public class DireccionAGuiaRemision extends javax.swing.JInternalFrame {
 
     private void txtDirFiscalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDirFiscalMouseClicked
         txtDireccion.setText(txtDirFiscal.getText());
-        direc=txtDirFiscal.getText();
+        direc = txtDirFiscal.getText();
     }//GEN-LAST:event_txtDirFiscalMouseClicked
 
     private void buttonAgregarAGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarAGuiaActionPerformed
@@ -239,27 +237,31 @@ public class DireccionAGuiaRemision extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonAgregarAGuiaActionPerformed
 
     private void buttonAgregarDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarDireccionActionPerformed
-         Clientes.x=GuiaRemision.idCliente;
-         if (Clientes.x!= 0) {
-            DireccionesAnexasRegistrar dirCliente=null;
-             try {
-                 dirCliente = new DireccionesAnexasRegistrar();
-             } catch (Exception ex) {
-                 Logger.getLogger(DireccionAGuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
-             }
-            Principal.jDesktopPane1.add(dirCliente);
-            dirCliente.toFront();
-            dirCliente.setVisible(true);
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "Agregar Cliente");
 
+        try {
+            Clientes.x = GuiaRemision.idCliente;
+            if (Clientes.x != 0) {
+                DireccionesAnexasRegistrar dirCliente = null;
+                try {
+                    dirCliente = new DireccionesAnexasRegistrar();
+                    Principal.jDesktopPane1.add(dirCliente);
+                    dirCliente.toFront();
+                    dirCliente.setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(DireccionAGuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Agregar Cliente");
+            }
+        } catch (NullPointerException ex) {
+            Logger.getLogger(Articulos.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
+
     }//GEN-LAST:event_buttonAgregarDireccionActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       listaDireccionAnexa(GuiaRemision.idCliente);
+        listaDireccionAnexa(GuiaRemision.idCliente);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -279,12 +281,12 @@ public class DireccionAGuiaRemision extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtRazSocial;
     // End of variables declaration//GEN-END:variables
 
-    ClienteController clientecontroler=new ClienteController();
+    ClienteController clientecontroler = new ClienteController();
     Cliente cliente;
-    
-   static DireccionAnexaController direccioncontroler= new DireccionAnexaController();
-   static DireccionAnexa direccion;
-    
+
+    static DireccionAnexaController direccioncontroler = new DireccionAnexaController();
+    static DireccionAnexa direccion;
+
     private void consultarClientePorId(int iddecliente) throws Exception {
         cliente = clientecontroler.ClienteBuscar1(iddecliente);
         if (cliente != null) {
@@ -293,19 +295,18 @@ public class DireccionAGuiaRemision extends javax.swing.JInternalFrame {
             txtRazSocial.setText(cliente.getRazonSocial());
             txtDirFiscal.setText(cliente.getDireccion());
             txtDireccion.setText(cliente.getDireccion());
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Cliente no registrado por ahora");
             //System.out.println("Error");
         }
     }
 
-    
     void listaDireccionAnexa(int idCliente) {
         List<DireccionAnexa> lista;
         try {
-            
-            lista = direccioncontroler.DireccionAnexaListar(idCliente); 
+
+            lista = direccioncontroler.DireccionAnexaListar(idCliente);
             verDireccion(lista);
 
         } catch (Exception e) {
@@ -319,14 +320,13 @@ public class DireccionAGuiaRemision extends javax.swing.JInternalFrame {
         DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
         tabla.setRowCount(0);
         for (DireccionAnexa dir : lista) {
-            Object[] fila = {dir.getIdDireccion(),dir.getDireccion(),dir.getObser()};
+            Object[] fila = {dir.getIdDireccion(), dir.getDireccion(), dir.getObser()};
             tabla.addRow(fila);
         }
     }
 
-void Limpiar(){
-    txtDireccion.setText("");
-}
-
+    void Limpiar() {
+        txtDireccion.setText("");
+    }
 
 }

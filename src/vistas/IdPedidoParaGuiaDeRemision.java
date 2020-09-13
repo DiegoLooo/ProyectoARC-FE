@@ -55,37 +55,37 @@ public class IdPedidoParaGuiaDeRemision extends javax.swing.JInternalFrame {
     String estado;
     String observacion;
     String campo1;
-   
+
     String campo3;
-    
+
     String nombre;
     String apellido;
     String nombreContacto;
     String dni;
     String atencion;
-    
-    String filtro="cli.razonSocial";
+
+    String filtro = "cli.razonSocial";
     int tabla;
-    
+
     String anioCadena;
     int anio;
-    
+
     String cant;
     String descripcion;
-   
+
     int idDetGuia;
-    
+
     String ordenCompra;
-    
+
     static String idPedidoStatic;
     static String numPedidoStatic;
-    
+
     public IdPedidoParaGuiaDeRemision() {
         initComponents();
-        listaPedido(filtro,txtFiltro.getText());
-        jTable1.setDefaultRenderer (Object.class, new RowsRenderer());
+        listaPedido(filtro, txtFiltro.getText());
+        jTable1.setDefaultRenderer(Object.class, new RowsRenderer());
     }
-    
+
     public class RowsRenderer extends DefaultTableCellRenderer {
 
         @Override
@@ -116,7 +116,7 @@ public class IdPedidoParaGuiaDeRemision extends javax.swing.JInternalFrame {
             if (selected) {
                 setBackground(Color.decode("#39698a"));
                 setForeground(Color.decode("#FFFFFF"));
-            } else{
+            } else {
                 setBackground(Color.WHITE);
             }
 
@@ -310,7 +310,7 @@ public class IdPedidoParaGuiaDeRemision extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyReleased
-        listaPedido(filtro,txtFiltro.getText());
+        listaPedido(filtro, txtFiltro.getText());
     }//GEN-LAST:event_txtFiltroKeyReleased
 
     private void comboBoxFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxFiltroItemStateChanged
@@ -346,22 +346,21 @@ public class IdPedidoParaGuiaDeRemision extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboBoxFiltroItemStateChanged
 
     private void comboBoxContactoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxContactoItemStateChanged
-        nombreContacto=comboBoxContacto.getSelectedItem().toString();
-        System.out.println("contacto:"+nombreContacto);
+        nombreContacto = comboBoxContacto.getSelectedItem().toString();
+        System.out.println("contacto:" + nombreContacto);
     }//GEN-LAST:event_comboBoxContactoItemStateChanged
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        tabla=jTable1.getSelectedRow();
-        numPedido=Integer.parseInt(jTable1.getValueAt(tabla,0).toString());
-        numCotizacion=jTable1.getValueAt(tabla,1).toString();
+        tabla = jTable1.getSelectedRow();
+        numPedido = Integer.parseInt(jTable1.getValueAt(tabla, 0).toString());
+        numCotizacion = jTable1.getValueAt(tabla, 1).toString();
         txtNumCotizacion.setText(numCotizacion);
-        fechaEmision=jTable1.getValueAt(tabla,4).toString();
-        
-        
-        System.out.println("numerocotizacion, numeroPedido y fecha:"+numCotizacion+", "+numPedido+" y "+fechaEmision);
+        fechaEmision = jTable1.getValueAt(tabla, 4).toString();
+
+        System.out.println("numerocotizacion, numeroPedido y fecha:" + numCotizacion + ", " + numPedido + " y " + fechaEmision);
         try {
             consultarAnioPedido(fechaEmision, numPedido);
-            System.out.println("año: "+ anio);
+            System.out.println("año: " + anio);
         } catch (Exception ex) {
             Logger.getLogger(PedidosOrdenCorte.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -370,34 +369,38 @@ public class IdPedidoParaGuiaDeRemision extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Logger.getLogger(PedidosOrdenCorte.class.getName()).log(Level.SEVERE, null, ex);
         }
-              
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void buttonAgregarContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarContactoActionPerformed
-        Clientes.x=idCliente;
-        if (Clientes.x!= 0) {
-            ContactosClientes conCliente = null;
-            try {
-                conCliente = new ContactosClientes();
-            } catch (Exception ex) {
-                Logger.getLogger(IdPedidoParaGuiaDeRemision.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Principal.jDesktopPane1.add(conCliente);
-            conCliente.toFront();
-            conCliente.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Agregar Cliente");
+        try {
+            Clientes.x = idCliente;
+            if (Clientes.x != 0) {
+                ContactosClientes conCliente = null;
+                try {
+                    conCliente = new ContactosClientes();
+                    Principal.jDesktopPane1.add(conCliente);
+                    conCliente.toFront();
+                    conCliente.setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(IdPedidoParaGuiaDeRemision.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
+            } else {
+                JOptionPane.showMessageDialog(null, "Agregar Cliente");
+            }
+        } catch (NullPointerException ex) {
+            Logger.getLogger(Articulos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buttonAgregarContactoActionPerformed
 
     private void buttonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimpiarActionPerformed
-       limpiar();
+        limpiar();
     }//GEN-LAST:event_buttonLimpiarActionPerformed
 
     private void buttonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarActionPerformed
-      GuiaRemision.numYIdPedidoParaGuia();
-      dispose();
+        GuiaRemision.numYIdPedidoParaGuia();
+        dispose();
     }//GEN-LAST:event_buttonAgregarActionPerformed
 
     private void buttonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCerrarActionPerformed
@@ -424,11 +427,11 @@ public class IdPedidoParaGuiaDeRemision extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
     PedidoController pedidocontroler = new PedidoController();
     Pedido pedido;
-    
+
     ClienteController clientecontroler = new ClienteController();
     Cliente cliente;
-    
-    ContactoClienteController contactoclientecontroler= new ContactoClienteController();
+
+    ContactoClienteController contactoclientecontroler = new ContactoClienteController();
     ContactoCliente contactocliente;
 
     UsuarioController usuariocontroler = new UsuarioController();
@@ -439,43 +442,40 @@ public class IdPedidoParaGuiaDeRemision extends javax.swing.JInternalFrame {
 
     DetalleGuiaDeRemisionController detGuiaController = new DetalleGuiaDeRemisionController();
     DetalleGuiaDeRemision detGuia;
-    
-    DetalleProformaController detalleproformacontroler= new DetalleProformaController();
-    DetalleProforma detalleproforma;
-    
 
-        
+    DetalleProformaController detalleproformacontroler = new DetalleProformaController();
+    DetalleProforma detalleproforma;
+
 //------------------------ Consultar --------------------------------------
-    
     private void consultarClientePorId(int iddecliente) throws Exception {
         cliente = clientecontroler.ClienteBuscar1(iddecliente);
         if (cliente != null) {
 
             txtRazSocial.setText(cliente.getRazonSocial());
-                        
+
         } else {
             JOptionPane.showMessageDialog(null, "Cliente no registrado por ahora");
             //System.out.println("Error");
         }
     }
-    
-     private void consultarContactoCliente(String nombre, int idDeCliente) throws Exception {
+
+    private void consultarContactoCliente(String nombre, int idDeCliente) throws Exception {
 
         contactocliente = contactoclientecontroler.ContactoClienteBuscarDni(nombre, idDeCliente);
         if (contactocliente != null) {
             idContactCli = contactocliente.getIdContactoCliente();
-            System.out.println("idCliente"+idContactCli);
-            dni=contactocliente.getDni();
-            atencion="ATENCION: "+nombre+" DNI:"+dni;
+            System.out.println("idCliente" + idContactCli);
+            dni = contactocliente.getDni();
+            atencion = "ATENCION: " + nombre + " DNI:" + dni;
             System.out.println(atencion);
 
         } else {
             JOptionPane.showMessageDialog(null, "EL Cliente no tiene contactos, Registre un contacto!!!!");
             //System.out.println("Error");
         }
-    } 
-    
-     private void consultarContactoCliente1(int idContacto) throws Exception {
+    }
+
+    private void consultarContactoCliente1(int idContacto) throws Exception {
 
         contactocliente = contactoclientecontroler.ContactoClienteBuscar2(idContacto);
         if (contactocliente != null) {
@@ -483,87 +483,86 @@ public class IdPedidoParaGuiaDeRemision extends javax.swing.JInternalFrame {
             nombre = contactocliente.getNombres();
             apellido = contactocliente.getApellidos();
             nombreContacto = nombre + " " + apellido;
-            System.out.println(nombreContacto );
+            System.out.println(nombreContacto);
 
         } else {
             JOptionPane.showMessageDialog(null, "Contacto no registrado");
             //System.out.println("Error");
         }
-    } 
-     
+    }
+
     private void consultarAnioPedido(String fech, int num) throws Exception {
         pedido = pedidocontroler.PedidoBuscarAnio(fech, num);
         if (pedido != null) {
-            anioCadena=pedido.getAnio();
-            anio=Integer.parseInt(anioCadena);
+            anioCadena = pedido.getAnio();
+            anio = Integer.parseInt(anioCadena);
         }
-  
+
     }
-         
+
     private void consultarPedido(int numeroPedido, int anio) throws Exception {
         pedido = pedidocontroler.PedidoBuscar(numeroPedido, anio);
         if (pedido != null) {
-            
-            idPedido=pedido.getIdPedido();
-            idPedidoStatic=Integer.toString(pedido.getIdPedido());
-            txtNumPedido.setText(String.format("%06d",pedido.getNumPedido()));
-            numPedidoStatic=Integer.toString(pedido.getNumPedido());
-            numPedido=pedido.getNumPedido();
-            idProf=pedido.getIdProforma();
-            
+
+            idPedido = pedido.getIdPedido();
+            idPedidoStatic = Integer.toString(pedido.getIdPedido());
+            txtNumPedido.setText(String.format("%06d", pedido.getNumPedido()));
+            numPedidoStatic = Integer.toString(pedido.getNumPedido());
+            numPedido = pedido.getNumPedido();
+            idProf = pedido.getIdProforma();
+
             idCliente = pedido.getIdCliente();
             Clientes.x = pedido.getIdCliente();
             consultarClientePorId(idCliente);
-            
-            comboBoxContacto.setModel(contactoclientecontroler.ListarCombodeContacto(txtRazSocial.getText(),idCliente));
-            
+
+            comboBoxContacto.setModel(contactoclientecontroler.ListarCombodeContacto(txtRazSocial.getText(), idCliente));
+
             idContactCli = pedido.getIdContactoCliente();
             consultarContactoCliente1(idContactCli);
-             
+
             String testValue1 = nombreContacto;
-            System.out.println("pedido contacto cliente:"+nombreContacto);
-            
+            System.out.println("pedido contacto cliente:" + nombreContacto);
+
             for (int i = 0; i < comboBoxContacto.getModel().getSize(); i++) {
-                
+
                 if (comboBoxContacto.getItemAt(i).equals(testValue1)) {
-                    
-                    System.out.println("for "+i);
+
+                    System.out.println("for " + i);
                     comboBoxContacto.setSelectedIndex(i);
-                   
+
                     break;
                 }
             }
-            
+
             consultarContactoCliente(nombreContacto, idCliente);
-            
+
             idUsuario = pedido.getIdUsuario();
-            
+
             moneda = pedido.getMoneda();
-            formPago=pedido.getFormPago();
+            formPago = pedido.getFormPago();
 
             tipo = pedido.getTipo();
-            fechaEmision=pedido.getFechaEmision();
-            dia1=pedido.getDia1();
-            dia2=pedido.getDia2();
-            detalleOrden=pedido.getDetalleOrden();
-            ordenCompra=pedido.getNumOrden();
-            
-            estado=pedido.getEstado();
+            fechaEmision = pedido.getFechaEmision();
+            dia1 = pedido.getDia1();
+            dia2 = pedido.getDia2();
+            detalleOrden = pedido.getDetalleOrden();
+            ordenCompra = pedido.getNumOrden();
+
+            estado = pedido.getEstado();
             System.out.println("Estado de pedido: " + estado);
 
-            observacion=pedido.getObservacion();
+            observacion = pedido.getObservacion();
 
         } else {
             JOptionPane.showMessageDialog(null, "Pedido no registrado");
-           
+
             System.out.println("Pedido no registrado");
         }
-    }  
-    
-    
+    }
+
 //------------------------------ Tabla ------------------------------------------------------
- void listaPedido(String valorFiltro,String filtrolike) {
-        
+    void listaPedido(String valorFiltro, String filtrolike) {
+
         List<Pedido> lista;
         try {
             lista = pedidocontroler.PedidoFiltrar(valorFiltro, filtrolike);
@@ -577,17 +576,15 @@ public class IdPedidoParaGuiaDeRemision extends javax.swing.JInternalFrame {
 
     void verPedido(List<Pedido> lista) {
         String numeropedido;
-        
+
         DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
         tabla.setRowCount(0);
         for (Pedido ped : lista) {
-            numeropedido=String.format("%06d",ped.getNumPedido());
-            Object[] fila = {numeropedido, ped.getCodCotiz(), ped.getRazSocial(), ped.getContacto(), ped.getFechaEmision(),ped.getEstado()};
+            numeropedido = String.format("%06d", ped.getNumPedido());
+            Object[] fila = {numeropedido, ped.getCodCotiz(), ped.getRazSocial(), ped.getContacto(), ped.getFechaEmision(), ped.getEstado()};
             tabla.addRow(fila);
         }
     }
-    
-
 
 //----------------------------------- Limpiar -----------------------------------------
     void limpiar() {
@@ -595,5 +592,6 @@ public class IdPedidoParaGuiaDeRemision extends javax.swing.JInternalFrame {
         txtNumPedido.setText("");
         txtNumCotizacion.setText("");
         txtRazSocial.setText("");
-        comboBoxContacto.setModel(new javax.swing.DefaultComboBoxModel(new String[]{}));}
-  }
+        comboBoxContacto.setModel(new javax.swing.DefaultComboBoxModel(new String[]{}));
+    }
+}
