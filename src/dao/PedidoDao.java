@@ -30,6 +30,8 @@ public class PedidoDao implements ICrudDao<Pedido> {
     Statement s = null;
     PreparedStatement ps = null;
     Pedido ped;
+    String startQuery = "select idPedido, numPedido, idProforma_fk, idClientefk, fk_idContactoCliente, fk_idUsuario, "
+                    + "moneda, formaPago, tipo, fechaPedido, dia1, dia2, detalleOrden,numOrden,estado, observacion, ";
     String q;
 
     @Override
@@ -154,9 +156,7 @@ public class PedidoDao implements ICrudDao<Pedido> {
         ped = null;
         try {
             // q="select nombres, apellidos, telefono, correo, cargo, usuario, password from usuario where nombres=?";
-            q = "select idPedido, numPedido, idProforma_fk, idClientefk, fk_idContactoCliente, fk_idUsuario, "
-                    + "moneda, formaPago, tipo, fechaPedido, dia1, dia2, detalleOrden,numOrden,estado, observacion, "
-                    + "observacionInterna "
+            q = startQuery + "observacionInterna "
                     + "from pedido where idPedido=? ";
             conexion = AccesoDB.obtener();
             ps = conexion.prepareStatement(q);
@@ -187,11 +187,8 @@ public class PedidoDao implements ICrudDao<Pedido> {
         ped = null;
         try {
             // q="select nombres, apellidos, telefono, correo, cargo, usuario, password from usuario where nombres=?";
-            q = "select idPedido, numPedido, idProforma_fk, idClientefk, fk_idContactoCliente, fk_idUsuario, "
-                    + "moneda, formaPago, tipo, fechaPedido, dia1, dia2, detalleOrden, numOrden, estado, observacion, "
-                    + "observacionInterna "
-                    + "from pedido where numPedido=? "
-                    + " and year(fechaPedido)=?";
+            q = startQuery + "observacionInterna from pedido where numPedido=? "
+                    + "and year(fechaPedido)=?";
             conexion = AccesoDB.obtener();
             ps = conexion.prepareStatement(q);
             //preparar valor del parametro
@@ -263,9 +260,9 @@ public class PedidoDao implements ICrudDao<Pedido> {
                     + "    round((SUM(dp.cantidad*dp.precioUnitario)*1.18),2)Total\n"
                     + "    \n"
                     + "FROM  pedido d  left join    guiaremision g      on d.idPedido=g.numPedido \n"
-                    + "		       left join    proforma p          on d.idProforma_fk=p.idProforma\n"
+                    + "                left join    proforma p          on d.idProforma_fk=p.idProforma\n"
                     + "                left join    detalleproforma dp  on d.idProforma_fk=dp.idProforma_fk,\n"
-                    + "	     cliente c ,contactocliente cl\n"
+                    + "      cliente c ,contactocliente cl\n"
                     + "WHERE (      d.idClientefk = c.idCliente\n" +
 "                              AND d.fk_idContactoCliente = cl.idContactoCliente)\n"
                     + "        AND d.idPedido = ?";
@@ -440,9 +437,7 @@ public class PedidoDao implements ICrudDao<Pedido> {
         ped = null;
         try {
             // q="select nombres, apellidos, telefono, correo, cargo, usuario, password from usuario where nombres=?";
-            q = "select idPedido, numPedido, idProforma_fk, idClientefk, fk_idContactoCliente, fk_idUsuario, "
-                    + "moneda, formaPago, tipo, fechaPedido, dia1, dia2, detalleOrden,numOrden, estado, observacion,"
-                    + " observacionInterna  from pedido where idPedido=?";
+            q = startQuery + "observacionInterna  from pedido where idPedido=?";
             conexion = AccesoDB.obtener();
             ps = conexion.prepareStatement(q);
             //preparar valor del parametro
