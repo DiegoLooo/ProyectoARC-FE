@@ -450,7 +450,7 @@ public class ValidarPrecio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboBoxDiametroItemStateChanged
 
     private void comboBoxMonedaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxMonedaItemStateChanged
-        if (comboDia != "") {
+        if (!"".equals(comboDia)) {
                     if (comboBoxMoneda.getSelectedItem() == "DOLARES AMERICANOS") {
            try {
                consultarDolares(Float.parseFloat(txtLongitud.getText()), comboDia);

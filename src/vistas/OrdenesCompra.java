@@ -1081,33 +1081,33 @@ public class OrdenesCompra extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonModificarActionPerformed
 
     private void buttonAgregarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarProveedorActionPerformed
-        Proveedores proveedorAdd = null;
-        try {
-            proveedorAdd = new Proveedores();
-        } catch (Exception ex) {
-            Logger.getLogger(OrdenesCompra.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(proveedorAdd);
-        proveedorAdd.toFront();
-        proveedorAdd.setVisible(true);
+//        Proveedores proveedorAdd = null;
+//        try {
+//            proveedorAdd = new Proveedores();
+//        } catch (Exception ex) {
+//            Logger.getLogger(OrdenesCompra.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(proveedorAdd);
+//        proveedorAdd.toFront();
+//        proveedorAdd.setVisible(true);
     }//GEN-LAST:event_buttonAgregarProveedorActionPerformed
 
     private void buttonAgregarContactoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarContactoProveedorActionPerformed
-        Proveedores.y = idProveedor;
-        if (Proveedores.y != 0) {
-            RegistrarContactosProveedor contactoAdd = null;
-            try {
-                contactoAdd = new RegistrarContactosProveedor();
-            } catch (Exception ex) {
-                Logger.getLogger(OrdenesCompra.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Principal.jDesktopPane1.add(contactoAdd);
-            contactoAdd.toFront();
-            contactoAdd.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Agregar Cliente");
-
-        }
+//        Proveedores.y = idProveedor;
+//        if (Proveedores.y != 0) {
+//            RegistrarContactosProveedor contactoAdd = null;
+//            try {
+//                contactoAdd = new RegistrarContactosProveedor();
+//            } catch (Exception ex) {
+//                Logger.getLogger(OrdenesCompra.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            Principal.jDesktopPane1.add(contactoAdd);
+//            contactoAdd.toFront();
+//            contactoAdd.setVisible(true);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Agregar Cliente");
+//
+//        }
     }//GEN-LAST:event_buttonAgregarContactoProveedorActionPerformed
 
     private void buttonPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPDFActionPerformed

@@ -474,17 +474,17 @@ public class OrdenesCorte extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonCerrarActionPerformed
 
     private void buttonOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOrdenActionPerformed
-        DetalleOrdenesCorte detOrdCort=null;
-        try {
-            detOrdCort = new DetalleOrdenesCorte();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(OrdenesCorte.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(OrdenesCorte.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(detOrdCort);
-        detOrdCort.toFront();
-        detOrdCort.setVisible(true);
+//        DetalleOrdenesCorte detOrdCort=null;
+//        try {
+//            detOrdCort = new DetalleOrdenesCorte();
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(OrdenesCorte.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (Exception ex) {
+//            Logger.getLogger(OrdenesCorte.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(detOrdCort);
+//        detOrdCort.toFront();
+//        detOrdCort.setVisible(true);
     }//GEN-LAST:event_buttonOrdenActionPerformed
 
     private void buttonBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarPedidoActionPerformed
@@ -549,28 +549,28 @@ public class OrdenesCorte extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonEliminarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-            tabla = jTable1.getSelectedRow();
-            tablaCodArt= jTable1.getValueAt(tabla, 6).toString(); //=jTable1.getValueAt(tabla, 0).toString();
-            int a= Integer.parseInt(tablaCodArt);//id del detalle de orden de corte 
-            DetalleOrdenesCorte detOrdenCort=null;
-        try {
-            detOrdenCort = new DetalleOrdenesCorte();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(OrdenesCorte.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(OrdenesCorte.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            Principal.jDesktopPane1.add(detOrdenCort);
-            detOrdenCort.toFront();
-            detOrdenCort.setVisible(true);
-
-         DetalleOrdenesCorte.habilitarTabla();
-
-        try {
-            DetalleOrdenesCorte.consultar(a);
-        } catch (Exception ex) {
-            Logger.getLogger(OrdenesCorte.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//            tabla = jTable1.getSelectedRow();
+//            tablaCodArt= jTable1.getValueAt(tabla, 6).toString(); //=jTable1.getValueAt(tabla, 0).toString();
+//            int a= Integer.parseInt(tablaCodArt);//id del detalle de orden de corte 
+//            DetalleOrdenesCorte detOrdenCort=null;
+//        try {
+//            detOrdenCort = new DetalleOrdenesCorte();
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(OrdenesCorte.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (Exception ex) {
+//            Logger.getLogger(OrdenesCorte.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//            Principal.jDesktopPane1.add(detOrdenCort);
+//            detOrdenCort.toFront();
+//            detOrdenCort.setVisible(true);
+//
+//         DetalleOrdenesCorte.habilitarTabla();
+//
+//        try {
+//            DetalleOrdenesCorte.consultar(a);
+//        } catch (Exception ex) {
+//            Logger.getLogger(OrdenesCorte.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         
         
     }//GEN-LAST:event_jTable1MouseClicked
@@ -979,10 +979,11 @@ public class OrdenesCorte extends javax.swing.JInternalFrame {
     
 //--------------------- Fecha --> Indica la fecha del dia  -----------------------------
     public String fechaActual() {
-        Date fecha = new Date();
-
-        SimpleDateFormat formatofecha = new SimpleDateFormat("YYYY/MM/dd");
-        return formatofecha.format(fecha);
+        return null;
+//        Date fecha = new Date();
+//
+//        SimpleDateFormat formatofecha = new SimpleDateFormat("YYYY/MM/dd");
+//        return formatofecha.format(fecha);
     }
 
     public String anioActual() {

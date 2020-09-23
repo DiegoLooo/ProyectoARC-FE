@@ -388,42 +388,42 @@ public final class Proveedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtRubroActionPerformed
 
     private void buttonAgregarContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarContactoActionPerformed
-         try {
-            consultarParametro(ComborazonsocialProveedor.getEditor().getItem().toString().trim());
-        } catch (Exception ex) {
-            Logger.getLogger(Proveedores.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (y != 0) {
-            RegistrarContactosProveedor conProveedores=null;
-            try {
-                conProveedores = new RegistrarContactosProveedor();
-            } catch (Exception ex) {
-                Logger.getLogger(Proveedores.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Principal.jDesktopPane1.add(conProveedores);
-            conProveedores.toFront();
-            conProveedores.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Agregar Cliente");
-        }
+//         try {
+//            consultarParametro(ComborazonsocialProveedor.getEditor().getItem().toString().trim());
+//        } catch (Exception ex) {
+//            Logger.getLogger(Proveedores.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        if (y != 0) {
+//            RegistrarContactosProveedor conProveedores=null;
+//            try {
+//                conProveedores = new RegistrarContactosProveedor();
+//            } catch (Exception ex) {
+//                Logger.getLogger(Proveedores.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            Principal.jDesktopPane1.add(conProveedores);
+//            conProveedores.toFront();
+//            conProveedores.setVisible(true);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Agregar Cliente");
+//        }
     }//GEN-LAST:event_buttonAgregarContactoActionPerformed
 
     private void buttonArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonArticulosActionPerformed
-         try {
-            consultarParametro(ComborazonsocialProveedor.getEditor().getItem().toString().trim());
-        } catch (Exception ex) {
-            Logger.getLogger(Proveedores.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ProveedorArticulos artProveedor=null;
-        try {
-            artProveedor = new ProveedorArticulos();
-        } catch (Exception ex) {
-            Logger.getLogger(Proveedores.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(artProveedor);
-        artProveedor.toFront();
-        artProveedor.setVisible(true);
+//         try {
+//            consultarParametro(ComborazonsocialProveedor.getEditor().getItem().toString().trim());
+//        } catch (Exception ex) {
+//            Logger.getLogger(Proveedores.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        ProveedorArticulos artProveedor=null;
+//        try {
+//            artProveedor = new ProveedorArticulos();
+//        } catch (Exception ex) {
+//            Logger.getLogger(Proveedores.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(artProveedor);
+//        artProveedor.toFront();
+//        artProveedor.setVisible(true);
     }//GEN-LAST:event_buttonArticulosActionPerformed
 
     private void buttonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardarActionPerformed
@@ -483,21 +483,21 @@ public final class Proveedores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonModificarActionPerformed
 
     private void buttonDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDireccionActionPerformed
-         try {
-            consultarParametro(ComborazonsocialProveedor.getEditor().getItem().toString().trim());
-        } catch (Exception ex) {
-            Logger.getLogger(Proveedores.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        DireccionAnexaProveedor dirProv=null;
-        try {
-            dirProv = new DireccionAnexaProveedor();
-        } catch (Exception ex) {
-            Logger.getLogger(Proveedores.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            Principal.jDesktopPane1.add(dirProv);
-            dirProv.toFront();
-            dirProv.setVisible(true);
+//         try {
+//            consultarParametro(ComborazonsocialProveedor.getEditor().getItem().toString().trim());
+//        } catch (Exception ex) {
+//            Logger.getLogger(Proveedores.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//        DireccionAnexaProveedor dirProv=null;
+//        try {
+//            dirProv = new DireccionAnexaProveedor();
+//        } catch (Exception ex) {
+//            Logger.getLogger(Proveedores.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//            Principal.jDesktopPane1.add(dirProv);
+//            dirProv.toFront();
+//            dirProv.setVisible(true);
     }//GEN-LAST:event_buttonDireccionActionPerformed
 
     private void buttonRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRubroActionPerformed

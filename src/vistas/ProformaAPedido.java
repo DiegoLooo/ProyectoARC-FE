@@ -363,20 +363,20 @@ public class ProformaAPedido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonLimpiarActionPerformed
 
     private void buttonAgregarContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarContactoActionPerformed
-        x=idCliente;
-        if (x!= 0) {
-            ContactosClientes conCliente = null;
-            try {
-                conCliente = new ContactosClientes();
-            } catch (Exception ex) {
-                Logger.getLogger(ProformaAPedido.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Principal.jDesktopPane1.add(conCliente);
-            conCliente.toFront();
-            conCliente.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Agregar Cliente");
-        }
+//        x=idCliente;
+//        if (x!= 0) {
+//            ContactosClientes conCliente = null;
+//            try {
+//                conCliente = new ContactosClientes();
+//            } catch (Exception ex) {
+//                Logger.getLogger(ProformaAPedido.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            Principal.jDesktopPane1.add(conCliente);
+//            conCliente.toFront();
+//            conCliente.setVisible(true);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Agregar Cliente");
+//        }
     }//GEN-LAST:event_buttonAgregarContactoActionPerformed
 
 

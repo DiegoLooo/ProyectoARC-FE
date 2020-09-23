@@ -1134,16 +1134,16 @@ public final class Pedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonGenerarOrdenCorteActionPerformed
 
     private void buttonGenerarOrdenTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGenerarOrdenTrabajoActionPerformed
-       OrdenTrabajoRegistro ped = null;
-        try {
-            ped = new OrdenTrabajoRegistro();
-        } catch (ParseException ex) {
-            Logger.getLogger(PedidosVista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(ped);
-        ped.toFront();
-        ped.setVisible(true);
-        OrdenTrabajoRegistro.numDePedidoRegistroAOrdenTrabajo();
+//       OrdenTrabajoRegistro ped = null;
+//        try {
+//            ped = new OrdenTrabajoRegistro();
+//        } catch (ParseException ex) {
+//            Logger.getLogger(PedidosVista.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(ped);
+//        ped.toFront();
+//        ped.setVisible(true);
+//        OrdenTrabajoRegistro.numDePedidoRegistroAOrdenTrabajo();
     }//GEN-LAST:event_buttonGenerarOrdenTrabajoActionPerformed
 
     private void buttonPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPdfActionPerformed
@@ -1180,18 +1180,18 @@ public final class Pedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboBoxDetalleOrdenItemStateChanged
 
     private void buttonRegistrarGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegistrarGuiaActionPerformed
-        GuiaRemision guia = null;
-        
-        try {
-            guia = new GuiaRemision();
-        } catch (Exception ex) {
-            Logger.getLogger(Pedidos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(guia);
-        guia.toFront();
-        guia.setVisible(true);
-        GuiaRemision.clienteDePedidoAGuia();
-        idclientePedAGuia=0;
+//        GuiaRemision guia = null;
+//        
+//        try {
+//            guia = new GuiaRemision();
+//        } catch (Exception ex) {
+//            Logger.getLogger(Pedidos.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(guia);
+//        guia.toFront();
+//        guia.setVisible(true);
+//        GuiaRemision.clienteDePedidoAGuia();
+//        idclientePedAGuia=0;
     }//GEN-LAST:event_buttonRegistrarGuiaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

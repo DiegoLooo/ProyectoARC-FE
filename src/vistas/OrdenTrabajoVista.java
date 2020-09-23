@@ -1683,16 +1683,20 @@ public class OrdenTrabajoVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonPDFActionPerformed
 
     private void buttonModificarEnOTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonModificarEnOTActionPerformed
-        OrdenTrabajoRegistro ordtrab = null;
-        try {
-            ordtrab = new OrdenTrabajoRegistro();
-        } catch (ParseException ex) {
-            Logger.getLogger(OrdenTrabajoVista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(ordtrab);
-        ordtrab.toFront();
-        ordtrab.setVisible(true);
-        OrdenTrabajoRegistro.pasarOrdenDeTrabajo();
+//        OrdenTrabajoRegistro ordtrab = null;
+//        try {
+//            ordtrab = new OrdenTrabajoRegistro();
+//        } catch (ParseException ex) {
+//            Logger.getLogger(OrdenTrabajoVista.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(ordtrab);
+//        ordtrab.toFront();
+//        ordtrab.setVisible(true);
+//        OrdenTrabajoRegistro.pasarOrdenDeTrabajo();
+        
+        
+        
+        
     }//GEN-LAST:event_buttonModificarEnOTActionPerformed
 
     private void buttonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardarActionPerformed
@@ -2362,22 +2366,22 @@ private void procesar(int op) {
     }
     
     String identificarfechaLunes(String fl) throws ParseException {
-       
-            if ("Domingo".equals(diaSemana(fl))) {
-                fl = sumarRestarDiasFecha(fl, -6);
-            } else if ("Lunes".equals(diaSemana(fl))) {
-                fl = fl;
-            } else if ("Martes".equals(diaSemana(fl))) {
-                fl = sumarRestarDiasFecha(fl, -1);
-            } else if ("Miercoles".equals(diaSemana(fl))) {
-                fl =sumarRestarDiasFecha(fl, -2);
-            } else if ("Jueves".equals(diaSemana(fl))) {
-                fl = sumarRestarDiasFecha(fl, -3);
-            } else if ("Viernes".equals(diaSemana(fl))) {
-                fl = sumarRestarDiasFecha(fl, -4);
-            } else if ("Sabado".equals(diaSemana(fl))) {
-                fl = sumarRestarDiasFecha(fl, -5);
-            }
+//       
+//            if ("Domingo".equals(diaSemana(fl))) {
+//                fl = sumarRestarDiasFecha(fl, -6);
+//            } else if ("Lunes".equals(diaSemana(fl))) {
+//                fl = fl;
+//            } else if ("Martes".equals(diaSemana(fl))) {
+//                fl = sumarRestarDiasFecha(fl, -1);
+//            } else if ("Miercoles".equals(diaSemana(fl))) {
+//                fl =sumarRestarDiasFecha(fl, -2);
+//            } else if ("Jueves".equals(diaSemana(fl))) {
+//                fl = sumarRestarDiasFecha(fl, -3);
+//            } else if ("Viernes".equals(diaSemana(fl))) {
+//                fl = sumarRestarDiasFecha(fl, -4);
+//            } else if ("Sabado".equals(diaSemana(fl))) {
+//                fl = sumarRestarDiasFecha(fl, -5);
+//            }
        return fl;
     }
     

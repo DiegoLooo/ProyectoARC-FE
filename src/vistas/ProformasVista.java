@@ -772,63 +772,63 @@ public final class ProformasVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonImprimirActionPerformed
 
     private void buttonModificarCotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonModificarCotActionPerformed
-        Proformas ped = null;
-        try {
-            ped = new Proformas();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(ped);
-        ped.toFront();
-        ped.setVisible(true);
-        Proformas.NumProformas();
+//        Proformas ped = null;
+//        try {
+//            ped = new Proformas();
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (Exception ex) {
+//            Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(ped);
+//        ped.toFront();
+//        ped.setVisible(true);
+//        Proformas.NumProformas();
     }//GEN-LAST:event_buttonModificarCotActionPerformed
 
     private void buttonPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPedidoActionPerformed
 
-        try {
-            consultarCotizacionParaPedido(idProf);
-        } catch (Exception ex) {
-            Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (comprobar == false) {
-
-             if (JOptionPane.showConfirmDialog(rootPane, "La Cotización ya tiene Pedido, ¿desea continuar?",
-                "Pedido Registrado", JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                 Pedidos ped = null;
-                 try {
-                     ped = new Pedidos();
-                 } catch (ClassNotFoundException ex) {
-                     Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
-                 } catch (Exception ex) {
-                     Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
-                 }
-                 Principal.jDesktopPane1.add(ped);
-                 ped.toFront();
-                 ped.setVisible(true);
-                 Pedidos.NumProformasPed();
-             }
-            habilitarGuardar();
-
-        } else if (comprobar == true) {
-
-            Pedidos ped = null;
-            try {
-                ped = new Pedidos();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Principal.jDesktopPane1.add(ped);
-            ped.toFront();
-            ped.setVisible(true);
-            Pedidos.NumProformasPed();
-        }
-        
+//        try {
+//            consultarCotizacionParaPedido(idProf);
+//        } catch (Exception ex) {
+//            Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        if (comprobar == false) {
+//
+//             if (JOptionPane.showConfirmDialog(rootPane, "La Cotización ya tiene Pedido, ¿desea continuar?",
+//                "Pedido Registrado", JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+//                 Pedidos ped = null;
+//                 try {
+//                     ped = new Pedidos();
+//                 } catch (ClassNotFoundException ex) {
+//                     Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
+//                 } catch (Exception ex) {
+//                     Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
+//                 }
+//                 Principal.jDesktopPane1.add(ped);
+//                 ped.toFront();
+//                 ped.setVisible(true);
+//                 Pedidos.NumProformasPed();
+//             }
+//            habilitarGuardar();
+//
+//        } else if (comprobar == true) {
+//
+//            Pedidos ped = null;
+//            try {
+//                ped = new Pedidos();
+//            } catch (ClassNotFoundException ex) {
+//                Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (Exception ex) {
+//                Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            Principal.jDesktopPane1.add(ped);
+//            ped.toFront();
+//            ped.setVisible(true);
+//            Pedidos.NumProformasPed();
+//        }
+//        
         
 //        try {
 //            consultarCotizacionParaPedido(idProf);

@@ -787,16 +787,16 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonBuscarVentaActionPerformed
 
     private void buttonRegistrarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegistrarPagoActionPerformed
-        RegistrarPago rePa = null;
-        RegistrarPago.idRegistroVentaPagoStatic = idRegistroVentaRegistroStatic;
-        try {
-            rePa = new RegistrarPago();
-        } catch (Exception ex) {
-            Logger.getLogger(RegistroVentas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(rePa);
-        rePa.toFront();
-        rePa.setVisible(true);
+//        RegistrarPago rePa = null;
+//        RegistrarPago.idRegistroVentaPagoStatic = idRegistroVentaRegistroStatic;
+//        try {
+//            rePa = new RegistrarPago();
+//        } catch (Exception ex) {
+//            Logger.getLogger(RegistroVentas.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(rePa);
+//        rePa.toFront();
+//        rePa.setVisible(true);
     }//GEN-LAST:event_buttonRegistrarPagoActionPerformed
 
     private void buttonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNuevoActionPerformed

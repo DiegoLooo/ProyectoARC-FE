@@ -579,15 +579,15 @@ public class ProveedoresVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonExportExcelActionPerformed
 
     private void buttonNuevoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNuevoProveedorActionPerformed
-        Proveedores provs = null;
-        try {
-            provs = new Proveedores();
-        } catch (Exception ex) {
-            Logger.getLogger(ProveedoresVista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(provs);
-        provs.toFront();
-        provs.setVisible(true);
+//        Proveedores provs = null;
+//        try {
+//            provs = new Proveedores();
+//        } catch (Exception ex) {
+//            Logger.getLogger(ProveedoresVista.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(provs);
+//        provs.toFront();
+//        provs.setVisible(true);
     }//GEN-LAST:event_buttonNuevoProveedorActionPerformed
 
     private void comboBoxFiltro3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxFiltro3ItemStateChanged

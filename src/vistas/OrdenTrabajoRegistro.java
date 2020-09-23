@@ -1832,26 +1832,36 @@ public class OrdenTrabajoRegistro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonAgregarDetalleActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        tabla = jTable1.getSelectedRow();
-        idDetalleOrdenTrabajo = Integer.parseInt(jTable1.getValueAt(tabla, 0).toString());
+//        try {
+//
+//            tabla = jTable1.getSelectedRow();
+//            idDetalleOrdenTrabajo = Integer.parseInt(jTable1.getValueAt(tabla, 0).toString());
+//
+//            DetalleDeOrdenTrabajo detOT = null;
+//            try {
+//                detOT = new DetalleDeOrdenTrabajo();
+//            } catch (Exception ex) {
+//                Logger.getLogger(OrdenTrabajoRegistro.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            Principal.jDesktopPane1.add(detOT);
+//            
+//            detOT.toFront();
+//            
+//            
+//            detOT.setVisible(true);
+//
+//            try {
+//                DetalleDeOrdenTrabajo.consultarDetalleOrdenTrabajo(idDetalleOrdenTrabajo);
+//            } catch (Exception ex) {
+//                Logger.getLogger(OrdenTrabajoRegistro.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            listaDetalleOrdenTrabajo(idOrdenTrabajo);
+//            DetalleDeOrdenTrabajo.habilitarTabla();
+//
+//        } catch (NullPointerException ex) {
+//            Logger.getLogger(Articulos.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
-        DetalleDeOrdenTrabajo detOT = null;
-        try {
-            detOT = new DetalleDeOrdenTrabajo();
-        } catch (Exception ex) {
-            Logger.getLogger(OrdenTrabajoRegistro.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(detOT);
-        detOT.toFront();
-        detOT.setVisible(true);
-
-        try {
-            DetalleDeOrdenTrabajo.consultarDetalleOrdenTrabajo(idDetalleOrdenTrabajo);
-        } catch (Exception ex) {
-            Logger.getLogger(OrdenTrabajoRegistro.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        listaDetalleOrdenTrabajo(idOrdenTrabajo);
-        DetalleDeOrdenTrabajo.habilitarTabla();
 
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -2865,23 +2875,25 @@ public class OrdenTrabajoRegistro extends javax.swing.JInternalFrame {
     }
 
     String identificarfechaLunes(String fl) throws ParseException {
+        return null;
 
-        if ("Domingo".equals(diaSemana(fl))) {
-            fl = sumarRestarDiasFecha(fl, -6);
-        } else if ("Lunes".equals(diaSemana(fl))) {
-            fl = fl;
-        } else if ("Martes".equals(diaSemana(fl))) {
-            fl = sumarRestarDiasFecha(fl, -1);
-        } else if ("Miercoles".equals(diaSemana(fl))) {
-            fl = sumarRestarDiasFecha(fl, -2);
-        } else if ("Jueves".equals(diaSemana(fl))) {
-            fl = sumarRestarDiasFecha(fl, -3);
-        } else if ("Viernes".equals(diaSemana(fl))) {
-            fl = sumarRestarDiasFecha(fl, -4);
-        } else if ("Sabado".equals(diaSemana(fl))) {
-            fl = sumarRestarDiasFecha(fl, -5);
-        }
-        return fl;
+//        if ("Domingo".equals(diaSemana(fl))) {
+//            fl = sumarRestarDiasFecha(fl, -6);
+//        } else if ("Lunes".equals(diaSemana(fl))) {
+//
+//        } else if ("Martes".equals(diaSemana(fl))) {
+//            fl = sumarRestarDiasFecha(fl, -1);
+//        } else if ("Miercoles".equals(diaSemana(fl))) {
+//            fl = sumarRestarDiasFecha(fl, -2);
+//        } else if ("Jueves".equals(diaSemana(fl))) {
+//            fl = sumarRestarDiasFecha(fl, -3);
+//        } else if ("Viernes".equals(diaSemana(fl))) {
+//            fl = sumarRestarDiasFecha(fl, -4);
+//        } else if ("Sabado".equals(diaSemana(fl))) {
+//            fl = sumarRestarDiasFecha(fl, -5);
+//        }
+//        return fl;
+
     }
 
     void agregarDias(String fh) throws ParseException {

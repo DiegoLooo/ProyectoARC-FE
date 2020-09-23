@@ -1002,15 +1002,15 @@ public class RegistrarCompras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonLimpiarActionPerformed
 
     private void buttonProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProveedorActionPerformed
-        Proveedores prov = null;
-        try {
-            prov = new Proveedores();
-        } catch (Exception ex) {
-            Logger.getLogger(RegistrarCompras.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(prov);
-        prov.toFront();
-        prov.setVisible(true);
+//        Proveedores prov = null;
+//        try {
+//            prov = new Proveedores();
+//        } catch (Exception ex) {
+//            Logger.getLogger(RegistrarCompras.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(prov);
+//        prov.toFront();
+//        prov.setVisible(true);
     }//GEN-LAST:event_buttonProveedorActionPerformed
 
     private void buttonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNuevoActionPerformed
@@ -1022,16 +1022,16 @@ public class RegistrarCompras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonModificarActionPerformed
 
     private void buttonRegistroPagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegistroPagosActionPerformed
-        RegistrarPagosCompra rePaCo = null;
-        try {
-            rePaCo = new RegistrarPagosCompra();
-        } catch (Exception ex) {
-            Logger.getLogger(RegistrarCompras.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        RegistrarPagosCompra.idRegistroCompraStatic=idRegistroCompras;
-        Principal.jDesktopPane1.add(rePaCo);
-        rePaCo.toFront();
-        rePaCo.setVisible(true);
+//        RegistrarPagosCompra rePaCo = null;
+//        try {
+//            rePaCo = new RegistrarPagosCompra();
+//        } catch (Exception ex) {
+//            Logger.getLogger(RegistrarCompras.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        RegistrarPagosCompra.idRegistroCompraStatic=idRegistroCompras;
+//        Principal.jDesktopPane1.add(rePaCo);
+//        rePaCo.toFront();
+//        rePaCo.setVisible(true);
     }//GEN-LAST:event_buttonRegistroPagosActionPerformed
 
     private void buttonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCerrarActionPerformed

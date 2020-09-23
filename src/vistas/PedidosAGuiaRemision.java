@@ -505,21 +505,21 @@ public class PedidosAGuiaRemision extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonJalarDatosContactoActionPerformed
 
     private void buttonAgregarContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarContactoActionPerformed
-        Clientes.x=idCliente;
-        if (Clientes.x!= 0) {
-            ContactosClientes conCliente = null;
-            try {
-                conCliente = new ContactosClientes();
-            } catch (Exception ex) {
-                Logger.getLogger(PedidosAGuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Principal.jDesktopPane1.add(conCliente);
-            conCliente.toFront();
-            conCliente.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Agregar Cliente");
-
-        }
+//        Clientes.x=idCliente;
+//        if (Clientes.x!= 0) {
+//            ContactosClientes conCliente = null;
+//            try {
+//                conCliente = new ContactosClientes();
+//            } catch (Exception ex) {
+//                Logger.getLogger(PedidosAGuiaRemision.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            Principal.jDesktopPane1.add(conCliente);
+//            conCliente.toFront();
+//            conCliente.setVisible(true);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Agregar Cliente");
+//
+//        }
     }//GEN-LAST:event_buttonAgregarContactoActionPerformed
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked

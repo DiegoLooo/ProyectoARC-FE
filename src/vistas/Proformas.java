@@ -924,16 +924,16 @@ public final class Proformas extends javax.swing.JInternalFrame {
 
     private void buttonProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonProductoActionPerformed
 
-        DetalleProformas detProf = null;
-
-        try {
-            detProf = new DetalleProformas();
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(Proformas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(detProf);
-        detProf.toFront();
-        detProf.setVisible(true);
+//        DetalleProformas detProf = null;
+//
+//        try {
+//            detProf = new DetalleProformas();
+//        } catch (SQLException | ClassNotFoundException ex) {
+//            Logger.getLogger(Proformas.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(detProf);
+//        detProf.toFront();
+//        detProf.setVisible(true);
 
 //        if(b!=0){
 //        DetalleProformas detProf = new DetalleProformas();
@@ -964,7 +964,7 @@ public final class Proformas extends javax.swing.JInternalFrame {
     private void comboBoxContactoClienteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxContactoClienteItemStateChanged
 
         // categoria1 = comboBoxContactoCliente.getSelectedItem().toString();
-        if (categoria1 != "Elegir Contacto") {
+        if (!"Elegir Contacto".equals(categoria1)) {
             categoria1 = comboBoxContactoCliente.getSelectedItem().toString();
             System.out.println(categoria1);
         } else {
@@ -1206,27 +1206,27 @@ public final class Proformas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboBoxMonedaItemStateChanged
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        tabla = jTable1.getSelectedRow();
-        DetalleProformas.Descripcion = jTable1.getValueAt(tabla, 3).toString();
-        idDetalleProforma = Integer.parseInt(jTable1.getValueAt(tabla, 0).toString());
-        //  DetalleProformas.txtItem.setText(jTable1.getValueAt(tabla, 0).toString());
-        DetalleProformas detProforma = null;
-        try {
-            detProforma = new DetalleProformas();
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(Proformas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(detProforma);
-        detProforma.toFront();
-        detProforma.setVisible(true);
-        DetalleProformas.habilitarTabla();
-        System.out.println("idDetalle " + idDetalleProforma);
-
-        try {
-            DetalleProformas.consultar(b, idDetalleProforma);
-        } catch (Exception ex) {
-            Logger.getLogger(Proformas.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        tabla = jTable1.getSelectedRow();
+//        DetalleProformas.Descripcion = jTable1.getValueAt(tabla, 3).toString();
+//        idDetalleProforma = Integer.parseInt(jTable1.getValueAt(tabla, 0).toString());
+//        //  DetalleProformas.txtItem.setText(jTable1.getValueAt(tabla, 0).toString());
+//        DetalleProformas detProforma = null;
+//        try {
+//            detProforma = new DetalleProformas();
+//        } catch (SQLException | ClassNotFoundException ex) {
+//            Logger.getLogger(Proformas.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(detProforma);
+//        detProforma.toFront();
+//        detProforma.setVisible(true);
+//        DetalleProformas.habilitarTabla();
+//        System.out.println("idDetalle " + idDetalleProforma);
+//
+//        try {
+//            DetalleProformas.consultar(b, idDetalleProforma);
+//        } catch (Exception ex) {
+//            Logger.getLogger(Proformas.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
 
     }//GEN-LAST:event_jTable1MouseClicked
@@ -1249,20 +1249,20 @@ public final class Proformas extends javax.swing.JInternalFrame {
 
     private void btnContactoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactoClienteActionPerformed
 
-        if (x != 0) {
-            ContactosClientes conCliente = null;
-            try {
-                conCliente = new ContactosClientes();
-            } catch (Exception ex) {
-                Logger.getLogger(Proformas.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Principal.jDesktopPane1.add(conCliente);
-            conCliente.toFront();
-            conCliente.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Agregar Cliente");
-
-        }
+//        if (x != 0) {
+//            ContactosClientes conCliente = null;
+//            try {
+//                conCliente = new ContactosClientes();
+//            } catch (Exception ex) {
+//                Logger.getLogger(Proformas.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            Principal.jDesktopPane1.add(conCliente);
+//            conCliente.toFront();
+//            conCliente.setVisible(true);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Agregar Cliente");
+//
+//        }
     }//GEN-LAST:event_btnContactoClienteActionPerformed
 
     private void txtValidezActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValidezActionPerformed
@@ -1523,47 +1523,47 @@ public final class Proformas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonAnteriorActionPerformed
 
     private void buttonGenerarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGenerarPedidoActionPerformed
-        try {
-            consultarCotizacionParaPedido(idProf);
-        } catch (Exception ex) {
-            Logger.getLogger(Proformas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (comprobar == false) {
-            if (JOptionPane.showConfirmDialog(rootPane, "La Cotización ya tiene Pedido, ¿desea continuar?",
-                    "Pedido Registrado", JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                Pedidos ped = null;
-                try {
-                    ped = new Pedidos();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (Exception ex) {
-                    Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                Principal.jDesktopPane1.add(ped);
-                ped.toFront();
-                ped.setVisible(true);
-                Pedidos.NumProformasReg();
-
-            }
-            habilitarBuscar();
-
-        } else if (comprobar == true) {
-
-            Pedidos ped = null;
-            try {
-                ped = new Pedidos();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Principal.jDesktopPane1.add(ped);
-            ped.toFront();
-            ped.setVisible(true);
-            Pedidos.NumProformasReg();
-
-        }
+//        try {
+//            consultarCotizacionParaPedido(idProf);
+//        } catch (Exception ex) {
+//            Logger.getLogger(Proformas.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        if (comprobar == false) {
+//            if (JOptionPane.showConfirmDialog(rootPane, "La Cotización ya tiene Pedido, ¿desea continuar?",
+//                    "Pedido Registrado", JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+//                Pedidos ped = null;
+//                try {
+//                    ped = new Pedidos();
+//                } catch (ClassNotFoundException ex) {
+//                    Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
+//                } catch (Exception ex) {
+//                    Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                Principal.jDesktopPane1.add(ped);
+//                ped.toFront();
+//                ped.setVisible(true);
+//                Pedidos.NumProformasReg();
+//
+//            }
+//            habilitarBuscar();
+//
+//        } else if (comprobar == true) {
+//
+//            Pedidos ped = null;
+//            try {
+//                ped = new Pedidos();
+//            } catch (ClassNotFoundException ex) {
+//                Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (Exception ex) {
+//                Logger.getLogger(ProformasVista.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            Principal.jDesktopPane1.add(ped);
+//            ped.toFront();
+//            ped.setVisible(true);
+//            Pedidos.NumProformasReg();
+//
+//        }
     }//GEN-LAST:event_buttonGenerarPedidoActionPerformed
 
     private void comboBoxUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxUsuarioActionPerformed

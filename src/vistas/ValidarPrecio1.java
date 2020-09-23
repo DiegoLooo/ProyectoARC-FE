@@ -444,36 +444,36 @@ public class ValidarPrecio1 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void comboBoxMonedaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxMonedaItemStateChanged
-        if (comboDia != "") {
-            if (comboBoxMoneda.getSelectedItem() == "DOLARES AMERICANOS") {
-                try {
-                    consultarDolares(Float.parseFloat(txtLongitud.getText()), comboDia);
-                    deshabilitarGen();
-                } catch (Exception ex) {
-                    Logger.getLogger(ValidarPrecio1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                txtCant.setText(txtPrecio.getText());
-                
-                labelMoneda1.setText("DOLARES AMERICANOS");
-            } else if (comboBoxMoneda.getSelectedItem() == "SOLES") {
-
-                try {
-                    consultarSoles(Float.parseFloat(txtLongitud.getText()), labelFecha.getText(), comboDia);
-                    deshabilitarGen();                   
-                } catch (Exception ex) {
-                    Logger.getLogger(ValidarPrecio1.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                txtCant.setText(txtPrecio.getText());
-                
-                labelMoneda1.setText("SOLES");
-            }
-
-        }else{
-            JOptionPane.showMessageDialog(null, "Tienes que presionar enter en DIametro");
-        }
-
-        nombreCompleto = txtNombre.getText() + " X " + txtLongitud.getText() + " MM LONG";
-        System.out.println(nombreCompleto);
+//        if (comboDia != "") {
+//            if (comboBoxMoneda.getSelectedItem() == "DOLARES AMERICANOS") {
+//                try {
+//                    consultarDolares(Float.parseFloat(txtLongitud.getText()), comboDia);
+//                    deshabilitarGen();
+//                } catch (Exception ex) {
+//                    Logger.getLogger(ValidarPrecio1.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                txtCant.setText(txtPrecio.getText());
+//                
+//                labelMoneda1.setText("DOLARES AMERICANOS");
+//            } else if (comboBoxMoneda.getSelectedItem() == "SOLES") {
+//
+//                try {
+//                    consultarSoles(Float.parseFloat(txtLongitud.getText()), labelFecha.getText(), comboDia);
+//                    deshabilitarGen();                   
+//                } catch (Exception ex) {
+//                    Logger.getLogger(ValidarPrecio1.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                txtCant.setText(txtPrecio.getText());
+//                
+//                labelMoneda1.setText("SOLES");
+//            }
+//
+//        }else{
+//            JOptionPane.showMessageDialog(null, "Tienes que presionar enter en DIametro");
+//        }
+//
+//        nombreCompleto = txtNombre.getText() + " X " + txtLongitud.getText() + " MM LONG";
+//        System.out.println(nombreCompleto);
 
     }//GEN-LAST:event_comboBoxMonedaItemStateChanged
 

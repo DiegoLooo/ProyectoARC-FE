@@ -757,22 +757,22 @@ public final class Rotulaciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonEliminarAtencionActionPerformed
 
     private void buttonContactoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonContactoClienteActionPerformed
-       Clientes.x=idCliente;
-        if (Clientes.x != 0) {
-            ContactosClientes conCliente = null;
-           try {
-               conCliente = new ContactosClientes();
-           } catch (Exception ex) {
-               Logger.getLogger(Rotulaciones.class.getName()).log(Level.SEVERE, null, ex);
-           }
-            Principal.jDesktopPane1.add(conCliente);
-            conCliente.toFront();
-            conCliente.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Agregar Cliente");
-
-        }
-        habilitarContactoCliente();
+//       Clientes.x=idCliente;
+//        if (Clientes.x != 0) {
+//            ContactosClientes conCliente = null;
+//           try {
+//               conCliente = new ContactosClientes();
+//           } catch (Exception ex) {
+//               Logger.getLogger(Rotulaciones.class.getName()).log(Level.SEVERE, null, ex);
+//           }
+//            Principal.jDesktopPane1.add(conCliente);
+//            conCliente.toFront();
+//            conCliente.setVisible(true);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Agregar Cliente");
+//
+//        }
+//        habilitarContactoCliente();
         
     }//GEN-LAST:event_buttonContactoClienteActionPerformed
 

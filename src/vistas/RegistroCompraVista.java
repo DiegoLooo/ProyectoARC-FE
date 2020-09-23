@@ -740,31 +740,31 @@ public class RegistroCompraVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboBoxFiltroItemStateChanged
 
     private void buttonEditarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarCompraActionPerformed
-        RegistrarCompras reCom = null;
-        
-        try {
-            reCom = new RegistrarCompras();
-        } catch (ParseException ex) {
-            Logger.getLogger(RegistroCompraVista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        Principal.jDesktopPane1.add(reCom);
-        reCom.toFront();
-        reCom.setVisible(true);
-        RegistrarCompras.SerieYNumeroDeVistaCompras();
+//        RegistrarCompras reCom = null;
+//        
+//        try {
+//            reCom = new RegistrarCompras();
+//        } catch (ParseException ex) {
+//            Logger.getLogger(RegistroCompraVista.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//        Principal.jDesktopPane1.add(reCom);
+//        reCom.toFront();
+//        reCom.setVisible(true);
+//        RegistrarCompras.SerieYNumeroDeVistaCompras();
     }//GEN-LAST:event_buttonEditarCompraActionPerformed
 
     private void buttonRegistrarPagoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegistrarPagoCompraActionPerformed
-         RegistrarPagosCompra rePaCo = null;
-        try {
-            rePaCo = new RegistrarPagosCompra();
-        } catch (Exception ex) {
-            Logger.getLogger(RegistrarCompras.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        RegistrarPagosCompra.idRegistroCompraStatic=idRegistroCompra;
-        Principal.jDesktopPane1.add(rePaCo);
-        rePaCo.toFront();
-        rePaCo.setVisible(true);
+//         RegistrarPagosCompra rePaCo = null;
+//        try {
+//            rePaCo = new RegistrarPagosCompra();
+//        } catch (Exception ex) {
+//            Logger.getLogger(RegistrarCompras.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        RegistrarPagosCompra.idRegistroCompraStatic=idRegistroCompra;
+//        Principal.jDesktopPane1.add(rePaCo);
+//        rePaCo.toFront();
+//        rePaCo.setVisible(true);
     }//GEN-LAST:event_buttonRegistrarPagoCompraActionPerformed
 
     private void buttonGuardarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGuardarEstadoActionPerformed
@@ -922,16 +922,17 @@ public class RegistroCompraVista extends javax.swing.JInternalFrame {
 //--------------------------- Consultar Tipo de Cambio ----------------------------
     
     float tipoCambioVenta(String f) throws Exception {
-        tipocambio = tipocambiocontroler.TipoCambioBuscarCambio(f);
-
-        if (tipocambio != null) {
-            return tipocambio.getPrecioVenta();
-
-        } else {
-//            JOptionPane.showMessageDialog(null, "tipo cambio no registradas");
-            System.out.println("Error");
-        }
-        return tipocambio.getPrecioVenta();
+        return 0;
+//        tipocambio = tipocambiocontroler.TipoCambioBuscarCambio(f);
+//
+//        if (tipocambio != null) {
+//            return tipocambio.getPrecioVenta();
+//
+//        } else {
+////            JOptionPane.showMessageDialog(null, "tipo cambio no registradas");
+//            System.out.println("Error");
+//        }
+//        return tipocambio.getPrecioVenta();
     }
     
 //----------------------------------------- Tabla ---------------------------------

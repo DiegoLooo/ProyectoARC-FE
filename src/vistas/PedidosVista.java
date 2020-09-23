@@ -812,18 +812,18 @@ public class PedidosVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtLikeActionPerformed
 
     private void buttonModificarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonModificarPedidoActionPerformed
-        Pedidos ped = null;
-        try {
-            ped = new Pedidos();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PedidosVista.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(PedidosVista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(ped);
-        ped.toFront();
-        ped.setVisible(true);
-        Pedidos.NumPedido();
+//        Pedidos ped = null;
+//        try {
+//            ped = new Pedidos();
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(PedidosVista.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (Exception ex) {
+//            Logger.getLogger(PedidosVista.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(ped);
+//        ped.toFront();
+//        ped.setVisible(true);
+//        Pedidos.NumPedido();
     }//GEN-LAST:event_buttonModificarPedidoActionPerformed
 
     private void buttonGenerarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGenerarOrdenActionPerformed
@@ -835,31 +835,31 @@ public class PedidosVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonGenerarOrdenActionPerformed
 
     private void buttonVerCotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVerCotizacionActionPerformed
-        Proformas ped = null;
-        try {
-            ped = new Proformas();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PedidosVista.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(PedidosVista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(ped);
-        ped.toFront();
-        ped.setVisible(true);
-        Proformas.NumProformaPedido();
+//        Proformas ped = null;
+//        try {
+//            ped = new Proformas();
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(PedidosVista.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (Exception ex) {
+//            Logger.getLogger(PedidosVista.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(ped);
+//        ped.toFront();
+//        ped.setVisible(true);
+//        Proformas.NumProformaPedido();
     }//GEN-LAST:event_buttonVerCotizacionActionPerformed
 
     private void buttonGenerarOrdenTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGenerarOrdenTrabajoActionPerformed
-        OrdenTrabajoRegistro ped = null;
-        try {
-            ped = new OrdenTrabajoRegistro();
-        } catch (ParseException ex) {
-            Logger.getLogger(PedidosVista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(ped);
-        ped.toFront();
-        ped.setVisible(true);
-        OrdenTrabajoRegistro.numDePedidoAOrdenTrabajo();
+//        OrdenTrabajoRegistro ped = null;
+//        try {
+//            ped = new OrdenTrabajoRegistro();
+//        } catch (ParseException ex) {
+//            Logger.getLogger(PedidosVista.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(ped);
+//        ped.toFront();
+//        ped.setVisible(true);
+//        OrdenTrabajoRegistro.numDePedidoAOrdenTrabajo();
     }//GEN-LAST:event_buttonGenerarOrdenTrabajoActionPerformed
 
     private void buttonExportExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExportExcelActionPerformed
@@ -872,17 +872,17 @@ public class PedidosVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonExportExcelActionPerformed
 
     private void buttonRegistroGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegistroGuiaActionPerformed
-        GuiaRemision guia = null;
-        try {
-            guia = new GuiaRemision();
-        } catch (Exception ex) {
-            Logger.getLogger(PedidosVista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(guia);
-        guia.toFront();
-        guia.setVisible(true);
-        GuiaRemision.clienteDePedidoAGuia();
-        idclientePedAGuia=0;
+//        GuiaRemision guia = null;
+//        try {
+//            guia = new GuiaRemision();
+//        } catch (Exception ex) {
+//            Logger.getLogger(PedidosVista.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(guia);
+//        guia.toFront();
+//        guia.setVisible(true);
+//        GuiaRemision.clienteDePedidoAGuia();
+//        idclientePedAGuia=0;
     }//GEN-LAST:event_buttonRegistroGuiaActionPerformed
 
     private void buttonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCerrarActionPerformed

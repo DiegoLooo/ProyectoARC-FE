@@ -784,29 +784,29 @@ public class RegistroVentasVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonGuardarActionPerformed
 
     private void buttonRegistrarVerPagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegistrarVerPagosActionPerformed
-        RegistrarPago rePa = null;
-        RegistrarPago.idRegistroVentaPagoStatic = idRegistroVentaVistaStatic;
-        try {
-            rePa = new RegistrarPago();
-        } catch (Exception ex) {
-            Logger.getLogger(RegistroVentas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(rePa);
-        rePa.toFront();
-        rePa.setVisible(true);
+//        RegistrarPago rePa = null;
+//        RegistrarPago.idRegistroVentaPagoStatic = idRegistroVentaVistaStatic;
+//        try {
+//            rePa = new RegistrarPago();
+//        } catch (Exception ex) {
+//            Logger.getLogger(RegistroVentas.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(rePa);
+//        rePa.toFront();
+//        rePa.setVisible(true);
     }//GEN-LAST:event_buttonRegistrarVerPagosActionPerformed
 
     private void buttonModificarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonModificarVentaActionPerformed
-        RegistroVentas reVet = null;
-        try {
-            reVet = new RegistroVentas();
-        } catch (Exception ex) {
-            Logger.getLogger(RegistroVentas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(reVet);
-        reVet.toFront();
-        reVet.setVisible(true);
-        RegistroVentas.serieYNumeroDeVenta();
+//        RegistroVentas reVet = null;
+//        try {
+//            reVet = new RegistroVentas();
+//        } catch (Exception ex) {
+//            Logger.getLogger(RegistroVentas.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(reVet);
+//        reVet.toFront();
+//        reVet.setVisible(true);
+//        RegistroVentas.serieYNumeroDeVenta();
     }//GEN-LAST:event_buttonModificarVentaActionPerformed
 
     private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
@@ -844,16 +844,16 @@ public class RegistroVentasVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonOrdenVencimientoActionPerformed
 
     private void buttonPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPedidoActionPerformed
-       Pedidos ped = null;
-        try {
-            ped = new Pedidos();
-        } catch (Exception ex) {
-            Logger.getLogger(RegistroVentas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Principal.jDesktopPane1.add(ped);
-        ped.toFront();
-        ped.setVisible(true);
-        Pedidos.NumPedidoRegistroVenta();
+//       Pedidos ped = null;
+//        try {
+//            ped = new Pedidos();
+//        } catch (Exception ex) {
+//            Logger.getLogger(RegistroVentas.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Principal.jDesktopPane1.add(ped);
+//        ped.toFront();
+//        ped.setVisible(true);
+//        Pedidos.NumPedidoRegistroVenta();
     }//GEN-LAST:event_buttonPedidoActionPerformed
 
     private void buttonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLimpiarActionPerformed
@@ -1117,18 +1117,19 @@ public class RegistroVentasVista extends javax.swing.JInternalFrame {
     }
     
     float tipoCambioVenta(String f) throws Exception {
-        tipocambio =tipocambiocontroler.TipoCambioBuscarCambio(f) ;
-
-        if (tipocambio != null) {
-            mensaje=true;
-            return tipocambio.getPrecioVenta();
-            
-        } else {
-            mensaje=false;
-//            JOptionPane.showMessageDialog(null, "tipo cambio no registradas");
-            System.out.println("Error");
-        }
-        return tipocambio.getPrecioVenta();
+        return 0;
+//        tipocambio =tipocambiocontroler.TipoCambioBuscarCambio(f) ;
+//
+//        if (tipocambio != null) {
+//            mensaje=true;
+//            return tipocambio.getPrecioVenta();
+//            
+//        } else {
+//            mensaje=false;
+////            JOptionPane.showMessageDialog(null, "tipo cambio no registradas");
+//            System.out.println("Error");
+//        }
+//        return tipocambio.getPrecioVenta();
     }
     
 
